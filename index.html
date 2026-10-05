@@ -6,9 +6,7 @@
 <meta name="theme-color" content="#8b5cf6">
 <meta name="description" content="کتابخانه هوشمند فرم‌ها">
 <meta name="apple-mobile-web-app-capable" content="yes">
-<meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
 <meta name="apple-mobile-web-app-title" content="فرم‌بان">
-<meta name="mobile-web-app-capable" content="yes">
 <title>فرم‌بان — کتابخانه فرم‌ها</title>
 <link id="manifestLink" rel="manifest" href="">
 <link id="faviconLink" rel="icon" href="">
@@ -19,9 +17,7 @@
   font-family: 'BYekan';
   src: url('https://cdn.jsdelivr.net/gh/font-store/font-B-Yekan/BYekan.ttf') format('truetype'),
        url('https://cdn.jsdelivr.net/gh/mahdi-sharifimehr/persian-fonts@master/BYekan/BYekan.ttf') format('truetype');
-  font-weight: normal;
-  font-style: normal;
-  font-display: swap;
+  font-weight: normal; font-style: normal; font-display: swap;
 }
 *{box-sizing:border-box;margin:0;padding:0}
 :root{
@@ -102,7 +98,7 @@ b,strong,h1,h2,h3,h4,h5,h6,button{font-weight:normal}
 @keyframes popIn{from{opacity:0;transform:scale(.6)}to{opacity:1;transform:none}}
 
 main{position:relative;z-index:10;max-width:1320px;margin:0 auto;padding:44px 30px 120px}
-.hero{text-align:center;margin-bottom:38px;animation:rise .7s cubic-bezier(.2,.8,.3,1) both}
+.hero{text-align:center;margin-bottom:32px;animation:rise .7s cubic-bezier(.2,.8,.3,1) both}
 .hero-badge{display:inline-flex;align-items:center;gap:8px;font-size:.76rem;font-weight:bold;padding:7px 15px;border-radius:100px;background:var(--surface);border:1px solid var(--border);color:var(--muted);backdrop-filter:blur(20px);margin-bottom:20px}
 .hero-badge .sparkle{animation:spin 4s linear infinite;display:inline-block}
 @keyframes spin{to{transform:rotate(360deg)}}
@@ -124,7 +120,31 @@ main{position:relative;z-index:10;max-width:1320px;margin:0 auto;padding:44px 30
 .clear-btn:hover{background:var(--danger);color:#fff;transform:rotate(90deg) scale(1.1)}
 .clear-btn.show{display:grid}
 
-.stats{display:flex;justify-content:center;gap:11px;flex-wrap:wrap;margin:28px 0 40px}
+/* ══ FILTERS ══ */
+.filters{display:flex;gap:8px;flex-wrap:wrap;justify-content:center;margin:24px 0 30px;padding:0 10px}
+.filter-chip{
+  display:inline-flex;align-items:center;gap:8px;
+  padding:9px 15px;border-radius:12px;
+  font-family:'BYekan',Tahoma,sans-serif;font-size:.8rem;
+  background:var(--surface);border:1px solid var(--border);color:var(--muted);
+  cursor:pointer;transition:.22s cubic-bezier(.2,.8,.3,1);
+  backdrop-filter:blur(20px);white-space:nowrap;
+}
+.filter-chip:hover{transform:translateY(-2px);border-color:var(--border-strong);color:var(--text)}
+.filter-chip.active{
+  background:linear-gradient(135deg,var(--accent),var(--accent-2));
+  color:#fff;border-color:transparent;
+  box-shadow:0 12px 26px -12px var(--accent);
+}
+.filter-chip svg{width:14px;height:14px;stroke:currentColor;fill:none;stroke-width:2.2;stroke-linecap:round;stroke-linejoin:round;flex-shrink:0}
+.filter-chip .count{
+  font-size:.68rem;padding:2px 7px;border-radius:7px;
+  background:rgba(255,255,255,.1);color:inherit;min-width:22px;text-align:center;
+}
+[data-theme="light"] .filter-chip .count{background:rgba(15,23,42,.07)}
+.filter-chip.active .count{background:rgba(255,255,255,.25)}
+
+.stats{display:flex;justify-content:center;gap:11px;flex-wrap:wrap;margin:0 0 30px}
 .chip{display:inline-flex;align-items:center;gap:9px;padding:10px 17px;border-radius:14px;font-size:.82rem;background:var(--surface);border:1px solid var(--border);backdrop-filter:blur(20px);color:var(--muted);transition:.25s cubic-bezier(.2,.8,.3,1);animation:rise .5s cubic-bezier(.2,.8,.3,1) both}
 .chip:hover{transform:translateY(-3px);border-color:var(--border-strong);box-shadow:var(--shadow-sm)}
 .chip b{color:var(--text);font-weight:bold;font-size:.95rem}
@@ -261,55 +281,20 @@ main{position:relative;z-index:10;max-width:1320px;margin:0 auto;padding:44px 30
 .btn-save:disabled{opacity:.4;cursor:not-allowed;box-shadow:none}
 
 /* ══ PREVIEW ══ */
-.preview-frame{width:100%;height:75vh;border:none;border-radius:14px;background:#525659;display:block}
-.preview-img{max-width:100%;max-height:75vh;border-radius:14px;display:block;margin:0 auto;box-shadow:var(--shadow)}
+.preview-frame{width:100%;height:78vh;border:none;border-radius:14px;background:#525659;display:block}
+.preview-img{max-width:100%;max-height:78vh;border-radius:14px;display:block;margin:0 auto;box-shadow:var(--shadow)}
 
 .preview-loading{text-align:center;padding:70px 24px;color:var(--muted)}
 .preview-loading .spin{width:46px;height:46px;border-radius:50%;border:3px solid var(--border);border-top-color:var(--accent);animation:spin 1s linear infinite;margin:0 auto 18px}
-.preview-loading .msg{font-size:.9rem;margin-bottom:6px}
-.preview-loading .sub{font-size:.75rem;color:var(--muted-2)}
+.preview-loading .msg{font-size:.9rem}
 
 .preview-unsupported{text-align:center;padding:60px 24px}
 .preview-unsupported .ic{width:88px;height:88px;margin:0 auto 22px;border-radius:26px;background:var(--surface-2);display:grid;place-items:center;border:1px solid var(--border)}
 .preview-unsupported svg{width:40px;height:40px;stroke:var(--fc);fill:none;stroke-width:1.5;stroke-linecap:round;stroke-linejoin:round}
 .preview-unsupported h4{font-size:1.05rem;font-weight:bold;margin-bottom:8px}
-.preview-unsupported p{color:var(--muted);font-size:.86rem;line-height:1.9;margin-bottom:18px}
+.preview-unsupported p{color:var(--muted);font-size:.86rem;line-height:1.9;margin-bottom:22px;max-width:400px;margin-inline:auto}
 
-.preview-text{background:var(--surface-2);padding:22px;border-radius:14px;font-family:ui-monospace,'SF Mono',Menlo,Consolas,monospace;font-size:.84rem;line-height:1.95;color:var(--text);white-space:pre-wrap;word-break:break-word;max-height:75vh;overflow-y:auto;border:1px solid var(--border);direction:ltr;text-align:left}
-
-/* Word preview */
-.preview-doc{background:#fff;color:#1f2937;padding:36px 44px;border-radius:14px;line-height:1.85;font-size:14px;max-height:75vh;overflow-y:auto;direction:rtl;text-align:right;font-family:'BYekan',Tahoma,sans-serif}
-.preview-doc h1,.preview-doc h2,.preview-doc h3,.preview-doc h4{color:#111827;margin:22px 0 12px;font-weight:bold;line-height:1.4}
-.preview-doc h1{font-size:1.8rem}
-.preview-doc h2{font-size:1.4rem}
-.preview-doc h3{font-size:1.15rem}
-.preview-doc p{margin:0 0 12px;line-height:1.9}
-.preview-doc ul,.preview-doc ol{margin:0 0 14px;padding-inline-start:28px}
-.preview-doc li{margin-bottom:6px}
-.preview-doc table{border-collapse:collapse;margin:14px 0;width:100%}
-.preview-doc td,.preview-doc th{border:1px solid #d1d5db;padding:9px 13px;text-align:right}
-.preview-doc th{background:#f3f4f6;font-weight:bold}
-.preview-doc img{max-width:100%;height:auto;border-radius:6px;margin:8px 0}
-.preview-doc a{color:#2563eb;text-decoration:none}
-.preview-doc a:hover{text-decoration:underline}
-.preview-doc blockquote{border-inline-start:4px solid #e5e7eb;padding-inline-start:16px;color:#6b7280;margin:12px 0;font-style:italic}
-.preview-doc code{background:#f3f4f6;padding:2px 6px;border-radius:5px;font-family:monospace;font-size:.85em}
-
-/* Excel preview */
-.preview-xlsx{background:#fff;border-radius:14px;overflow:hidden;max-height:75vh;display:flex;flex-direction:column}
-.xlsx-tabs{display:flex;gap:4px;padding:10px 14px 0;background:#f9fafb;border-bottom:1px solid #e5e7eb;overflow-x:auto;flex-shrink:0;scrollbar-width:thin}
-.xlsx-tabs::-webkit-scrollbar{height:6px}
-.xlsx-tab{font-family:'BYekan',Tahoma,sans-serif;font-size:.8rem;font-weight:bold;padding:9px 16px;border-radius:10px 10px 0 0;border:none;background:transparent;color:#6b7280;cursor:pointer;transition:.18s;white-space:nowrap;position:relative;top:1px}
-.xlsx-tab:hover{background:#f3f4f6;color:#374151}
-.xlsx-tab.active{background:#fff;color:#8b5cf6;border:1px solid #e5e7eb;border-bottom-color:#fff}
-.xlsx-content{overflow:auto;flex:1;padding:4px}
-.xlsx-content table{border-collapse:collapse;min-width:100%;font-size:13px;font-family:'BYekan',Tahoma,sans-serif}
-.xlsx-content td,.xlsx-content th{border:1px solid #e5e7eb;padding:7px 12px;white-space:nowrap;color:#1f2937;text-align:right;vertical-align:top}
-.xlsx-content tr:nth-child(even) td{background:#fafafa}
-.xlsx-content tr:first-child td{background:#f3f4f6;font-weight:bold;color:#111827;position:sticky;top:0;z-index:1}
-
-/* PPT fallback */
-.preview-ppt-note{background:var(--surface-2);border:1px solid var(--border);border-radius:14px;padding:20px;font-size:.82rem;color:var(--muted);line-height:1.9;text-align:center;margin-top:14px}
+.preview-text{background:var(--surface-2);padding:22px;border-radius:14px;font-family:ui-monospace,'SF Mono',Menlo,Consolas,monospace;font-size:.84rem;line-height:1.95;color:var(--text);white-space:pre-wrap;word-break:break-word;max-height:78vh;overflow-y:auto;border:1px solid var(--border);direction:ltr;text-align:left}
 
 .toast-wrap{position:fixed;bottom:28px;inset-inline-end:28px;z-index:300;display:flex;flex-direction:column;gap:10px;pointer-events:none}
 .toast{display:flex;align-items:center;gap:11px;padding:14px 20px;border-radius:15px;font-size:.88rem;background:var(--surface-solid);border:1px solid var(--border-strong);box-shadow:var(--shadow-lg);animation:toastIn .45s cubic-bezier(.34,1.4,.64,1) both;min-width:220px;max-width:400px}
@@ -348,11 +333,12 @@ main{position:relative;z-index:10;max-width:1320px;margin:0 auto;padding:44px 30
   .modal-body{max-height:60vh}
   .search-kbd{display:none}
   .hero h2{letter-spacing:-.6px}
+  .filters{margin:18px 0 22px;gap:6px}
+  .filter-chip{font-size:.72rem;padding:8px 12px}
   .toast-wrap{inset-inline-end:16px;inset-inline-start:16px;bottom:16px}
   .toast{min-width:auto;max-width:100%}
   .fab{bottom:22px;inset-inline-start:22px;width:56px;height:56px}
-  .preview-frame,.preview-img,.preview-doc,.preview-xlsx{max-height:65vh;height:65vh}
-  .preview-doc{padding:22px 20px}
+  .preview-frame,.preview-img{height:65vh;max-height:65vh}
 }
 @media(max-width:420px){
   .grid{grid-template-columns:1fr}
@@ -403,6 +389,8 @@ main{position:relative;z-index:10;max-width:1320px;margin:0 auto;padding:44px 30
       <button class="clear-btn" id="clearSearch" title="پاک کردن">×</button>
     </div>
   </section>
+
+  <section class="filters" id="filters"></section>
   <section class="stats" id="stats"></section>
   <section class="grid" id="grid"></section>
 </main>
@@ -500,7 +488,7 @@ main{position:relative;z-index:10;max-width:1320px;margin:0 auto;padding:44px 30
 /* ══════════════════════════════════════════════════════════════════
    🔐 رمز عبور مدیر
    ══════════════════════════════════════════════════════════════════ */
-const ADMIN_PASSWORD = 'admin1234';
+const ADMIN_PASSWORD = '09368003576';
 
 /* ══════════════════════════════════════════════════════════════════
    ⚙️ Supabase
@@ -512,19 +500,14 @@ const SUPABASE_CONFIG = {
   table:   'forms',
 };
 
-/* ══════════════════════════════════════════════════════════════════
-   🎨 لوگو (SVG) + تولید PNG برای آیکون‌های PWA
-   ══════════════════════════════════════════════════════════════════ */
+/* لوگو */
 const LOGO_SVG = `<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 512 512">
   <defs>
     <linearGradient id="lg" x1="0" y1="0" x2="1" y2="1">
-      <stop offset="0%" stop-color="#8b5cf6"/>
-      <stop offset="55%" stop-color="#6366f1"/>
-      <stop offset="100%" stop-color="#06b6d4"/>
+      <stop offset="0%" stop-color="#8b5cf6"/><stop offset="55%" stop-color="#6366f1"/><stop offset="100%" stop-color="#06b6d4"/>
     </linearGradient>
     <linearGradient id="lg2" x1="0" y1="0" x2="0" y2="1">
-      <stop offset="0%" stop-color="#ffffff"/>
-      <stop offset="100%" stop-color="#e8ebf5"/>
+      <stop offset="0%" stop-color="#ffffff"/><stop offset="100%" stop-color="#e8ebf5"/>
     </linearGradient>
   </defs>
   <rect width="512" height="512" rx="120" fill="url(#lg)"/>
@@ -535,12 +518,10 @@ const LOGO_SVG = `<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 512 512">
   <rect x="176" y="330" width="138" height="22" rx="11" fill="#8b5cf6" opacity="0.55"/>
 </svg>`;
 const LOGO_DATA_URI = 'data:image/svg+xml;charset=utf-8,' + encodeURIComponent(LOGO_SVG);
-
 document.getElementById('brandLogo').innerHTML = LOGO_SVG;
 document.getElementById('faviconLink').href = LOGO_DATA_URI;
 document.getElementById('appleIconLink').href = LOGO_DATA_URI;
 
-/* تولید PNG از SVG برای آیکون‌های PWA */
 function generatePngIcon(size) {
   return new Promise((resolve) => {
     const img = new Image();
@@ -548,37 +529,23 @@ function generatePngIcon(size) {
     img.onload = () => {
       const c = document.createElement('canvas');
       c.width = size; c.height = size;
-      const ctx = c.getContext('2d');
-      ctx.drawImage(img, 0, 0, size, size);
-      try { resolve(c.toDataURL('image/png')); }
-      catch(e) { resolve(LOGO_DATA_URI); }
+      c.getContext('2d').drawImage(img, 0, 0, size, size);
+      try { resolve(c.toDataURL('image/png')); } catch(e) { resolve(LOGO_DATA_URI); }
     };
     img.onerror = () => resolve(LOGO_DATA_URI);
     img.src = LOGO_DATA_URI;
   });
 }
-
-/* ساخت Manifest به‌صورت Blob با Base URL مطلق */
 async function buildManifest() {
   const baseUrl = new URL('.', location.href).href;
-  const [png192, png512] = await Promise.all([
-    generatePngIcon(192),
-    generatePngIcon(512)
-  ]);
+  const [png192, png512] = await Promise.all([generatePngIcon(192), generatePngIcon(512)]);
   const manifest = {
-    name: 'فرم‌بان — کتابخانه فرم‌ها',
-    short_name: 'فرم‌بان',
+    name: 'فرم‌بان — کتابخانه فرم‌ها', short_name: 'فرم‌بان',
     description: 'کتابخانه هوشمند فرم‌ها',
-    start_url: baseUrl,
-    scope: baseUrl,
-    display: 'standalone',
-    display_override: ['window-controls-overlay', 'standalone'],
-    orientation: 'any',
-    background_color: '#07080f',
-    theme_color: '#8b5cf6',
-    lang: 'fa',
-    dir: 'rtl',
-    categories: ['productivity', 'utilities'],
+    start_url: baseUrl, scope: baseUrl,
+    display: 'standalone', display_override: ['window-controls-overlay', 'standalone'],
+    orientation: 'any', background_color: '#07080f', theme_color: '#8b5cf6',
+    lang: 'fa', dir: 'rtl', categories: ['productivity', 'utilities'],
     icons: [
       { src: png192, sizes: '192x192', type: 'image/png', purpose: 'any' },
       { src: png512, sizes: '512x512', type: 'image/png', purpose: 'any' },
@@ -589,48 +556,30 @@ async function buildManifest() {
   document.getElementById('manifestLink').href = URL.createObjectURL(blob);
 }
 
-/* ══════════════════════════════════════════════════════════════════
-   📲 Service Worker (CRITICAL for PWA install)
-   ══════════════════════════════════════════════════════════════════ */
+/* Service Worker */
 if ('serviceWorker' in navigator) {
   window.addEventListener('load', () => {
-    // ثبت SW از فایل sw.js (کنار index.html)
     navigator.serviceWorker.register('./sw.js', { scope: './' })
-      .then(reg => {
-        console.log('%c✅ Service Worker ثبت شد — PWA آماده‌ی نصبه', 'color:#22c55e;font-weight:bold');
-        console.log('SW scope:', reg.scope);
-      })
-      .catch(err => {
-        console.error('%c❌ Service Worker ثبت نشد:', 'color:#ef4444;font-weight:bold', err);
-        console.error('💡 راه‌حل: فایل sw.js رو کنار index.html توی گیت‌هاب بذار');
-      });
+      .then(() => console.log('%c✅ Service Worker ثبت شد', 'color:#22c55e;font-weight:bold'))
+      .catch(err => console.error('❌ SW ثبت نشد:', err));
   });
 }
 
-/* PWA Install */
 let deferredInstallPrompt = null;
 const installBtn = document.getElementById('installBtn');
-
 window.addEventListener('beforeinstallprompt', e => {
   e.preventDefault();
   deferredInstallPrompt = e;
   installBtn.classList.add('show');
-  console.log('%c📲 آماده نصب — دکمه نصب فعال شد', 'color:#8b5cf6;font-weight:bold');
 });
-
 installBtn.addEventListener('click', async () => {
-  if (!deferredInstallPrompt) {
-    toast('برای نصب از منوی مرورگر (سه‌نقطه بالا) → «نصب فرم‌بان» استفاده کن', 'info', 5000);
-    return;
-  }
+  if (!deferredInstallPrompt) { toast('از منوی مرورگر → Install فرم‌بان', 'info', 5000); return; }
   deferredInstallPrompt.prompt();
   const { outcome } = await deferredInstallPrompt.userChoice;
-  console.log('Install outcome:', outcome);
   deferredInstallPrompt = null;
   installBtn.classList.remove('show');
   if (outcome === 'accepted') toast('فرم‌بان نصب شد 🎉');
 });
-
 window.addEventListener('appinstalled', () => {
   installBtn.classList.remove('show');
   deferredInstallPrompt = null;
@@ -662,17 +611,24 @@ function cleanName(filename){
   n = n.replace(/[_\-]+/g, ' ').replace(/\s+/g, ' ').trim();
   return n;
 }
+/* تشخیص نوع فایل */
 function fileKind(name, type){
   const ext = (name.split('.').pop() || '').toLowerCase();
   const t = type || '';
-  if(t === 'application/pdf' || ext === 'pdf') return { label:'PDF',   color:'#ef4444', glyph:'pdf' };
-  if(t.startsWith('image/'))                   return { label:'IMAGE', color:'#8b5cf6', glyph:'img', isImage:true };
-  if(['doc','docx','odt','rtf'].includes(ext) || t.includes('word'))   return { label:'WORD',  color:'#2563eb', glyph:'doc' };
-  if(['xls','xlsx','csv','ods'].includes(ext) || t.includes('sheet') || t.includes('excel')) return { label:'EXCEL', color:'#16a34a', glyph:'xls' };
-  if(['ppt','pptx','odp'].includes(ext) || t.includes('presentation')) return { label:'PPT',   color:'#ea580c', glyph:'ppt' };
-  if(['zip','rar','7z','tar','gz'].includes(ext))  return { label:'ZIP',   color:'#f59e0b', glyph:'zip' };
-  if(['txt','md'].includes(ext) || t.startsWith('text/'))  return { label:'TEXT',  color:'#0ea5e9', glyph:'txt' };
-  return { label:(ext ? ext.toUpperCase().slice(0,5) : 'FILE'), color:'#64748b', glyph:'file' };
+  if(t === 'application/pdf' || ext === 'pdf') return { label:'PDF',   color:'#ef4444', glyph:'pdf', cat:'pdf' };
+  if(t.startsWith('image/') || ['jpg','jpeg','png','gif','webp','bmp','svg'].includes(ext))
+    return { label:'IMAGE', color:'#8b5cf6', glyph:'img', cat:'image', isImage:true };
+  if(['doc','docx','odt','rtf'].includes(ext) || t.includes('word'))
+    return { label:'WORD',  color:'#2563eb', glyph:'doc', cat:'word' };
+  if(['xls','xlsx','csv','ods'].includes(ext) || t.includes('sheet') || t.includes('excel'))
+    return { label:'EXCEL', color:'#16a34a', glyph:'xls', cat:'excel' };
+  if(['ppt','pptx','odp'].includes(ext) || t.includes('presentation'))
+    return { label:'PPT',   color:'#ea580c', glyph:'ppt', cat:'ppt' };
+  if(['zip','rar','7z','tar','gz'].includes(ext))
+    return { label:'ZIP',   color:'#f59e0b', glyph:'zip', cat:'other' };
+  if(['txt','md','json','xml','log','ini','yml','yaml'].includes(ext) || (t.startsWith('text/') && !t.includes('pdf')))
+    return { label:'TEXT',  color:'#0ea5e9', glyph:'txt', cat:'text' };
+  return { label:(ext ? ext.toUpperCase().slice(0,5) : 'FILE'), color:'#64748b', glyph:'file', cat:'other' };
 }
 const GLYPHS = {
   pdf :'<path d="M14 2H6a2 2 0 00-2 2v16a2 2 0 002 2h12a2 2 0 002-2V8z"/><path d="M14 2v6h6"/><path d="M9 15h1.5a1.5 1.5 0 000-3H9v6"/><path d="M14 12v6h1a2 2 0 002-2v-2a2 2 0 00-2-2h-1z"/>',
@@ -688,6 +644,7 @@ const GLYPHS = {
 const state = {
   forms: [],
   search: '',
+  filter: 'all',
   theme: localStorage.getItem('formban-theme') || 'dark',
   editingId: null,
   nameMode: 'auto',
@@ -862,7 +819,6 @@ function renderStatus(){
 /* Lock */
 const LOCK_CLOSED = '<svg viewBox="0 0 24 24"><rect x="4" y="11" width="16" height="10" rx="2"/><path d="M8 11V7a4 4 0 018 0v4"/></svg>';
 const LOCK_OPEN   = '<svg viewBox="0 0 24 24"><rect x="4" y="11" width="16" height="10" rx="2"/><path d="M8 11V7a4 4 0 018 0"/></svg>';
-
 function renderLockState(){
   const btn = $('#lockBtn');
   if(state.isAdmin){
@@ -881,7 +837,6 @@ function renderLockState(){
 const loginModal = $('#loginModal');
 const pwInput    = $('#pwInput');
 const pwError    = $('#pwError');
-
 function openLogin(){
   pwInput.value = '';
   pwError.style.display = 'none';
@@ -898,25 +853,20 @@ function doLogin(){
   if(pwInput.value === ADMIN_PASSWORD){
     state.isAdmin = true;
     sessionStorage.setItem('formban-admin', '1');
-    closeLogin();
-    renderLockState();
-    render();
+    closeLogin(); renderLockState(); render();
     toast('خوش آمدی مدیر 👋');
   } else {
     pwError.textContent = 'رمز عبور اشتباهه';
     pwError.style.display = 'block';
-    pwInput.classList.remove('shake');
-    void pwInput.offsetWidth;
-    pwInput.classList.add('shake');
-    pwInput.select();
+    pwInput.classList.remove('shake'); void pwInput.offsetWidth;
+    pwInput.classList.add('shake'); pwInput.select();
   }
 }
 function doLogout(){
   if(!confirm('از حالت مدیر خارج می‌شوی؟')) return;
   state.isAdmin = false;
   sessionStorage.removeItem('formban-admin');
-  renderLockState();
-  render();
+  renderLockState(); render();
   toast('از حالت مدیر خارج شدی', 'info');
 }
 $('#lockBtn').addEventListener('click', () => state.isAdmin ? doLogout() : openLogin());
@@ -928,26 +878,61 @@ loginModal.addEventListener('click', e => { if(e.target === loginModal) closeLog
 $('#pwToggle').addEventListener('click', () => {
   const t = pwInput.type === 'password' ? 'text' : 'password';
   pwInput.type = t;
-  const eye = $('#pwEye');
-  eye.innerHTML = t === 'password'
+  $('#pwEye').innerHTML = t === 'password'
     ? '<path d="M1.5 12S5 5 12 5s10.5 7 10.5 7-3.5 7-10.5 7S1.5 12 1.5 12z"/><circle cx="12" cy="12" r="3"/>'
     : '<path d="M17.94 17.94A10.07 10.07 0 0112 20c-7 0-11-8-11-8a18.45 18.45 0 015.06-5.94M9.9 4.24A9.12 9.12 0 0112 4c7 0 11 8 11 8a18.5 18.5 0 01-2.16 3.19m-6.72-1.07a3 3 0 11-4.24-4.24"/><path d="M1 1l22 22"/>';
 });
 
+/* ══════════════════════════════════════════════════════════════════
+   🔖 FILTERS
+   ══════════════════════════════════════════════════════════════════ */
+const FILTERS = [
+  { id: 'all',   label: 'همه',   icon: '<path d="M4 6h16M4 12h16M4 18h16"/>' },
+  { id: 'pdf',   label: 'PDF',   icon: '<path d="M14 2H6a2 2 0 00-2 2v16a2 2 0 002 2h12a2 2 0 002-2V8z"/><path d="M14 2v6h6"/>' },
+  { id: 'word',  label: 'Word',  icon: '<path d="M14 2H6a2 2 0 00-2 2v16a2 2 0 002 2h12a2 2 0 002-2V8z"/><path d="M14 2v6h6"/><path d="M9 13h6M9 17h6"/>' },
+  { id: 'excel', label: 'Excel', icon: '<path d="M14 2H6a2 2 0 00-2 2v16a2 2 0 002 2h12a2 2 0 002-2V8z"/><path d="M14 2v6h6"/><path d="M9 12l6 6M15 12l-6 6"/>' },
+  { id: 'image', label: 'تصاویر', icon: '<rect x="3" y="3" width="18" height="18" rx="2"/><circle cx="8.5" cy="8.5" r="1.5"/><path d="M21 15l-5-5L5 21"/>' },
+  { id: 'text',  label: 'متنی',  icon: '<path d="M14 2H6a2 2 0 00-2 2v16a2 2 0 002 2h12a2 2 0 002-2V8z"/><path d="M14 2v6h6"/><path d="M8 13h8M8 17h5"/>' },
+];
+
+function countByCat(cat){
+  if(cat === 'all') return state.forms.length;
+  return state.forms.filter(f => fileKind(f.name, f.type).cat === cat).length;
+}
+
+function renderFilters(){
+  const html = FILTERS.map(f => {
+    const count = countByCat(f.id);
+    if(f.id !== 'all' && count === 0) return '';
+    return `<button class="filter-chip ${state.filter===f.id?'active':''}" data-filter="${f.id}">
+      <svg viewBox="0 0 24 24">${f.icon}</svg>
+      ${f.label}
+      <span class="count">${fa(count)}</span>
+    </button>`;
+  }).join('');
+  $('#filters').innerHTML = html;
+}
+
+$('#filters').addEventListener('click', e => {
+  const btn = e.target.closest('[data-filter]');
+  if(!btn) return;
+  state.filter = btn.dataset.filter;
+  render();
+});
+
 /* RENDER */
-function renderStats(list){
+function renderStats(){
   const totalSize = state.forms.reduce((s,f) => s + (f.size || 0), 0);
-  const pdfCount  = state.forms.filter(f => f.type === 'application/pdf' || /\.pdf$/i.test(f.name)).length;
-  const docCount  = state.forms.filter(f => /word|\.docx?$/i.test(f.type||'') || /\.docx?$/i.test(f.name)).length;
-  const imgCount  = state.forms.filter(f => (f.type||'').startsWith('image/')).length;
+  const pdfCount  = state.forms.filter(f => fileKind(f.name, f.type).cat === 'pdf').length;
+  const docCount  = state.forms.filter(f => fileKind(f.name, f.type).cat === 'word').length;
+  const xlsCount  = state.forms.filter(f => fileKind(f.name, f.type).cat === 'excel').length;
   const chips = [
     { c:'#8b5cf6', v: state.forms.length, l:'کل فرم‌ها', ic:'<path d="M14 2H6a2 2 0 00-2 2v16a2 2 0 002 2h12a2 2 0 002-2V8z"/><path d="M14 2v6h6"/>' },
     { c:'#06b6d4', v: fmtSize(totalSize), l:'حجم کل', ic:'<path d="M21 15v4a2 2 0 01-2 2H5a2 2 0 01-2-2v-4"/><path d="M7 10l5 5 5-5"/><path d="M12 15V3"/>' },
     { c:'#ef4444', v: pdfCount, l:'PDF', ic:'<path d="M14 2H6a2 2 0 00-2 2v16a2 2 0 002 2h12a2 2 0 002-2V8z"/><path d="M14 2v6h6"/>' },
     { c:'#2563eb', v: docCount, l:'Word', ic:'<path d="M14 2H6a2 2 0 00-2 2v16a2 2 0 002 2h12a2 2 0 002-2V8z"/><path d="M14 2v6h6"/><path d="M9 13h6M9 17h6"/>' },
+    { c:'#16a34a', v: xlsCount, l:'Excel', ic:'<path d="M14 2H6a2 2 0 00-2 2v16a2 2 0 002 2h12a2 2 0 002-2V8z"/><path d="M14 2v6h6"/><path d="M9 12l6 6M15 12l-6 6"/>' },
   ];
-  if(imgCount) chips.push({ c:'#8b5cf6', v: imgCount, l:'تصاویر', ic:'<rect x="3" y="3" width="18" height="18" rx="2"/><circle cx="8.5" cy="8.5" r="1.5"/><path d="M21 15l-5-5L5 21"/>' });
-  if(state.search) chips.push({ c:'#ec4899', v: list.length, l:'نتیجه جستجو', ic:'<circle cx="11" cy="11" r="7"/><path d="M20 20l-3.6-3.6"/>' });
   $('#stats').innerHTML = chips.map((c,i) => `
     <span class="chip" style="--c:${c.c}; animation-delay:${i*60}ms">
       <span class="ic"><svg viewBox="0 0 24 24">${c.ic}</svg></span>
@@ -1004,12 +989,23 @@ function cardHTML(form, index){
 }
 
 function render(){
-  const q = state.search.trim().toLowerCase();
-  const list = q ? state.forms.filter(f => f.name.toLowerCase().includes(q)) : state.forms.slice();
-  renderStats(list);
+  renderFilters();
+  renderStats();
   renderStatus();
   renderLockState();
+
+  const q = state.search.trim().toLowerCase();
+  let list = state.forms.slice();
+
+  /* فیلتر دسته */
+  if(state.filter !== 'all'){
+    list = list.filter(f => fileKind(f.name, f.type).cat === state.filter);
+  }
+  /* جستجو */
+  if(q) list = list.filter(f => f.name.toLowerCase().includes(q));
+
   const grid = $('#grid');
+
   if(!state.forms.length){
     grid.innerHTML = `
       <div class="empty">
@@ -1026,18 +1022,23 @@ function render(){
       </div>`;
     return;
   }
+
   if(!list.length){
+    const isFiltered = state.filter !== 'all' || q;
     grid.innerHTML = `
       <div class="empty">
         <div class="circle"><svg viewBox="0 0 24 24"><circle cx="11" cy="11" r="7"/><path d="M20 20l-3.6-3.6"/><path d="M8 11h6"/></svg></div>
-        <h3>فرمی با این اسم پیدا نشد</h3>
-        <p>املای اسم رو چک کن یا یه عبارت کوتاه‌تر بنویس.</p>
+        <h3>${isFiltered ? 'چیزی پیدا نشد' : 'فرمی نیست'}</h3>
+        <p>${state.filter !== 'all' ? 'توی این دسته فرمی وجود نداره یا با جستجو مطابقت نمی‌کنه.' : 'املای اسم رو چک کن یا یه عبارت کوتاه‌تر بنویس.'}</p>
+        ${state.filter !== 'all' ? `<button class="btn-ghost" onclick="document.querySelector('[data-filter=all]').click()" style="margin:0 auto;max-width:180px;padding:12px 20px">نمایش همه</button>` : ''}
       </div>`;
     return;
   }
+
   grid.innerHTML = list.map((f,i) => cardHTML(f,i)).join('');
   const inp = grid.querySelector('.card-name-input');
   if(inp){ inp.focus(); inp.setSelectionRange(inp.value.length, inp.value.length); }
+
   list.forEach(async form => {
     if(form.previewUrl) return;
     const kind = fileKind(form.name, form.type);
@@ -1052,7 +1053,9 @@ function render(){
   });
 }
 
-/* عملیات */
+/* ══════════════════════════════════════════════════════════════════
+   ⬇️ DOWNLOAD
+   ══════════════════════════════════════════════════════════════════ */
 async function downloadForm(form){
   try{
     const blob = await getFormBlob(form);
@@ -1066,64 +1069,77 @@ async function downloadForm(form){
   }catch(e){ console.error(e); toast('خطا در دانلود: ' + (e.message||''), 'err'); }
 }
 
+/* ══════════════════════════════════════════════════════════════════
+   🖨️ PRINT — مستقیم پرینت دیالوگ
+   ══════════════════════════════════════════════════════════════════ */
 async function printForm(form){
   try{
     const blob = await getFormBlob(form);
     if(!blob){ toast('فایل پیدا نشد', 'err'); return; }
+
     const type = blob.type || '';
-    const isPdf   = type === 'application/pdf' || /\.pdf$/i.test(form.name);
+    const isPdf = type === 'application/pdf' || /\.pdf$/i.test(form.name);
     const isImage = type.startsWith('image/') || /\.(png|jpe?g|gif|webp|bmp)$/i.test(form.name);
-    const url = URL.createObjectURL(blob);
-    const w = window.open('', '_blank');
-    if(!w){ URL.revokeObjectURL(url); toast('پنجره جدید مسدود شد', 'err'); return; }
-    const safeTitle = esc(form.name);
-    if(isPdf){
-      w.document.write(`<!DOCTYPE html><html dir="rtl"><head><meta charset="utf-8"><title>${safeTitle}</title>
-        <style>html,body{margin:0;height:100%;background:#333}iframe{border:0;width:100%;height:100%}</style>
-        </head><body><iframe id="f" src="${url}"></iframe>
-        <script>var f=document.getElementById('f');f.onload=function(){setTimeout(function(){try{f.contentWindow.focus();f.contentWindow.print()}catch(e){window.print()}},400)}<\/script>
-        </body></html>`);
-    } else if(isImage){
-      w.document.write(`<!DOCTYPE html><html dir="rtl"><head><meta charset="utf-8"><title>${safeTitle}</title>
-        <style>@page{margin:10mm}body{margin:0;display:flex;align-items:center;justify-content:center;min-height:100vh;background:#fff}img{max-width:100%;max-height:100vh;display:block}</style>
-        </head><body><img src="${url}" onload="setTimeout(function(){window.focus();window.print()},350)"></body></html>`);
-    } else {
-      w.close(); URL.revokeObjectURL(url);
-      downloadForm(form);
-      toast('این نوع فایل قابل چاپ نیست — دانلود شد', 'info');
+
+    if(!isPdf && !isImage){
+      toast('فقط PDF و تصویر قابل چاپ مستقیم هستند. برای بقیه فایل‌ها دانلود کن.', 'info', 5000);
       return;
     }
-    w.document.close();
-    setTimeout(() => URL.revokeObjectURL(url), 60000);
-  }catch(e){ console.error(e); toast('خطا در چاپ: ' + (e.message||''), 'err'); }
+
+    const url = URL.createObjectURL(blob);
+
+    /* ─── PDF ─── */
+    if(isPdf){
+      // روش ۱: استفاده از iframe مخفی برای پرینت خودکار
+      const iframe = document.createElement('iframe');
+      iframe.style.cssText = 'position:fixed;inset-inline-end:0;bottom:0;width:0;height:0;border:0;visibility:hidden;';
+      iframe.src = url;
+      document.body.appendChild(iframe);
+
+      let printed = false;
+      const doPrint = () => {
+        if(printed) return;
+        printed = true;
+        try{
+          iframe.contentWindow.focus();
+          iframe.contentWindow.print();
+          toast('پنجره چاپ باز شد 🖨️');
+        }catch(err){
+          console.warn('iframe print failed, fallback to new tab', err);
+          window.open(url, '_blank');
+          toast('فایل در تب جدید باز شد — از دکمه چاپ استفاده کن', 'info', 4000);
+        }
+        setTimeout(() => { iframe.remove(); URL.revokeObjectURL(url); }, 60000);
+      };
+
+      iframe.onload = () => setTimeout(doPrint, 500);
+      // fallback اگه onload اجرا نشد
+      setTimeout(() => { if(iframe.parentNode) doPrint(); }, 2500);
+      return;
+    }
+
+    /* ─── IMAGE ─── */
+    if(isImage){
+      const w = window.open('', '_blank');
+      if(!w){ URL.revokeObjectURL(url); toast('پنجره جدید مسدود شد', 'err'); return; }
+      w.document.write(`<!DOCTYPE html><html dir="rtl"><head><meta charset="utf-8"><title>${esc(form.name)}</title>
+        <style>@page{margin:10mm}html,body{margin:0;padding:0}
+        body{display:flex;align-items:center;justify-content:center;min-height:100vh;background:#fff}
+        img{max-width:100%;max-height:100vh;display:block;object-fit:contain}</style>
+        </head><body><img src="${url}" onload="setTimeout(function(){window.focus();window.print();},300)"></body></html>`);
+      w.document.close();
+      toast('پنجره چاپ باز شد 🖨️');
+      setTimeout(() => URL.revokeObjectURL(url), 60000);
+    }
+  }catch(e){
+    console.error(e);
+    toast('خطا در چاپ: ' + (e.message||''), 'err');
+  }
 }
 
 /* ══════════════════════════════════════════════════════════════════
-   🚀 PREVIEW — سریع + کامل
+   👁️ PREVIEW — فقط فایل اصلی، بدون تبدیل
    ══════════════════════════════════════════════════════════════════ */
-const loadedLibs = {};
-
-function loadScript(url){
-  if(loadedLibs[url]) return loadedLibs[url];
-  loadedLibs[url] = new Promise((resolve, reject) => {
-    const s = document.createElement('script');
-    s.src = url;
-    s.onload = () => resolve();
-    s.onerror = () => reject(new Error('خطا در بارگذاری کتابخانه'));
-    document.head.appendChild(s);
-  });
-  return loadedLibs[url];
-}
-
-function showLoading(body, msg, sub = ''){
-  body.innerHTML = `
-    <div class="preview-loading">
-      <div class="spin"></div>
-      <div class="msg">${esc(msg)}</div>
-      ${sub ? `<div class="sub">${esc(sub)}</div>` : ''}
-    </div>`;
-}
-
 async function previewForm(form){
   const body  = $('#previewBody');
   const title = $('#previewTitle');
@@ -1132,24 +1148,22 @@ async function previewForm(form){
 
   title.textContent = form.name;
   sub.textContent = `${kind.label} • ${fmtSize(form.size)} • ${fmtDate(form.createdAt)}`;
-  showLoading(body, 'در حال بارگذاری…');
+  body.innerHTML = `<div class="preview-loading"><div class="spin"></div><div class="msg">در حال بارگذاری…</div></div>`;
 
   $('#previewModal').classList.add('open');
   document.body.style.overflow = 'hidden';
   $('#previewDownload').onclick = () => downloadForm(form);
 
   const type = form.type || '';
-  const isPdf    = type === 'application/pdf' || /\.pdf$/i.test(form.name);
-  const isImage  = type.startsWith('image/') || /\.(png|jpe?g|gif|webp|bmp|svg)$/i.test(form.name);
-  const isDocx   = /\.docx?$/i.test(form.name) || /officedocument\.wordprocessingml|msword/i.test(type);
-  const isXlsx   = /\.(xlsx?|csv|ods)$/i.test(form.name) || /officedocument\.spreadsheetml|ms-excel/i.test(type);
-  const isText   = /\.(txt|md|json|xml|log|ini|yml|yaml)$/i.test(form.name) || (type.startsWith('text/') && !isPdf && !isXlsx);
+  const isPdf   = type === 'application/pdf' || /\.pdf$/i.test(form.name);
+  const isImage = type.startsWith('image/') || /\.(png|jpe?g|gif|webp|bmp|svg)$/i.test(form.name);
+  const isText  = /\.(txt|md|json|xml|log|ini|yml|yaml)$/i.test(form.name) || (type.startsWith('text/') && !isPdf);
 
   try{
-    /* ─── PDF: نمایش مستقیم با iframe (فوری) ─── */
+    /* ─── PDF: نمایش بومی مرورگر — دقیقاً همون فایل ─── */
     if(isPdf){
       const url = await getFormUrl(form);
-      body.innerHTML = `<iframe class="preview-frame" src="${url}#toolbar=1&view=FitH" title="PDF"></iframe>`;
+      body.innerHTML = `<iframe class="preview-frame" src="${url}#toolbar=1&navpanes=0&view=FitH"></iframe>`;
       return;
     }
 
@@ -1160,7 +1174,7 @@ async function previewForm(form){
       return;
     }
 
-    /* ─── TEXT: نمایش کامل ─── */
+    /* ─── TEXT: نمایش کامل متن ─── */
     if(isText){
       const blob = await getFormBlob(form);
       if(!blob) throw new Error('فایل پیدا نشد');
@@ -1169,81 +1183,7 @@ async function previewForm(form){
       return;
     }
 
-    /* ─── WORD (docx) — با mammoth.js محلی ─── */
-    if(isDocx){
-      // فایل‌های .doc قدیمی پشتیبانی نمی‌شن
-      if(/\.doc$/i.test(form.name) && !/\.docx$/i.test(form.name)){
-        showUnsupported(body, kind, 'فایل‌های Word قدیمی (.doc) قابل پیش‌نمایش نیستن. لطفاً دانلود کن یا فرمت رو به .docx تبدیل کن.');
-        return;
-      }
-      showLoading(body, 'در حال آماده‌سازی پیش‌نمایش Word…', 'بارگذاری موتور (فقط یک بار)');
-      try{
-        await loadScript('https://cdn.jsdelivr.net/npm/mammoth@1.6.0/mammoth.browser.min.js');
-      }catch(e){ throw new Error('اتصال به اینترنت برقرار نیست — کتابخانه پیش‌نمایش بارگذاری نشد'); }
-
-      showLoading(body, 'در حال تبدیل فایل Word…');
-      const blob = await getFormBlob(form);
-      if(!blob) throw new Error('فایل پیدا نشد');
-      const arrayBuffer = await blob.arrayBuffer();
-      const result = await mammoth.convertToHtml({ arrayBuffer });
-      const html = result.value || '<p style="color:#6b7280;text-align:center;padding:40px">فایل خالیه یا محتوایی نداره</p>';
-      body.innerHTML = `<div class="preview-doc">${html}</div>`;
-      return;
-    }
-
-    /* ─── EXCEL (xlsx/csv/ods) — با SheetJS محلی ─── */
-    if(isXlsx){
-      showLoading(body, 'در حال آماده‌سازی پیش‌نمایش Excel…', 'بارگذاری موتور (فقط یک بار)');
-      try{
-        await loadScript('https://cdn.jsdelivr.net/npm/xlsx@0.18.5/dist/xlsx.full.min.js');
-      }catch(e){ throw new Error('اتصال به اینترنت برقرار نیست — کتابخانه پیش‌نمایش بارگذاری نشد'); }
-
-      showLoading(body, 'در حال تبدیل فایل Excel…');
-      const blob = await getFormBlob(form);
-      if(!blob) throw new Error('فایل پیدا نشد');
-      const arrayBuffer = await blob.arrayBuffer();
-      const wb = XLSX.read(arrayBuffer, { type: 'array', cellStyles: false });
-      if(!wb.SheetNames.length) throw new Error('فایل شیت نداره');
-
-      const sheetsHtml = wb.SheetNames.map((name, i) => {
-        const sheet = wb.Sheets[name];
-        const html = XLSX.utils.sheet_to_html(sheet, { id: `sheet-${i}`, editable: false });
-        // تمیزکاری HTML
-        const clean = html.replace(/<html>|<\/html>|<head>[\s\S]*?<\/head>|<body>|<\/body>/g, '');
-        return `<div class="xlsx-sheet" data-sheet-idx="${i}" style="display:${i===0?'block':'none'}">${clean}</div>`;
-      }).join('');
-
-      const tabsHtml = wb.SheetNames.map((name, i) =>
-        `<button class="xlsx-tab ${i===0?'active':''}" data-tab="${i}">${esc(name)}</button>`
-      ).join('');
-
-      body.innerHTML = `
-        <div class="preview-xlsx">
-          ${wb.SheetNames.length > 1 ? `<div class="xlsx-tabs">${tabsHtml}</div>` : ''}
-          <div class="xlsx-content" id="xlsxContent">${sheetsHtml}</div>
-        </div>`;
-
-      // رویداد تغییر تب
-      body.querySelectorAll('.xlsx-tab').forEach(tab => {
-        tab.addEventListener('click', () => {
-          const idx = tab.dataset.tab;
-          body.querySelectorAll('.xlsx-tab').forEach(t => t.classList.remove('active'));
-          tab.classList.add('active');
-          body.querySelectorAll('.xlsx-sheet').forEach(s => {
-            s.style.display = s.dataset.sheetIdx === idx ? 'block' : 'none';
-          });
-        });
-      });
-      return;
-    }
-
-    /* ─── PPTX: پیش‌نمایش نداریم — فقط یادداشت + دانلود ─── */
-    if(/\.pptx?$/i.test(form.name) || /presentation/i.test(type)){
-      showUnsupported(body, kind, 'پیش‌نمایش فایل‌های PowerPoint در مرورگر پشتیبانی نمی‌شه. لطفاً فایل رو دانلود کن و با PowerPoint باز کن.');
-      return;
-    }
-
-    /* ─── بقیه ─── */
+    /* ─── بقیه فایل‌ها: نمیشه تو مرورگر نمایش داد ─── */
     showUnsupported(body, kind);
 
   }catch(e){
@@ -1256,12 +1196,12 @@ async function previewForm(form){
   }
 }
 
-function showUnsupported(body, kind, customMsg){
+function showUnsupported(body, kind){
   body.innerHTML = `
     <div class="preview-unsupported" style="--fc:${kind.color}">
       <div class="ic"><svg viewBox="0 0 24 24">${GLYPHS[kind.glyph] || GLYPHS.file}</svg></div>
-      <h4>پیش‌نمایش این فایل پشتیبانی نمی‌شه</h4>
-      <p>${customMsg || 'می‌تونی فایل رو دانلود کنی و با اپ مناسب بازش کنی.'}</p>
+      <h4>پیش‌نمایش این فایل در مرورگر ممکن نیست</h4>
+      <p>مرورگر نمی‌تونه فایل‌های ${kind.label} رو مستقیم نمایش بده. برای مشاهده، فایل رو دانلود کن تا با برنامه‌ی پیش‌فرض ویندوزت باز بشه.</p>
       <button class="btn-primary" id="previewDlUnsupported" style="margin:0 auto">
         <svg viewBox="0 0 24 24"><path d="M21 15v4a2 2 0 01-2 2H5a2 2 0 01-2-2v-4"/><path d="M7 10l5 5 5-5"/><path d="M12 15V3"/></svg>
         <span>دانلود فایل</span>
@@ -1271,6 +1211,9 @@ function showUnsupported(body, kind, customMsg){
   if(btn) btn.onclick = () => { const dl = document.getElementById('previewDownload'); if(dl) dl.click(); };
 }
 
+/* ══════════════════════════════════════════════════════════════════
+   حذف و تغییر نام
+   ══════════════════════════════════════════════════════════════════ */
 async function deleteForm(form){
   if(!state.isAdmin){ toast('فقط مدیر می‌تونه حذف کنه', 'err'); return; }
   const card = document.querySelector(`.form-card[data-id="${form.id}"]`);
@@ -1285,7 +1228,6 @@ async function deleteForm(form){
     toast('خطا در حذف: ' + (e.message||''), 'err');
   }
 }
-
 function startRename(id){
   if(!state.isAdmin){ toast('فقط مدیر می‌تونه ویرایش کنه', 'err'); return; }
   state.editingId = id;
@@ -1587,17 +1529,10 @@ $('#themeBtn').addEventListener('click', () => {
 (async function init(){
   applyTheme();
   console.log('%c🚀 فرم‌بان بالا اومد', 'color:#8b5cf6;font-weight:bold;font-size:14px');
-
   await buildManifest();
-
   initSupabase();
-
-  if(!state.connected){
-    console.warn('%c⚠️ Supabase وصل نشد', 'color:#f59e0b;font-weight:bold');
-  } else {
-    console.info('%c✅ Supabase متصل', 'color:#22c55e;font-weight:bold');
-  }
-
+  if(!state.connected) console.warn('%c⚠️ Supabase وصل نشد', 'color:#f59e0b;font-weight:bold');
+  else console.info('%c✅ Supabase متصل', 'color:#22c55e;font-weight:bold');
   try{
     state.forms = await fetchAllForms();
     console.info(`%c📋 ${state.forms.length} فرم بارگذاری شد`, 'color:#06b6d4');
@@ -1606,7 +1541,6 @@ $('#themeBtn').addEventListener('click', () => {
     state.forms = [];
     if(state.connected) toast('خطا در اتصال به Supabase', 'err');
   }
-
   render();
 })();
 </script>
