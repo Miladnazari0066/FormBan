@@ -6,7 +6,6 @@
 <title>فرم‌بان — کتابخانه فرم‌ها</title>
 <script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script>
 <style>
-/* ==================== FONT: B YEKAN ==================== */
 @font-face {
   font-family: 'BYekan';
   src: url('https://cdn.jsdelivr.net/gh/font-store/font-B-Yekan/BYekan.ttf') format('truetype'),
@@ -223,6 +222,7 @@ main{position:relative;z-index:10;max-width:1320px;margin:0 auto;padding:44px 30
 .pending-item{display:flex;align-items:center;gap:13px;padding:13px;border-radius:16px;background:var(--surface-2);border:1px solid var(--border);animation:itemIn .35s cubic-bezier(.34,1.4,.64,1) both;position:relative;overflow:hidden}
 @keyframes itemIn{from{opacity:0;transform:translateX(-14px)}to{opacity:1;transform:none}}
 .pending-item.done::after{content:'';position:absolute;inset:0;background:linear-gradient(90deg, transparent, color-mix(in srgb, var(--success) 18%, transparent));animation:flash .8s ease-out forwards;pointer-events:none}
+.pending-item.failed{background:rgba(239,68,68,.08);border-color:rgba(239,68,68,.3)}
 @keyframes flash{from{opacity:1}to{opacity:0}}
 .pending-item .ico{width:42px;height:42px;border-radius:13px;flex-shrink:0;display:grid;place-items:center;background:color-mix(in srgb, var(--fc) 20%, transparent);border:1px solid color-mix(in srgb, var(--fc) 30%, transparent)}
 .pending-item .ico svg{width:20px;height:20px;stroke:var(--fc);fill:none;stroke-width:1.9;stroke-linecap:round;stroke-linejoin:round}
@@ -231,6 +231,7 @@ main{position:relative;z-index:10;max-width:1320px;margin:0 auto;padding:44px 30
 .pending-item input:focus{border-color:var(--accent);box-shadow:0 0 0 3px color-mix(in srgb, var(--accent) 18%, transparent)}
 .pending-item input:disabled{opacity:.55;cursor:not-allowed}
 .pending-item .sz{font-size:.7rem;color:var(--muted);margin-top:6px;padding-inline-start:3px}
+.pending-item .err-msg{font-size:.7rem;color:var(--danger);margin-top:6px;padding-inline-start:3px;font-weight:bold}
 .rm-file{width:32px;height:32px;border-radius:10px;border:none;background:transparent;color:var(--muted);cursor:pointer;display:grid;place-items:center;transition:.22s;flex-shrink:0}
 .rm-file:hover{background:rgba(239,68,68,.15);color:var(--danger);transform:rotate(90deg)}
 .rm-file svg{width:16px;height:16px;stroke:currentColor;fill:none;stroke-width:2.2;stroke-linecap:round}
@@ -260,7 +261,7 @@ main{position:relative;z-index:10;max-width:1320px;margin:0 auto;padding:44px 30
 .preview-unsupported svg{width:40px;height:40px;stroke:var(--fc);fill:none;stroke-width:1.5;stroke-linecap:round;stroke-linejoin:round}
 
 .toast-wrap{position:fixed;bottom:28px;inset-inline-end:28px;z-index:300;display:flex;flex-direction:column;gap:10px;pointer-events:none}
-.toast{display:flex;align-items:center;gap:11px;padding:14px 20px;border-radius:15px;font-size:.88rem;background:var(--surface-solid);border:1px solid var(--border-strong);box-shadow:var(--shadow-lg);animation:toastIn .45s cubic-bezier(.34,1.4,.64,1) both;min-width:220px;max-width:340px}
+.toast{display:flex;align-items:center;gap:11px;padding:14px 20px;border-radius:15px;font-size:.88rem;background:var(--surface-solid);border:1px solid var(--border-strong);box-shadow:var(--shadow-lg);animation:toastIn .45s cubic-bezier(.34,1.4,.64,1) both;min-width:220px;max-width:400px}
 .toast.out{animation:toastOut .3s ease-in forwards}
 @keyframes toastIn{from{opacity:0;transform:translateX(60px) scale(.9)}to{opacity:1;transform:none}}
 @keyframes toastOut{to{opacity:0;transform:translateX(60px) scale(.9)}}
@@ -423,7 +424,7 @@ main{position:relative;z-index:10;max-width:1320px;margin:0 auto;padding:44px 30
 
 <script>
 /* ══════════════════════════════════════════════════════════════════
-   ⚙️ تنظیمات Supabase — متصل شد
+   ⚙️ تنظیمات Supabase
    ══════════════════════════════════════════════════════════════════ */
 const SUPABASE_CONFIG = {
   url:     'https://nlcicbmdjymnfhlntfvb.supabase.co',
@@ -496,14 +497,21 @@ const state = {
 let supabaseClient = null;
 
 function initSupabase(){
-  if(!SUPABASE_CONFIG.url || !SUPABASE_CONFIG.anonKey) return null;
-  if(!window.supabase) return null;
+  if(!SUPABASE_CONFIG.url || !SUPABASE_CONFIG.anonKey){
+    console.warn('⚠️ SUPABASE_CONFIG خالیه');
+    return null;
+  }
+  if(!window.supabase){
+    console.error('❌ کتابخانه Supabase لود نشد — اینترنت یا CDN رو چک کن');
+    return null;
+  }
   try{
     supabaseClient = window.supabase.createClient(SUPABASE_CONFIG.url, SUPABASE_CONFIG.anonKey);
     state.connected = true;
+    console.info('%c✅ Supabase client ساخته شد', 'color:#22c55e;font-weight:bold');
     return supabaseClient;
   }catch(e){
-    console.error('Supabase init error:', e);
+    console.error('❌ Supabase init error:', e);
     return null;
   }
 }
@@ -568,7 +576,10 @@ async function fetchAllForms(){
       .from(SUPABASE_CONFIG.table)
       .select('*')
       .order('created_at', { ascending: false });
-    if(error) throw error;
+    if(error){
+      console.error('❌ خطا در خواندن جدول:', error);
+      throw error;
+    }
     return (data || []).map(r => ({
       id: r.id,
       name: r.name,
@@ -591,23 +602,29 @@ async function fetchAllForms(){
   }));
 }
 
-async function uploadForm(file, name, onProgress){
+async function uploadForm(file, name){
   if(state.connected && supabaseClient){
     const id = rnd();
     const ext = (file.name.split('.').pop() || 'bin').toLowerCase();
     const path = `${id}.${ext}`;
 
-    const { error: upErr } = await supabaseClient.storage
+    console.log('📤 شروع آپلود:', { name, path, type: file.type, size: file.size });
+
+    const { data: upData, error: upErr } = await supabaseClient.storage
       .from(SUPABASE_CONFIG.bucket)
       .upload(path, file, {
         cacheControl: '3600',
         upsert: false,
         contentType: file.type || 'application/octet-stream',
       });
-    if(upErr) throw upErr;
-    if(onProgress) onProgress(1);
 
-    const { error: dbErr } = await supabaseClient
+    if(upErr){
+      console.error('❌ خطای Storage:', upErr);
+      throw new Error(`Storage: ${upErr.message}`);
+    }
+    console.log('✅ آپلود Storage موفق:', upData);
+
+    const { data: dbData, error: dbErr } = await supabaseClient
       .from(SUPABASE_CONFIG.table)
       .insert({
         id,
@@ -615,8 +632,16 @@ async function uploadForm(file, name, onProgress){
         file_path: path,
         file_type: file.type || '',
         file_size: file.size,
-      });
-    if(dbErr) throw dbErr;
+      })
+      .select();
+
+    if(dbErr){
+      console.error('❌ خطای Database:', dbErr);
+      // پاک کردن فایل آپلود شده اگه insert نشد
+      try{ await supabaseClient.storage.from(SUPABASE_CONFIG.bucket).remove([path]); }catch(e){}
+      throw new Error(`Table: ${dbErr.message}`);
+    }
+    console.log('✅ درج Database موفق:', dbData);
 
     return {
       id, name, size: file.size,
@@ -634,7 +659,6 @@ async function uploadForm(file, name, onProgress){
     type: file.type,
   };
   await idbPut(rec);
-  if(onProgress) onProgress(1);
   return { ...rec, remote: false };
 }
 
@@ -691,7 +715,7 @@ const TOAST_ICONS = {
   err:  '<svg viewBox="0 0 24 24"><circle cx="12" cy="12" r="9"/><path d="M12 8v5M12 16h.01"/></svg>',
   info: '<svg viewBox="0 0 24 24"><circle cx="12" cy="12" r="9"/><path d="M12 16v-5M12 8h.01"/></svg>',
 };
-function toast(msg, type='ok'){
+function toast(msg, type='ok', timeout=2600){
   const el = document.createElement('div');
   el.className = 'toast ' + type;
   el.innerHTML = TOAST_ICONS[type] + '<span>' + esc(msg) + '</span>';
@@ -699,7 +723,7 @@ function toast(msg, type='ok'){
   setTimeout(() => {
     el.classList.add('out');
     setTimeout(() => el.remove(), 320);
-  }, 2600);
+  }, timeout);
 }
 
 function renderStatus(){
@@ -854,7 +878,7 @@ async function downloadForm(form){
     toast('دانلود شروع شد');
   }catch(e){
     console.error(e);
-    toast('خطا در دانلود', 'err');
+    toast('خطا در دانلود: ' + (e.message || ''), 'err');
   }
 }
 
@@ -890,7 +914,7 @@ async function printForm(form){
     setTimeout(() => URL.revokeObjectURL(url), 60000);
   }catch(e){
     console.error(e);
-    toast('خطا در چاپ', 'err');
+    toast('خطا در چاپ: ' + (e.message || ''), 'err');
   }
 }
 
@@ -942,7 +966,7 @@ async function deleteForm(form){
   }catch(e){
     console.error(e);
     if(card) card.classList.remove('leaving');
-    toast('خطا در حذف', 'err');
+    toast('خطا در حذف: ' + (e.message || ''), 'err');
   }
 }
 
@@ -1075,12 +1099,13 @@ function renderPending(){
     const kind = fileKind(p.name + '.' + (p.file.name.split('.').pop() || ''), p.file.type);
     const disabled = state.nameMode === 'auto' ? 'disabled' : '';
     return `
-    <div class="pending-item" style="--fc:${kind.color}">
+    <div class="pending-item" style="--fc:${kind.color}" data-idx="${i}">
       <div class="ico"><svg viewBox="0 0 24 24">${GLYPHS[kind.glyph] || GLYPHS.file}</svg></div>
       <div class="info">
         <input type="text" value="${esc(p.name)}" data-idx="${i}" data-role="name" ${disabled}
           placeholder="اسم فرم…">
         <div class="sz">${fmtSize(p.file.size)} • ${kind.label} ${state.nameMode==='auto' ? '• نام خودکار' : ''}</div>
+        <div class="err-msg" style="display:none" data-role="err"></div>
       </div>
       <button class="rm-file" data-idx="${i}" data-role="remove" title="حذف">
         <svg viewBox="0 0 24 24"><path d="M18 6L6 18M6 6l12 12"/></svg>
@@ -1135,6 +1160,11 @@ $$('.name-mode button').forEach(btn => {
 
 saveBtn.addEventListener('click', async () => {
   if(!pending.length) return;
+
+  if(!state.connected){
+    toast('به Supabase وصل نیست — از ذخیره محلی استفاده می‌شه', 'info', 3500);
+  }
+
   saveBtn.disabled = true;
   saveBtn.textContent = 'در حال آپلود…';
 
@@ -1153,36 +1183,73 @@ saveBtn.addEventListener('click', async () => {
   const curr   = $('#progressCurrent');
   const total  = pending.length;
   let ok = 0;
+  let firstError = null;
 
   for(let i = 0; i < total; i++){
     const p = pending[i];
     curr.textContent = `(${fa(i+1)}/${fa(total)}) ${p.name}`;
-    const overallPct = ((i) / total) * 100;
+    const overallPct = (i / total) * 100;
     fill.style.width = overallPct + '%';
     pct.textContent = Math.round(overallPct).toLocaleString('fa-IR') + '٪';
 
+    const itemEl = pendingList.querySelector(`.pending-item[data-idx="${i}"]`);
+
     try{
-      const rec = await uploadForm(p.file, p.name.trim() || p.file.name, () => {});
+      const rec = await uploadForm(p.file, p.name.trim() || p.file.name);
       state.forms.unshift(rec);
       ok++;
-      const el = pendingList.children[i];
-      if(el) el.classList.add('done');
+      if(itemEl) itemEl.classList.add('done');
     }catch(err){
-      console.error(err);
-      toast(`خطا در «${p.name}»`, 'err');
+      console.error(`❌ خطا در آپلود «${p.name}»:`, err);
+      const msg = err?.message || err?.error_description || err?.error?.message || String(err);
+      if(!firstError) firstError = msg;
+
+      // نمایش خطای واقعی زیر همون آیتم
+      if(itemEl){
+        itemEl.classList.add('failed');
+        const errEl = itemEl.querySelector('[data-role="err"]');
+        if(errEl){
+          errEl.textContent = '❌ ' + msg;
+          errEl.style.display = 'block';
+        }
+      }
+      toast(`خطا در «${p.name}»`, 'err', 5000);
     }
   }
 
   fill.style.width = '100%';
   pct.textContent = '۱۰۰٪';
-  curr.textContent = 'تکمیل شد ✓';
 
-  setTimeout(() => {
-    closeUpload();
-    render();
-    if(ok) toast(`${fa(ok)} فرم با موفقیت ذخیره شد`);
-    else   toast('هیچ فرمی ذخیره نشد', 'err');
-  }, 500);
+  if(ok === total){
+    curr.textContent = 'تکمیل شد ✓';
+    setTimeout(() => {
+      closeUpload();
+      render();
+      toast(`${fa(ok)} فرم با موفقیت ذخیره شد`);
+    }, 500);
+  } else if(ok > 0){
+    curr.textContent = `${fa(ok)} از ${fa(total)} موفق`;
+    setTimeout(() => {
+      closeUpload();
+      render();
+      toast(`${fa(ok)} فرم ذخیره شد، ${fa(total-ok)} تا خطا خورد`, 'info', 4500);
+    }, 1200);
+  } else {
+    // همه خطا خوردن — مودال رو باز نگه دار تا خطاها رو ببینی
+    curr.textContent = '❌ هیچ فایلی ذخیره نشد';
+    saveBtn.disabled = false;
+    saveBtn.textContent = 'تلاش مجدد';
+
+    // نمایش خلاصه‌ی خطا
+    if(firstError){
+      toast('خطا: ' + firstError, 'err', 8000);
+      console.error('%c🔴 اولین خطا:', 'color:#ef4444;font-weight:bold', firstError);
+      console.error('%c💡 راهنما:', 'color:#f59e0b;font-weight:bold',
+        '\n- Bucket not found → باکت "forms" رو توی Storage بساز و Public کن' +
+        '\n- row-level security → پالیسی‌ها رو اجرا کن' +
+        '\n- Invalid JWT → کلید anon رو چک کن');
+    }
+  }
 });
 
 $('#uploadBtn').addEventListener('click', openUpload);
@@ -1247,16 +1314,38 @@ $('#themeBtn').addEventListener('click', () => {
 /* شروع */
 (async function init(){
   applyTheme();
+  console.log('%c🚀 فرم‌بان داره بالا میاد…', 'color:#8b5cf6;font-weight:bold;font-size:14px');
+
   initSupabase();
 
   if(!state.connected){
-    console.info('%c🔌 Supabase تنظیم نشده — از ذخیره‌سازی محلی استفاده می‌شه', 'color:#f59e0b;font-weight:bold');
+    console.warn('%c⚠️ Supabase وصل نشد — از ذخیره محلی استفاده می‌شه', 'color:#f59e0b;font-weight:bold');
   } else {
     console.info('%c✅ به Supabase متصل شد', 'color:#22c55e;font-weight:bold');
+    // تست سریع اتصال
+    try{
+      const { error: testErr } = await supabaseClient.storage.from(SUPABASE_CONFIG.bucket).list('', { limit: 1 });
+      if(testErr){
+        console.error('%c❌ مشکل در Bucket "forms":', 'color:#ef4444;font-weight:bold', testErr.message);
+        console.error('%c💡 راه‌حل: برو Supabase → Storage → یه باکت به اسم "forms" بساز و تیک Public رو بزن', 'color:#f59e0b;font-weight:bold');
+      } else {
+        console.info('%c✅ Bucket "forms" در دسترسه', 'color:#22c55e');
+      }
+
+      const { error: tableErr } = await supabaseClient.from(SUPABASE_CONFIG.table).select('id').limit(1);
+      if(tableErr){
+        console.error('%c❌ مشکل در جدول "forms":', 'color:#ef4444;font-weight:bold', tableErr.message);
+      } else {
+        console.info('%c✅ جدول "forms" در دسترسه', 'color:#22c55e');
+      }
+    }catch(e){
+      console.error('خطا در تست اتصال:', e);
+    }
   }
 
   try{
     state.forms = await fetchAllForms();
+    console.info(`%c📋 ${state.forms.length} فرم بارگذاری شد`, 'color:#06b6d4');
   }catch(e){
     console.error('خطا در بارگذاری:', e);
     state.forms = [];
