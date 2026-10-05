@@ -4,10 +4,11 @@
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
 <meta name="theme-color" content="#8b5cf6">
-<meta name="description" content="کتابخانه هوشمند فرم‌ها — آپلود، جستجو، دانلود و چاپ">
+<meta name="description" content="کتابخانه هوشمند فرم‌ها">
 <meta name="apple-mobile-web-app-capable" content="yes">
 <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
 <meta name="apple-mobile-web-app-title" content="فرم‌بان">
+<meta name="mobile-web-app-capable" content="yes">
 <title>فرم‌بان — کتابخانه فرم‌ها</title>
 <link id="manifestLink" rel="manifest" href="">
 <link id="faviconLink" rel="icon" href="">
@@ -17,82 +18,57 @@
 @font-face {
   font-family: 'BYekan';
   src: url('https://cdn.jsdelivr.net/gh/font-store/font-B-Yekan/BYekan.ttf') format('truetype'),
-       url('https://cdn.jsdelivr.net/gh/mahdi-sharifimehr/persian-fonts@master/BYekan/BYekan.ttf') format('truetype'),
-       url('https://cdn.jsdelivr.net/gh/rastikerdar/vazir-font@v30.1.0/dist/Vazir-Regular.woff2') format('woff2');
+       url('https://cdn.jsdelivr.net/gh/mahdi-sharifimehr/persian-fonts@master/BYekan/BYekan.ttf') format('truetype');
   font-weight: normal;
   font-style: normal;
   font-display: swap;
 }
-
 *{box-sizing:border-box;margin:0;padding:0}
-
 :root{
   color-scheme:dark;
-  --bg:#07080f;
-  --surface:rgba(20,23,35,.62);
-  --surface-solid:#141827;
-  --surface-2:#1a1f30;
-  --surface-3:#232a3d;
-  --border:rgba(255,255,255,.08);
-  --border-strong:rgba(255,255,255,.2);
-  --text:#eef1f9;
-  --muted:#8b93a7;
-  --muted-2:#5d6578;
-  --accent:#8b5cf6;
-  --accent-2:#06b6d4;
-  --accent-3:#ec4899;
-  --danger:#ef4444;
-  --success:#22c55e;
-  --radius:22px;
+  --bg:#07080f;--surface:rgba(20,23,35,.62);--surface-solid:#141827;--surface-2:#1a1f30;--surface-3:#232a3d;
+  --border:rgba(255,255,255,.08);--border-strong:rgba(255,255,255,.2);
+  --text:#eef1f9;--muted:#8b93a7;--muted-2:#5d6578;
+  --accent:#8b5cf6;--accent-2:#06b6d4;--accent-3:#ec4899;
+  --danger:#ef4444;--success:#22c55e;--radius:22px;
   --shadow-sm:0 4px 16px -6px rgba(0,0,0,.5);
   --shadow:0 22px 55px -24px rgba(0,0,0,.85);
   --shadow-lg:0 40px 90px -30px rgba(0,0,0,.9);
 }
 [data-theme="light"]{
   color-scheme:light;
-  --bg:#eef1f8;
-  --surface:rgba(255,255,255,.72);
-  --surface-solid:#ffffff;
-  --surface-2:#f6f8fc;
-  --surface-3:#eef2f9;
-  --border:rgba(15,23,42,.08);
-  --border-strong:rgba(15,23,42,.18);
-  --text:#0f172a;
-  --muted:#64748b;
-  --muted-2:#94a3b8;
+  --bg:#eef1f8;--surface:rgba(255,255,255,.72);--surface-solid:#ffffff;--surface-2:#f6f8fc;--surface-3:#eef2f9;
+  --border:rgba(15,23,42,.08);--border-strong:rgba(15,23,42,.18);
+  --text:#0f172a;--muted:#64748b;--muted-2:#94a3b8;
   --shadow-sm:0 4px 16px -8px rgba(15,23,42,.2);
   --shadow:0 22px 55px -30px rgba(15,23,42,.35);
   --shadow-lg:0 40px 90px -40px rgba(15,23,42,.4);
 }
-
 html{scroll-behavior:smooth}
 body{
   font-family:'BYekan', Tahoma, system-ui, sans-serif;
-  background:var(--bg);color:var(--text);
-  min-height:100vh;-webkit-font-smoothing:antialiased;
-  transition:background .5s,color .5s;
+  background:var(--bg);color:var(--text);min-height:100vh;
+  -webkit-font-smoothing:antialiased;transition:background .5s,color .5s;
   overflow-x:hidden;position:relative;
-  letter-spacing:0;
 }
-b, strong, h1, h2, h3, h4, h5, h6, button{font-weight:normal}
-.bold,.fw-bold{font-weight:bold}
+b,strong,h1,h2,h3,h4,h5,h6,button{font-weight:normal}
 
 .aurora{position:fixed;inset:0;z-index:0;pointer-events:none;overflow:hidden;transition:opacity .5s}
 .aurora::before,.aurora::after{content:'';position:absolute;border-radius:50%;filter:blur(110px);opacity:.55;will-change:transform}
-.aurora::before{width:640px;height:640px;top:-260px;right:-180px;background:radial-gradient(circle, #8b5cf6 0%, transparent 68%);animation:drift1 22s ease-in-out infinite}
-.aurora::after{width:560px;height:560px;bottom:-220px;left:-160px;background:radial-gradient(circle, #06b6d4 0%, transparent 68%);animation:drift2 26s ease-in-out infinite}
+.aurora::before{width:640px;height:640px;top:-260px;right:-180px;background:radial-gradient(circle,#8b5cf6 0%,transparent 68%);animation:drift1 22s ease-in-out infinite}
+.aurora::after{width:560px;height:560px;bottom:-220px;left:-160px;background:radial-gradient(circle,#06b6d4 0%,transparent 68%);animation:drift2 26s ease-in-out infinite}
 .orb{position:absolute;border-radius:50%;filter:blur(90px);opacity:.4;will-change:transform}
-.orb.o1{width:420px;height:420px;top:38%;left:52%;background:radial-gradient(circle, #ec4899 0%, transparent 70%);animation:drift3 30s ease-in-out infinite}
-.orb.o2{width:340px;height:340px;top:12%;left:18%;background:radial-gradient(circle, #f59e0b 0%, transparent 70%);animation:drift1 34s ease-in-out infinite reverse}
+.orb.o1{width:420px;height:420px;top:38%;left:52%;background:radial-gradient(circle,#ec4899 0%,transparent 70%);animation:drift3 30s ease-in-out infinite}
+.orb.o2{width:340px;height:340px;top:12%;left:18%;background:radial-gradient(circle,#f59e0b 0%,transparent 70%);animation:drift1 34s ease-in-out infinite reverse}
 [data-theme="light"] .aurora{opacity:.7}
 @keyframes drift1{0%,100%{transform:translate(0,0) scale(1)}33%{transform:translate(-60px,80px) scale(1.15)}66%{transform:translate(50px,-40px) scale(.92)}}
 @keyframes drift2{0%,100%{transform:translate(0,0) scale(1)}50%{transform:translate(90px,-70px) scale(1.18)}}
 @keyframes drift3{0%,100%{transform:translate(0,0) scale(1)}33%{transform:translate(70px,-60px) scale(.9)}66%{transform:translate(-80px,50px) scale(1.12)}}
 .grain{position:fixed;inset:0;z-index:1;pointer-events:none;opacity:.03;background-image:url("data:image/svg+xml,%3Csvg viewBox='0 0 200 200' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.9' numOctaves='3'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23n)'/%3E%3C/svg%3E")}
 
-.topbar{position:sticky;top:0;z-index:60;display:flex;align-items:center;justify-content:space-between;gap:16px;padding:14px 30px;background:color-mix(in srgb, var(--bg) 72%, transparent);backdrop-filter:blur(24px) saturate(180%);-webkit-backdrop-filter:blur(24px) saturate(180%);border-bottom:1px solid var(--border)}
+.topbar{position:sticky;top:0;z-index:60;display:flex;align-items:center;justify-content:space-between;gap:16px;padding:14px 30px;background:color-mix(in srgb,var(--bg) 72%,transparent);backdrop-filter:blur(24px) saturate(180%);-webkit-backdrop-filter:blur(24px) saturate(180%);border-bottom:1px solid var(--border)}
 .brand{display:flex;align-items:center;gap:13px}
-.brand-logo{width:48px;height:48px;border-radius:16px;flex-shrink:0;display:grid;place-items:center;position:relative;box-shadow:0 14px 30px -12px rgba(139,92,246,.6);transition:transform .3s}
+.brand-logo{width:48px;height:48px;border-radius:16px;flex-shrink:0;display:grid;place-items:center;box-shadow:0 14px 30px -12px rgba(139,92,246,.6);transition:transform .3s}
 .brand-logo svg{width:48px;height:48px;display:block}
 .brand:hover .brand-logo{transform:rotate(-5deg) scale(1.05)}
 .brand h1{font-size:1.25rem;font-weight:bold;letter-spacing:-.4px;line-height:1.2;background:linear-gradient(120deg,var(--text),var(--accent));-webkit-background-clip:text;background-clip:text;-webkit-text-fill-color:transparent}
@@ -104,7 +80,7 @@ b, strong, h1, h2, h3, h4, h5, h6, button{font-weight:normal}
 .status-pill.online .dot{background:var(--success);color:var(--success);box-shadow:0 0 10px var(--success)}
 .status-pill.local .dot{background:#f59e0b;color:#f59e0b;box-shadow:0 0 10px #f59e0b}
 @keyframes pulseRing{0%,100%{transform:scale(1);opacity:.4}50%{transform:scale(1.7);opacity:0}}
-.btn-primary{display:inline-flex;align-items:center;gap:8px;font-size:.9rem;font-weight:bold;color:#fff;border:none;cursor:pointer;padding:11px 20px;border-radius:14px;background:linear-gradient(135deg,var(--accent),#00b3ff);box-shadow:0 14px 30px -12px var(--accent), inset 0 1px 0 rgba(255,255,255,.3);transition:transform .2s cubic-bezier(.2,.8,.3,1), box-shadow .2s;white-space:nowrap;position:relative;overflow:hidden;font-family:'BYekan', Tahoma, sans-serif}
+.btn-primary{display:inline-flex;align-items:center;gap:8px;font-size:.9rem;font-weight:bold;color:#fff;border:none;cursor:pointer;padding:11px 20px;border-radius:14px;background:linear-gradient(135deg,var(--accent),#00b3ff);box-shadow:0 14px 30px -12px var(--accent),inset 0 1px 0 rgba(255,255,255,.3);transition:transform .2s cubic-bezier(.2,.8,.3,1),box-shadow .2s;white-space:nowrap;position:relative;overflow:hidden;font-family:'BYekan',Tahoma,sans-serif}
 .btn-primary::before{content:'';position:absolute;inset:0;background:linear-gradient(135deg,transparent 40%,rgba(255,255,255,.35),transparent 60%);transform:translateX(-100%);transition:transform .7s}
 .btn-primary:hover::before{transform:translateX(100%)}
 .btn-primary:hover{transform:translateY(-2px) scale(1.02);box-shadow:0 20px 38px -12px var(--accent)}
@@ -115,20 +91,12 @@ b, strong, h1, h2, h3, h4, h5, h6, button{font-weight:normal}
 .icon-btn:active{transform:translateY(0) scale(.94)}
 .icon-btn svg{width:18px;height:18px;stroke:currentColor;fill:none;stroke-width:2;stroke-linecap:round;stroke-linejoin:round}
 #themeBtn:hover{transform:translateY(-2px) rotate(8deg)}
-
-/* LOCK BUTTON */
 .lock-btn{position:relative}
 .lock-btn.unlocked{color:var(--success);border-color:rgba(34,197,94,.4);background:rgba(34,197,94,.1)}
-.lock-btn.unlocked:hover{color:var(--success);border-color:rgba(34,197,94,.6);background:rgba(34,197,94,.16)}
-.lock-btn.unlocked::after{
-  content:'';position:absolute;top:-3px;inset-inline-end:-3px;width:10px;height:10px;
-  border-radius:50%;background:var(--success);border:2px solid var(--bg);
-  box-shadow:0 0 10px var(--success);animation:pulseRing2 2s ease-in-out infinite;
-}
+.lock-btn.unlocked::after{content:'';position:absolute;top:-3px;inset-inline-end:-3px;width:10px;height:10px;border-radius:50%;background:var(--success);border:2px solid var(--bg);box-shadow:0 0 10px var(--success);animation:pulseRing2 2s ease-in-out infinite}
 @keyframes pulseRing2{0%,100%{transform:scale(1);opacity:1}50%{transform:scale(1.3);opacity:.7}}
-
-.install-btn{display:none;align-items:center;gap:8px;font-family:'BYekan',Tahoma,sans-serif;font-size:.85rem;font-weight:bold;color:var(--accent);background:color-mix(in srgb, var(--accent) 12%, transparent);border:1px solid color-mix(in srgb, var(--accent) 40%, transparent);padding:10px 16px;border-radius:13px;cursor:pointer;transition:.22s}
-.install-btn:hover{background:color-mix(in srgb, var(--accent) 22%, transparent);transform:translateY(-2px)}
+.install-btn{display:none;align-items:center;gap:8px;font-family:'BYekan',Tahoma,sans-serif;font-size:.85rem;font-weight:bold;color:var(--accent);background:color-mix(in srgb,var(--accent) 12%,transparent);border:1px solid color-mix(in srgb,var(--accent) 40%,transparent);padding:10px 16px;border-radius:13px;cursor:pointer;transition:.22s}
+.install-btn:hover{background:color-mix(in srgb,var(--accent) 22%,transparent);transform:translateY(-2px)}
 .install-btn.show{display:inline-flex;animation:popIn .4s cubic-bezier(.34,1.4,.64,1) both}
 .install-btn svg{width:16px;height:16px;stroke:currentColor;fill:none;stroke-width:2.2;stroke-linecap:round;stroke-linejoin:round}
 @keyframes popIn{from{opacity:0;transform:scale(.6)}to{opacity:1;transform:none}}
@@ -145,14 +113,14 @@ main{position:relative;z-index:10;max-width:1320px;margin:0 auto;padding:44px 30
 .search-big::before{content:'';position:absolute;inset:-2px;border-radius:24px;z-index:-1;background:linear-gradient(120deg,var(--accent),var(--accent-2),var(--accent-3));background-size:200% 200%;opacity:0;filter:blur(14px);transition:opacity .35s}
 .search-big:focus-within::before{opacity:.7;animation:shine 4s ease-in-out infinite}
 .search-big:focus-within{border-color:transparent;transform:translateY(-2px) scale(1.005)}
-.search-big > svg.search-ico{width:22px;height:22px;stroke:var(--muted);fill:none;stroke-width:2.2;stroke-linecap:round;flex-shrink:0;transition:.3s}
-.search-big:focus-within > svg.search-ico{stroke:var(--accent);transform:scale(1.1)}
-.search-big input{flex:1;background:transparent;border:none;outline:none;color:var(--text);font-size:1.05rem;padding:17px 0;min-width:0;font-family:'BYekan', Tahoma, sans-serif}
+.search-big>svg.search-ico{width:22px;height:22px;stroke:var(--muted);fill:none;stroke-width:2.2;stroke-linecap:round;flex-shrink:0;transition:.3s}
+.search-big:focus-within>svg.search-ico{stroke:var(--accent);transform:scale(1.1)}
+.search-big input{flex:1;background:transparent;border:none;outline:none;color:var(--text);font-size:1.05rem;padding:17px 0;min-width:0;font-family:'BYekan',Tahoma,sans-serif}
 .search-big input::placeholder{color:var(--muted)}
 .search-kbd{display:inline-flex;gap:3px;flex-shrink:0}
-.search-kbd kbd{font-family:'BYekan', Tahoma, sans-serif;font-size:.68rem;padding:3px 7px;border-radius:6px;background:var(--surface-3);color:var(--muted-2);border:1px solid var(--border)}
+.search-kbd kbd{font-family:'BYekan',Tahoma,sans-serif;font-size:.68rem;padding:3px 7px;border-radius:6px;background:var(--surface-3);color:var(--muted-2);border:1px solid var(--border)}
 .search-big:focus-within .search-kbd{display:none}
-.clear-btn{width:28px;height:28px;border-radius:50%;border:none;cursor:pointer;background:var(--surface-3);color:var(--muted);font-size:1.15rem;line-height:1;display:none;place-items:center;flex-shrink:0;transition:.2s;font-family:'BYekan', Tahoma, sans-serif}
+.clear-btn{width:28px;height:28px;border-radius:50%;border:none;cursor:pointer;background:var(--surface-3);color:var(--muted);font-size:1.15rem;line-height:1;display:none;place-items:center;flex-shrink:0;transition:.2s;font-family:'BYekan',Tahoma,sans-serif}
 .clear-btn:hover{background:var(--danger);color:#fff;transform:rotate(90deg) scale(1.1)}
 .clear-btn.show{display:grid}
 
@@ -160,38 +128,38 @@ main{position:relative;z-index:10;max-width:1320px;margin:0 auto;padding:44px 30
 .chip{display:inline-flex;align-items:center;gap:9px;padding:10px 17px;border-radius:14px;font-size:.82rem;background:var(--surface);border:1px solid var(--border);backdrop-filter:blur(20px);color:var(--muted);transition:.25s cubic-bezier(.2,.8,.3,1);animation:rise .5s cubic-bezier(.2,.8,.3,1) both}
 .chip:hover{transform:translateY(-3px);border-color:var(--border-strong);box-shadow:var(--shadow-sm)}
 .chip b{color:var(--text);font-weight:bold;font-size:.95rem}
-.chip .ic{width:24px;height:24px;border-radius:8px;display:grid;place-items:center;background:color-mix(in srgb, var(--c) 20%, transparent)}
+.chip .ic{width:24px;height:24px;border-radius:8px;display:grid;place-items:center;background:color-mix(in srgb,var(--c) 20%,transparent)}
 .chip .ic svg{width:13px;height:13px;stroke:var(--c);fill:none;stroke-width:2.4;stroke-linecap:round;stroke-linejoin:round}
 
 .grid{display:grid;gap:20px;grid-template-columns:repeat(auto-fill,minmax(272px,1fr))}
 @keyframes rise{from{opacity:0;transform:translateY(20px)}to{opacity:1;transform:none}}
 @keyframes cardIn{from{opacity:0;transform:translateY(28px) scale(.94)}to{opacity:1;transform:none}}
-.form-card{position:relative;display:flex;flex-direction:column;border-radius:var(--radius);overflow:hidden;background:var(--surface);border:1px solid var(--border);backdrop-filter:blur(28px) saturate(180%);-webkit-backdrop-filter:blur(28px) saturate(180%);box-shadow:var(--shadow);transition:transform .35s cubic-bezier(.2,.8,.3,1), box-shadow .35s, border-color .35s;animation:cardIn .55s cubic-bezier(.2,.8,.3,1) both;transform-style:preserve-3d;will-change:transform}
+.form-card{position:relative;display:flex;flex-direction:column;border-radius:var(--radius);overflow:hidden;background:var(--surface);border:1px solid var(--border);backdrop-filter:blur(28px) saturate(180%);-webkit-backdrop-filter:blur(28px) saturate(180%);box-shadow:var(--shadow);transition:transform .35s cubic-bezier(.2,.8,.3,1),box-shadow .35s,border-color .35s;animation:cardIn .55s cubic-bezier(.2,.8,.3,1) both;transform-style:preserve-3d;will-change:transform}
 .form-card::before{content:'';position:absolute;inset:-1px;border-radius:var(--radius);z-index:-1;background:linear-gradient(135deg,var(--fc),transparent 60%);opacity:0;transition:opacity .35s}
 .form-card:hover::before{opacity:.5}
 .form-card:hover{border-color:transparent;box-shadow:0 40px 80px -30px var(--fc);z-index:2}
 .form-card.leaving{transition:all .32s cubic-bezier(.4,0,.6,1);opacity:0;transform:scale(.85) translateY(20px) !important}
-.thumb{height:142px;position:relative;overflow:hidden;display:grid;place-items:center;background:linear-gradient(135deg, color-mix(in srgb, var(--fc) 30%, transparent), color-mix(in srgb, var(--fc) 6%, transparent));border-bottom:1px solid var(--border)}
-.thumb::after{content:'';position:absolute;inset:0;background:radial-gradient(circle at 50% 120%, color-mix(in srgb, var(--fc) 40%, transparent), transparent 60%);opacity:.6}
+.thumb{height:142px;position:relative;overflow:hidden;display:grid;place-items:center;background:linear-gradient(135deg,color-mix(in srgb,var(--fc) 30%,transparent),color-mix(in srgb,var(--fc) 6%,transparent));border-bottom:1px solid var(--border)}
+.thumb::after{content:'';position:absolute;inset:0;background:radial-gradient(circle at 50% 120%,color-mix(in srgb,var(--fc) 40%,transparent),transparent 60%);opacity:.6}
 .thumb img{width:100%;height:100%;object-fit:cover;display:block;position:relative;z-index:1}
-.thumb .glyph{width:54px;height:54px;stroke:var(--fc);fill:none;stroke-width:1.6;stroke-linecap:round;stroke-linejoin:round;opacity:.98;position:relative;z-index:1;filter:drop-shadow(0 6px 16px color-mix(in srgb, var(--fc) 50%, transparent));transition:transform .4s cubic-bezier(.2,.8,.3,1)}
+.thumb .glyph{width:54px;height:54px;stroke:var(--fc);fill:none;stroke-width:1.6;stroke-linecap:round;stroke-linejoin:round;opacity:.98;position:relative;z-index:1;filter:drop-shadow(0 6px 16px color-mix(in srgb,var(--fc) 50%,transparent));transition:transform .4s cubic-bezier(.2,.8,.3,1)}
 .form-card:hover .thumb .glyph{transform:scale(1.15) rotate(-4deg)}
-.thumb .kind{position:absolute;top:12px;inset-inline-start:12px;font-size:.66rem;letter-spacing:.6px;padding:5px 10px;border-radius:9px;background:color-mix(in srgb, var(--fc) 88%, transparent);color:#fff;z-index:2;box-shadow:0 8px 20px -6px var(--fc), inset 0 1px 0 rgba(255,255,255,.3);backdrop-filter:blur(10px)}
+.thumb .kind{position:absolute;top:12px;inset-inline-start:12px;font-size:.66rem;letter-spacing:.6px;padding:5px 10px;border-radius:9px;background:color-mix(in srgb,var(--fc) 88%,transparent);color:#fff;z-index:2;box-shadow:0 8px 20px -6px var(--fc),inset 0 1px 0 rgba(255,255,255,.3);backdrop-filter:blur(10px)}
 .thumb .date-badge{position:absolute;top:12px;inset-inline-end:12px;font-size:.66rem;padding:5px 10px;border-radius:9px;background:rgba(0,0,0,.45);color:#fff;z-index:2;backdrop-filter:blur(10px)}
 .card-body{padding:15px 16px 12px;flex:1;display:flex;flex-direction:column;gap:10px}
 .card-name{font-size:.95rem;line-height:1.65;word-break:break-word;display:-webkit-box;-webkit-line-clamp:2;-webkit-box-orient:vertical;overflow:hidden;min-height:2.9em;transition:.2s}
 .card-name.editable{cursor:text}
 .card-name.editable:hover{color:var(--accent)}
-.card-name-input{width:100%;background:var(--surface-3);border:1px solid var(--accent);border-radius:11px;padding:9px 12px;color:var(--text);font-size:.95rem;outline:none;font-family:'BYekan', Tahoma, sans-serif;box-shadow:0 0 0 4px color-mix(in srgb, var(--accent) 18%, transparent)}
+.card-name-input{width:100%;background:var(--surface-3);border:1px solid var(--accent);border-radius:11px;padding:9px 12px;color:var(--text);font-size:.95rem;outline:none;font-family:'BYekan',Tahoma,sans-serif;box-shadow:0 0 0 4px color-mix(in srgb,var(--accent) 18%,transparent)}
 .card-meta{display:flex;align-items:center;gap:8px;font-size:.72rem;color:var(--muted);margin-top:auto}
 .card-meta .sep{opacity:.35}
 .card-meta svg{width:12px;height:12px;stroke:currentColor;fill:none;stroke-width:2.2;stroke-linecap:round;stroke-linejoin:round}
 .card-actions{display:grid;gap:7px;padding:0 13px 14px}
-.act{display:flex;flex-direction:column;align-items:center;gap:5px;padding:10px 4px;border-radius:12px;border:1px solid transparent;background:var(--surface-3);color:var(--muted);cursor:pointer;font-size:.68rem;transition:.22s cubic-bezier(.2,.8,.3,1);font-family:'BYekan', Tahoma, sans-serif}
+.act{display:flex;flex-direction:column;align-items:center;gap:5px;padding:10px 4px;border-radius:12px;border:1px solid transparent;background:var(--surface-3);color:var(--muted);cursor:pointer;font-size:.68rem;transition:.22s cubic-bezier(.2,.8,.3,1);font-family:'BYekan',Tahoma,sans-serif}
 .act svg{width:17px;height:17px;stroke:currentColor;fill:none;stroke-width:2;stroke-linecap:round;stroke-linejoin:round;transition:transform .22s}
 .act:hover{transform:translateY(-3px)}
 .act:hover svg{transform:scale(1.15)}
-.act.pv:hover{color:var(--accent);background:color-mix(in srgb, var(--accent) 15%, transparent);border-color:color-mix(in srgb, var(--accent) 35%, transparent)}
+.act.pv:hover{color:var(--accent);background:color-mix(in srgb,var(--accent) 15%,transparent);border-color:color-mix(in srgb,var(--accent) 35%,transparent)}
 .act.dl:hover{color:var(--success);background:rgba(34,197,94,.14);border-color:rgba(34,197,94,.35)}
 .act.pr:hover{color:#f59e0b;background:rgba(245,158,11,.14);border-color:rgba(245,158,11,.35)}
 .act.rm:hover{color:var(--danger);background:rgba(239,68,68,.14);border-color:rgba(239,68,68,.35)}
@@ -204,10 +172,9 @@ main{position:relative;z-index:10;max-width:1320px;margin:0 auto;padding:44px 30
 .empty h3{font-size:1.2rem;font-weight:bold;margin-bottom:11px}
 .empty p{font-size:.92rem;color:var(--muted);line-height:2;max-width:440px;margin:0 auto 26px}
 
-.fab{position:fixed;bottom:32px;inset-inline-start:32px;z-index:80;width:60px;height:60px;border-radius:20px;border:none;cursor:pointer;background:linear-gradient(135deg,var(--accent),#00b3ff);box-shadow:0 22px 45px -14px var(--accent), inset 0 1px 0 rgba(255,255,255,.3);display:grid;place-items:center;transition:.3s cubic-bezier(.2,.8,.3,1);animation:fabIn .5s .4s cubic-bezier(.2,.8,.3,1) both}
+.fab{position:fixed;bottom:32px;inset-inline-start:32px;z-index:80;width:60px;height:60px;border-radius:20px;border:none;cursor:pointer;background:linear-gradient(135deg,var(--accent),#00b3ff);box-shadow:0 22px 45px -14px var(--accent),inset 0 1px 0 rgba(255,255,255,.3);display:grid;place-items:center;transition:.3s cubic-bezier(.2,.8,.3,1);animation:fabIn .5s .4s cubic-bezier(.2,.8,.3,1) both}
 @keyframes fabIn{from{opacity:0;transform:scale(0) rotate(-90deg)}to{opacity:1;transform:none}}
 .fab:hover{transform:scale(1.12) rotate(90deg);box-shadow:0 28px 55px -14px var(--accent)}
-.fab:active{transform:scale(1.02) rotate(90deg)}
 .fab svg{width:26px;height:26px;stroke:#fff;fill:none;stroke-width:2.6;stroke-linecap:round}
 @media(min-width:761px){.fab{display:none}}
 
@@ -219,52 +186,30 @@ main{position:relative;z-index:10;max-width:1320px;margin:0 auto;padding:44px 30
 .modal.wide{max-width:1100px}
 .modal.small{max-width:420px}
 @keyframes springIn{from{opacity:0;transform:scale(.9) translateY(30px)}to{opacity:1;transform:none}}
-.modal-head{display:flex;align-items:center;justify-content:space-between;padding:22px 26px;border-bottom:1px solid var(--border);background:linear-gradient(180deg, color-mix(in srgb, var(--accent) 6%, transparent), transparent)}
+.modal-head{display:flex;align-items:center;justify-content:space-between;padding:22px 26px;border-bottom:1px solid var(--border);background:linear-gradient(180deg,color-mix(in srgb,var(--accent) 6%,transparent),transparent)}
 .modal-head h3{font-size:1.1rem;font-weight:bold;letter-spacing:-.3px}
 .modal-head p{font-size:.78rem;color:var(--muted);margin-top:5px}
-.close-x{width:36px;height:36px;border-radius:12px;border:1px solid var(--border);background:transparent;color:var(--muted);cursor:pointer;display:grid;place-items:center;font-size:1.25rem;transition:.25s;flex-shrink:0;font-family:'BYekan', Tahoma, sans-serif}
+.close-x{width:36px;height:36px;border-radius:12px;border:1px solid var(--border);background:transparent;color:var(--muted);cursor:pointer;display:grid;place-items:center;font-size:1.25rem;transition:.25s;flex-shrink:0;font-family:'BYekan',Tahoma,sans-serif}
 .close-x:hover{color:var(--danger);border-color:rgba(239,68,68,.4);background:rgba(239,68,68,.1);transform:rotate(90deg) scale(1.1)}
-.modal-body{padding:24px 26px;max-height:64vh;overflow-y:auto}
+.modal-body{padding:24px 26px;max-height:70vh;overflow-y:auto}
 
-/* LOCK ICON in modal head */
-.lock-head-icon{
-  width:44px;height:44px;border-radius:13px;flex-shrink:0;
-  background:linear-gradient(135deg,rgba(139,92,246,.2),rgba(6,182,212,.12));
-  border:1px solid color-mix(in srgb, var(--accent) 35%, transparent);
-  display:grid;place-items:center;
-}
+.lock-head-icon{width:44px;height:44px;border-radius:13px;flex-shrink:0;background:linear-gradient(135deg,rgba(139,92,246,.2),rgba(6,182,212,.12));border:1px solid color-mix(in srgb,var(--accent) 35%,transparent);display:grid;place-items:center}
 .lock-head-icon svg{width:22px;height:22px;stroke:var(--accent);fill:none;stroke-width:2;stroke-linecap:round;stroke-linejoin:round}
 
 .pw-wrap{position:relative;margin-bottom:14px}
-.pw-wrap input{
-  width:100%;background:var(--surface-2);border:2px solid var(--border);
-  border-radius:14px;padding:15px 52px 15px 16px;color:var(--text);
-  font-size:1rem;font-weight:bold;outline:none;font-family:'BYekan',Tahoma,sans-serif;
-  transition:.2s;letter-spacing:2px;
-}
-.pw-wrap input:focus{border-color:var(--accent);box-shadow:0 0 0 4px color-mix(in srgb, var(--accent) 18%, transparent)}
+.pw-wrap input{width:100%;background:var(--surface-2);border:2px solid var(--border);border-radius:14px;padding:15px 52px 15px 16px;color:var(--text);font-size:1rem;font-weight:bold;outline:none;font-family:'BYekan',Tahoma,sans-serif;transition:.2s;letter-spacing:2px}
+.pw-wrap input:focus{border-color:var(--accent);box-shadow:0 0 0 4px color-mix(in srgb,var(--accent) 18%,transparent)}
 .pw-wrap input.shake{animation:shake .4s}
 @keyframes shake{0%,100%{transform:translateX(0)}20%{transform:translateX(-10px)}40%{transform:translateX(10px)}60%{transform:translateX(-6px)}80%{transform:translateX(6px)}}
-.pw-toggle{
-  position:absolute;top:50%;inset-inline-end:10px;transform:translateY(-50%);
-  width:38px;height:38px;border-radius:11px;border:none;background:transparent;
-  color:var(--muted);cursor:pointer;display:grid;place-items:center;transition:.2s;
-}
+.pw-toggle{position:absolute;top:50%;inset-inline-end:10px;transform:translateY(-50%);width:38px;height:38px;border-radius:11px;border:none;background:transparent;color:var(--muted);cursor:pointer;display:grid;place-items:center;transition:.2s}
 .pw-toggle:hover{background:var(--surface-3);color:var(--text)}
 .pw-toggle svg{width:19px;height:19px;stroke:currentColor;fill:none;stroke-width:2;stroke-linecap:round;stroke-linejoin:round}
-.pw-error{
-  display:none;padding:12px 14px;border-radius:12px;font-size:.83rem;
-  background:rgba(239,68,68,.12);border:1px solid rgba(239,68,68,.35);
-  color:#fca5a5;text-align:center;margin-bottom:6px;
-  animation:shake .4s;
-}
-.pw-hint{
-  font-size:.75rem;color:var(--muted);text-align:center;margin-top:14px;line-height:1.8;
-}
+.pw-error{display:none;padding:12px 14px;border-radius:12px;font-size:.83rem;background:rgba(239,68,68,.12);border:1px solid rgba(239,68,68,.35);color:#fca5a5;text-align:center;margin-bottom:6px;animation:shake .4s}
+.pw-hint{font-size:.75rem;color:var(--muted);text-align:center;margin-top:14px;line-height:1.8}
 
 .drop{border:2px dashed var(--border-strong);border-radius:20px;padding:42px 24px;text-align:center;cursor:pointer;transition:.3s cubic-bezier(.2,.8,.3,1);background:var(--surface-2);position:relative;overflow:hidden}
-.drop::before{content:'';position:absolute;inset:0;background:radial-gradient(circle at 50% 50%, color-mix(in srgb, var(--accent) 15%, transparent), transparent 65%);opacity:0;transition:opacity .3s}
-.drop:hover,.drop.over{border-color:var(--accent);background:color-mix(in srgb, var(--accent) 8%, var(--surface-2));transform:scale(1.01)}
+.drop::before{content:'';position:absolute;inset:0;background:radial-gradient(circle at 50% 50%,color-mix(in srgb,var(--accent) 15%,transparent),transparent 65%);opacity:0;transition:opacity .3s}
+.drop:hover,.drop.over{border-color:var(--accent);background:color-mix(in srgb,var(--accent) 8%,var(--surface-2));transform:scale(1.01)}
 .drop:hover::before,.drop.over::before{opacity:1}
 .drop.over{border-style:solid;transform:scale(1.03)}
 .drop svg{width:46px;height:46px;stroke:var(--accent);fill:none;stroke-width:1.5;stroke-linecap:round;stroke-linejoin:round;margin-bottom:16px;position:relative;z-index:1;transition:transform .35s}
@@ -275,21 +220,21 @@ main{position:relative;z-index:10;max-width:1320px;margin:0 auto;padding:44px 30
 .drop .formats span{font-size:.66rem;letter-spacing:.5px;padding:4px 9px;border-radius:7px;background:var(--surface-3);color:var(--muted);border:1px solid var(--border)}
 
 .name-mode{display:flex;gap:8px;margin-bottom:18px;padding:4px;border-radius:14px;background:var(--surface-2);border:1px solid var(--border)}
-.name-mode button{flex:1;display:flex;align-items:center;justify-content:center;gap:7px;padding:11px;border-radius:11px;border:none;cursor:pointer;font-family:'BYekan', Tahoma, sans-serif;font-size:.82rem;background:transparent;color:var(--muted);transition:.25s}
+.name-mode button{flex:1;display:flex;align-items:center;justify-content:center;gap:7px;padding:11px;border-radius:11px;border:none;cursor:pointer;font-family:'BYekan',Tahoma,sans-serif;font-size:.82rem;background:transparent;color:var(--muted);transition:.25s}
 .name-mode button svg{width:15px;height:15px;stroke:currentColor;fill:none;stroke-width:2.2;stroke-linecap:round;stroke-linejoin:round}
 .name-mode button.active{background:linear-gradient(135deg,var(--accent),var(--accent-2));color:#fff;box-shadow:0 10px 22px -10px var(--accent)}
 
 .pending{display:flex;flex-direction:column;gap:10px;margin-top:18px}
 .pending-item{display:flex;align-items:center;gap:13px;padding:13px;border-radius:16px;background:var(--surface-2);border:1px solid var(--border);animation:itemIn .35s cubic-bezier(.34,1.4,.64,1) both;position:relative;overflow:hidden}
 @keyframes itemIn{from{opacity:0;transform:translateX(-14px)}to{opacity:1;transform:none}}
-.pending-item.done::after{content:'';position:absolute;inset:0;background:linear-gradient(90deg, transparent, color-mix(in srgb, var(--success) 18%, transparent));animation:flash .8s ease-out forwards;pointer-events:none}
+.pending-item.done::after{content:'';position:absolute;inset:0;background:linear-gradient(90deg,transparent,color-mix(in srgb,var(--success) 18%,transparent));animation:flash .8s ease-out forwards;pointer-events:none}
 .pending-item.failed{background:rgba(239,68,68,.08);border-color:rgba(239,68,68,.3)}
 @keyframes flash{from{opacity:1}to{opacity:0}}
-.pending-item .ico{width:42px;height:42px;border-radius:13px;flex-shrink:0;display:grid;place-items:center;background:color-mix(in srgb, var(--fc) 20%, transparent);border:1px solid color-mix(in srgb, var(--fc) 30%, transparent)}
+.pending-item .ico{width:42px;height:42px;border-radius:13px;flex-shrink:0;display:grid;place-items:center;background:color-mix(in srgb,var(--fc) 20%,transparent);border:1px solid color-mix(in srgb,var(--fc) 30%,transparent)}
 .pending-item .ico svg{width:20px;height:20px;stroke:var(--fc);fill:none;stroke-width:1.9;stroke-linecap:round;stroke-linejoin:round}
 .pending-item .info{flex:1;min-width:0}
-.pending-item input{width:100%;background:var(--surface-3);border:1px solid var(--border);border-radius:10px;padding:9px 12px;color:var(--text);font-size:.88rem;outline:none;transition:.2s;font-family:'BYekan', Tahoma, sans-serif}
-.pending-item input:focus{border-color:var(--accent);box-shadow:0 0 0 3px color-mix(in srgb, var(--accent) 18%, transparent)}
+.pending-item input{width:100%;background:var(--surface-3);border:1px solid var(--border);border-radius:10px;padding:9px 12px;color:var(--text);font-size:.88rem;outline:none;transition:.2s;font-family:'BYekan',Tahoma,sans-serif}
+.pending-item input:focus{border-color:var(--accent);box-shadow:0 0 0 3px color-mix(in srgb,var(--accent) 18%,transparent)}
 .pending-item input:disabled{opacity:.55;cursor:not-allowed}
 .pending-item .sz{font-size:.7rem;color:var(--muted);margin-top:6px;padding-inline-start:3px}
 .pending-item .err-msg{font-size:.7rem;color:var(--danger);margin-top:6px;padding-inline-start:3px;font-weight:bold}
@@ -308,25 +253,63 @@ main{position:relative;z-index:10;max-width:1320px;margin:0 auto;padding:44px 30
 .progress-current{font-size:.74rem;color:var(--muted);margin-top:9px;white-space:nowrap;overflow:hidden;text-overflow:ellipsis}
 
 .modal-foot{display:flex;gap:11px;padding:18px 26px;border-top:1px solid var(--border);background:var(--surface-2)}
-.btn-ghost{flex:1;font-size:.9rem;color:var(--muted);background:transparent;border:1px solid var(--border);border-radius:14px;padding:13px;cursor:pointer;transition:.22s;font-family:'BYekan', Tahoma, sans-serif}
+.btn-ghost{flex:1;font-size:.9rem;color:var(--muted);background:transparent;border:1px solid var(--border);border-radius:14px;padding:13px;cursor:pointer;transition:.22s;font-family:'BYekan',Tahoma,sans-serif}
 .btn-ghost:hover{color:var(--text);border-color:var(--border-strong);background:var(--surface-3)}
-.btn-save{flex:2;font-size:.9rem;font-weight:bold;color:#fff;border:none;cursor:pointer;padding:13px;border-radius:14px;background:linear-gradient(135deg,var(--accent),#00b3ff);box-shadow:0 14px 30px -12px var(--accent), inset 0 1px 0 rgba(255,255,255,.3);transition:.22s;font-family:'BYekan', Tahoma, sans-serif;position:relative;overflow:hidden}
+.btn-save{flex:2;font-size:.9rem;font-weight:bold;color:#fff;border:none;cursor:pointer;padding:13px;border-radius:14px;background:linear-gradient(135deg,var(--accent),#00b3ff);box-shadow:0 14px 30px -12px var(--accent),inset 0 1px 0 rgba(255,255,255,.3);transition:.22s;font-family:'BYekan',Tahoma,sans-serif;position:relative;overflow:hidden}
 .btn-save:hover:not(:disabled){transform:translateY(-2px);box-shadow:0 20px 38px -12px var(--accent)}
 .btn-save:active:not(:disabled){transform:translateY(0) scale(.98)}
 .btn-save:disabled{opacity:.4;cursor:not-allowed;box-shadow:none}
 
-.preview-frame{width:100%;height:72vh;border:none;border-radius:14px;background:var(--surface-2)}
-.preview-img{max-width:100%;max-height:72vh;border-radius:14px;display:block;margin:0 auto;box-shadow:var(--shadow)}
-.preview-text{background:var(--surface-2);padding:22px;border-radius:14px;font-family:ui-monospace,'SF Mono',Menlo,Consolas,monospace;font-size:.84rem;line-height:1.95;color:var(--text);white-space:pre-wrap;word-break:break-word;max-height:72vh;overflow-y:auto;border:1px solid var(--border);direction:ltr;text-align:left}
-.preview-office{border-radius:14px;overflow:hidden;background:#fff;border:1px solid var(--border)}
-.preview-office iframe{display:block;width:100%;height:72vh;border:none;background:#fff}
-.preview-loading{text-align:center;padding:60px 24px;color:var(--muted)}
-.preview-loading .spin{width:44px;height:44px;border-radius:50%;border:3px solid var(--border);border-top-color:var(--accent);animation:spin 1s linear infinite;margin:0 auto 18px}
+/* ══ PREVIEW ══ */
+.preview-frame{width:100%;height:75vh;border:none;border-radius:14px;background:#525659;display:block}
+.preview-img{max-width:100%;max-height:75vh;border-radius:14px;display:block;margin:0 auto;box-shadow:var(--shadow)}
+
+.preview-loading{text-align:center;padding:70px 24px;color:var(--muted)}
+.preview-loading .spin{width:46px;height:46px;border-radius:50%;border:3px solid var(--border);border-top-color:var(--accent);animation:spin 1s linear infinite;margin:0 auto 18px}
+.preview-loading .msg{font-size:.9rem;margin-bottom:6px}
+.preview-loading .sub{font-size:.75rem;color:var(--muted-2)}
+
 .preview-unsupported{text-align:center;padding:60px 24px}
 .preview-unsupported .ic{width:88px;height:88px;margin:0 auto 22px;border-radius:26px;background:var(--surface-2);display:grid;place-items:center;border:1px solid var(--border)}
 .preview-unsupported svg{width:40px;height:40px;stroke:var(--fc);fill:none;stroke-width:1.5;stroke-linecap:round;stroke-linejoin:round}
 .preview-unsupported h4{font-size:1.05rem;font-weight:bold;margin-bottom:8px}
 .preview-unsupported p{color:var(--muted);font-size:.86rem;line-height:1.9;margin-bottom:18px}
+
+.preview-text{background:var(--surface-2);padding:22px;border-radius:14px;font-family:ui-monospace,'SF Mono',Menlo,Consolas,monospace;font-size:.84rem;line-height:1.95;color:var(--text);white-space:pre-wrap;word-break:break-word;max-height:75vh;overflow-y:auto;border:1px solid var(--border);direction:ltr;text-align:left}
+
+/* Word preview */
+.preview-doc{background:#fff;color:#1f2937;padding:36px 44px;border-radius:14px;line-height:1.85;font-size:14px;max-height:75vh;overflow-y:auto;direction:rtl;text-align:right;font-family:'BYekan',Tahoma,sans-serif}
+.preview-doc h1,.preview-doc h2,.preview-doc h3,.preview-doc h4{color:#111827;margin:22px 0 12px;font-weight:bold;line-height:1.4}
+.preview-doc h1{font-size:1.8rem}
+.preview-doc h2{font-size:1.4rem}
+.preview-doc h3{font-size:1.15rem}
+.preview-doc p{margin:0 0 12px;line-height:1.9}
+.preview-doc ul,.preview-doc ol{margin:0 0 14px;padding-inline-start:28px}
+.preview-doc li{margin-bottom:6px}
+.preview-doc table{border-collapse:collapse;margin:14px 0;width:100%}
+.preview-doc td,.preview-doc th{border:1px solid #d1d5db;padding:9px 13px;text-align:right}
+.preview-doc th{background:#f3f4f6;font-weight:bold}
+.preview-doc img{max-width:100%;height:auto;border-radius:6px;margin:8px 0}
+.preview-doc a{color:#2563eb;text-decoration:none}
+.preview-doc a:hover{text-decoration:underline}
+.preview-doc blockquote{border-inline-start:4px solid #e5e7eb;padding-inline-start:16px;color:#6b7280;margin:12px 0;font-style:italic}
+.preview-doc code{background:#f3f4f6;padding:2px 6px;border-radius:5px;font-family:monospace;font-size:.85em}
+
+/* Excel preview */
+.preview-xlsx{background:#fff;border-radius:14px;overflow:hidden;max-height:75vh;display:flex;flex-direction:column}
+.xlsx-tabs{display:flex;gap:4px;padding:10px 14px 0;background:#f9fafb;border-bottom:1px solid #e5e7eb;overflow-x:auto;flex-shrink:0;scrollbar-width:thin}
+.xlsx-tabs::-webkit-scrollbar{height:6px}
+.xlsx-tab{font-family:'BYekan',Tahoma,sans-serif;font-size:.8rem;font-weight:bold;padding:9px 16px;border-radius:10px 10px 0 0;border:none;background:transparent;color:#6b7280;cursor:pointer;transition:.18s;white-space:nowrap;position:relative;top:1px}
+.xlsx-tab:hover{background:#f3f4f6;color:#374151}
+.xlsx-tab.active{background:#fff;color:#8b5cf6;border:1px solid #e5e7eb;border-bottom-color:#fff}
+.xlsx-content{overflow:auto;flex:1;padding:4px}
+.xlsx-content table{border-collapse:collapse;min-width:100%;font-size:13px;font-family:'BYekan',Tahoma,sans-serif}
+.xlsx-content td,.xlsx-content th{border:1px solid #e5e7eb;padding:7px 12px;white-space:nowrap;color:#1f2937;text-align:right;vertical-align:top}
+.xlsx-content tr:nth-child(even) td{background:#fafafa}
+.xlsx-content tr:first-child td{background:#f3f4f6;font-weight:bold;color:#111827;position:sticky;top:0;z-index:1}
+
+/* PPT fallback */
+.preview-ppt-note{background:var(--surface-2);border:1px solid var(--border);border-radius:14px;padding:20px;font-size:.82rem;color:var(--muted);line-height:1.9;text-align:center;margin-top:14px}
 
 .toast-wrap{position:fixed;bottom:28px;inset-inline-end:28px;z-index:300;display:flex;flex-direction:column;gap:10px;pointer-events:none}
 .toast{display:flex;align-items:center;gap:11px;padding:14px 20px;border-radius:15px;font-size:.88rem;background:var(--surface-solid);border:1px solid var(--border-strong);box-shadow:var(--shadow-lg);animation:toastIn .45s cubic-bezier(.34,1.4,.64,1) both;min-width:220px;max-width:400px}
@@ -362,13 +345,14 @@ main{position:relative;z-index:10;max-width:1320px;margin:0 auto;padding:44px 30
   .card-name{font-size:.86rem;min-height:2.6em}
   .modal{max-width:100%;border-radius:22px}
   .modal-head,.modal-body,.modal-foot{padding-inline:18px}
-  .modal-body{max-height:52vh}
+  .modal-body{max-height:60vh}
   .search-kbd{display:none}
   .hero h2{letter-spacing:-.6px}
   .toast-wrap{inset-inline-end:16px;inset-inline-start:16px;bottom:16px}
   .toast{min-width:auto;max-width:100%}
   .fab{bottom:22px;inset-inline-start:22px;width:56px;height:56px}
-  .preview-frame,.preview-office iframe{height:60vh}
+  .preview-frame,.preview-img,.preview-doc,.preview-xlsx{max-height:65vh;height:65vh}
+  .preview-doc{padding:22px 20px}
 }
 @media(max-width:420px){
   .grid{grid-template-columns:1fr}
@@ -409,13 +393,9 @@ main{position:relative;z-index:10;max-width:1320px;margin:0 auto;padding:44px 30
 
 <main>
   <section class="hero">
-    <span class="hero-badge">
-      <span class="sparkle">✨</span>
-      اسم فرم رو بنویس، فوری پیداش کن
-    </span>
+    <span class="hero-badge"><span class="sparkle">✨</span> اسم فرم رو بنویس، فوری پیداش کن</span>
     <h2>کتابخانه‌ی فرم‌های تو</h2>
     <p>فایل‌های PDF، Word، Excel و تصویر رو ببین، دانلود کن و چاپ بگیر</p>
-
     <div class="search-big">
       <svg class="search-ico" viewBox="0 0 24 24"><circle cx="11" cy="11" r="7"/><path d="M20 20l-3.6-3.6"/></svg>
       <input type="text" id="search" placeholder="مثلاً: فرم مرخصی، فرم بیمه، ثبت‌نام…" autocomplete="off">
@@ -423,7 +403,6 @@ main{position:relative;z-index:10;max-width:1320px;margin:0 auto;padding:44px 30
       <button class="clear-btn" id="clearSearch" title="پاک کردن">×</button>
     </div>
   </section>
-
   <section class="stats" id="stats"></section>
   <section class="grid" id="grid"></section>
 </main>
@@ -436,13 +415,9 @@ main{position:relative;z-index:10;max-width:1320px;margin:0 auto;padding:44px 30
 <div class="overlay" id="uploadModal">
   <div class="modal" role="dialog" aria-modal="true">
     <div class="modal-head">
-      <div>
-        <h3>افزودن فرم جدید</h3>
-        <p>فایل رو بکش و رها کن، یا کلیک کن</p>
-      </div>
+      <div><h3>افزودن فرم جدید</h3><p>فایل رو بکش و رها کن، یا کلیک کن</p></div>
       <button class="close-x" id="closeModal">×</button>
     </div>
-
     <div class="modal-body">
       <div class="name-mode">
         <button class="active" data-mode="auto">
@@ -454,7 +429,6 @@ main{position:relative;z-index:10;max-width:1320px;margin:0 auto;padding:44px 30
           من خودم می‌نویسم
         </button>
       </div>
-
       <div class="drop" id="dropZone">
         <svg viewBox="0 0 24 24"><path d="M21 15v4a2 2 0 01-2 2H5a2 2 0 01-2-2v-4"/><path d="M17 8l-5-5-5 5"/><path d="M12 3v13"/></svg>
         <h4>فایل‌های فرم رو انتخاب کن</h4>
@@ -466,11 +440,9 @@ main{position:relative;z-index:10;max-width:1320px;margin:0 auto;padding:44px 30
       </div>
       <input type="file" id="fileInput" multiple hidden
         accept=".pdf,.doc,.docx,.odt,.rtf,.xls,.xlsx,.csv,.ods,.ppt,.pptx,.odp,.txt,.md,image/*">
-
       <div class="pending" id="pendingList"></div>
       <div id="progressArea"></div>
     </div>
-
     <div class="modal-foot">
       <button class="btn-ghost" id="cancelModal">انصراف</button>
       <button class="btn-save" id="saveBtn" disabled>ذخیره فرم‌ها</button>
@@ -482,10 +454,7 @@ main{position:relative;z-index:10;max-width:1320px;margin:0 auto;padding:44px 30
 <div class="overlay" id="previewModal">
   <div class="modal wide" role="dialog" aria-modal="true">
     <div class="modal-head">
-      <div>
-        <h3 id="previewTitle">پیش‌نمایش</h3>
-        <p id="previewSub"></p>
-      </div>
+      <div><h3 id="previewTitle">پیش‌نمایش</h3><p id="previewSub"></p></div>
       <button class="close-x" id="closePreview">×</button>
     </div>
     <div class="modal-body" id="previewBody"></div>
@@ -504,27 +473,20 @@ main{position:relative;z-index:10;max-width:1320px;margin:0 auto;padding:44px 30
         <div class="lock-head-icon">
           <svg viewBox="0 0 24 24"><rect x="4" y="11" width="16" height="10" rx="2"/><path d="M8 11V7a4 4 0 018 0v4"/></svg>
         </div>
-        <div>
-          <h3>ورود مدیر</h3>
-          <p>برای مدیریت فرم‌ها رمز عبور رو وارد کن</p>
-        </div>
+        <div><h3>ورود مدیر</h3><p>برای مدیریت فرم‌ها رمز عبور رو وارد کن</p></div>
       </div>
       <button class="close-x" id="closeLogin">×</button>
     </div>
-
     <div class="modal-body">
       <div class="pw-wrap">
-        <input type="password" id="pwInput" placeholder="رمز عبور…" autocomplete="off" inputmode="text">
+        <input type="password" id="pwInput" placeholder="رمز عبور…" autocomplete="off">
         <button type="button" class="pw-toggle" id="pwToggle" title="نمایش/مخفی">
           <svg viewBox="0 0 24 24" id="pwEye"><path d="M1.5 12S5 5 12 5s10.5 7 10.5 7-3.5 7-10.5 7S1.5 12 1.5 12z"/><circle cx="12" cy="12" r="3"/></svg>
         </button>
       </div>
       <div class="pw-error" id="pwError"></div>
-      <div class="pw-hint">
-        🔒 این بخش فقط برای مدیر سایت قابل دسترسیه
-      </div>
+      <div class="pw-hint">🔒 این بخش فقط برای مدیر سایت قابل دسترسیه</div>
     </div>
-
     <div class="modal-foot">
       <button class="btn-ghost" id="cancelLogin">انصراف</button>
       <button class="btn-save" id="loginBtn">ورود</button>
@@ -537,14 +499,11 @@ main{position:relative;z-index:10;max-width:1320px;margin:0 auto;padding:44px 30
 <script>
 /* ══════════════════════════════════════════════════════════════════
    🔐 رمز عبور مدیر
-   ──────────────────────────────────────────────────────────────────
-   برای تغییر رمز، فقط مقدار زیر رو عوض کن و ذخیره کن.
-   مثال: ADMIN_PASSWORD = 'mypassword123';
    ══════════════════════════════════════════════════════════════════ */
 const ADMIN_PASSWORD = 'admin1234';
 
 /* ══════════════════════════════════════════════════════════════════
-   ⚙️ تنظیمات Supabase
+   ⚙️ Supabase
    ══════════════════════════════════════════════════════════════════ */
 const SUPABASE_CONFIG = {
   url:     'https://nlcicbmdjymnfhlntfvb.supabase.co',
@@ -553,7 +512,9 @@ const SUPABASE_CONFIG = {
   table:   'forms',
 };
 
-/* لوگو + PWA */
+/* ══════════════════════════════════════════════════════════════════
+   🎨 لوگو (SVG) + تولید PNG برای آیکون‌های PWA
+   ══════════════════════════════════════════════════════════════════ */
 const LOGO_SVG = `<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 512 512">
   <defs>
     <linearGradient id="lg" x1="0" y1="0" x2="1" y2="1">
@@ -579,47 +540,101 @@ document.getElementById('brandLogo').innerHTML = LOGO_SVG;
 document.getElementById('faviconLink').href = LOGO_DATA_URI;
 document.getElementById('appleIconLink').href = LOGO_DATA_URI;
 
-const PWA_MANIFEST = {
-  name: 'فرم‌بان — کتابخانه فرم‌ها',
-  short_name: 'فرم‌بان',
-  description: 'کتابخانه هوشمند فرم‌ها',
-  start_url: '.',
-  scope: '.',
-  display: 'standalone',
-  orientation: 'any',
-  background_color: '#07080f',
-  theme_color: '#8b5cf6',
-  lang: 'fa',
-  dir: 'rtl',
-  categories: ['productivity', 'utilities'],
-  icons: [
-    { src: LOGO_DATA_URI, sizes: '192x192', type: 'image/svg+xml', purpose: 'any' },
-    { src: LOGO_DATA_URI, sizes: '512x512', type: 'image/svg+xml', purpose: 'any' },
-    { src: LOGO_DATA_URI, sizes: '512x512', type: 'image/svg+xml', purpose: 'maskable' },
-  ],
-};
-const manifestBlob = new Blob([JSON.stringify(PWA_MANIFEST)], { type: 'application/manifest+json' });
-document.getElementById('manifestLink').href = URL.createObjectURL(manifestBlob);
+/* تولید PNG از SVG برای آیکون‌های PWA */
+function generatePngIcon(size) {
+  return new Promise((resolve) => {
+    const img = new Image();
+    img.crossOrigin = 'anonymous';
+    img.onload = () => {
+      const c = document.createElement('canvas');
+      c.width = size; c.height = size;
+      const ctx = c.getContext('2d');
+      ctx.drawImage(img, 0, 0, size, size);
+      try { resolve(c.toDataURL('image/png')); }
+      catch(e) { resolve(LOGO_DATA_URI); }
+    };
+    img.onerror = () => resolve(LOGO_DATA_URI);
+    img.src = LOGO_DATA_URI;
+  });
+}
+
+/* ساخت Manifest به‌صورت Blob با Base URL مطلق */
+async function buildManifest() {
+  const baseUrl = new URL('.', location.href).href;
+  const [png192, png512] = await Promise.all([
+    generatePngIcon(192),
+    generatePngIcon(512)
+  ]);
+  const manifest = {
+    name: 'فرم‌بان — کتابخانه فرم‌ها',
+    short_name: 'فرم‌بان',
+    description: 'کتابخانه هوشمند فرم‌ها',
+    start_url: baseUrl,
+    scope: baseUrl,
+    display: 'standalone',
+    display_override: ['window-controls-overlay', 'standalone'],
+    orientation: 'any',
+    background_color: '#07080f',
+    theme_color: '#8b5cf6',
+    lang: 'fa',
+    dir: 'rtl',
+    categories: ['productivity', 'utilities'],
+    icons: [
+      { src: png192, sizes: '192x192', type: 'image/png', purpose: 'any' },
+      { src: png512, sizes: '512x512', type: 'image/png', purpose: 'any' },
+      { src: png512, sizes: '512x512', type: 'image/png', purpose: 'maskable' },
+    ],
+  };
+  const blob = new Blob([JSON.stringify(manifest)], { type: 'application/manifest+json' });
+  document.getElementById('manifestLink').href = URL.createObjectURL(blob);
+}
+
+/* ══════════════════════════════════════════════════════════════════
+   📲 Service Worker (CRITICAL for PWA install)
+   ══════════════════════════════════════════════════════════════════ */
+if ('serviceWorker' in navigator) {
+  window.addEventListener('load', () => {
+    // ثبت SW از فایل sw.js (کنار index.html)
+    navigator.serviceWorker.register('./sw.js', { scope: './' })
+      .then(reg => {
+        console.log('%c✅ Service Worker ثبت شد — PWA آماده‌ی نصبه', 'color:#22c55e;font-weight:bold');
+        console.log('SW scope:', reg.scope);
+      })
+      .catch(err => {
+        console.error('%c❌ Service Worker ثبت نشد:', 'color:#ef4444;font-weight:bold', err);
+        console.error('💡 راه‌حل: فایل sw.js رو کنار index.html توی گیت‌هاب بذار');
+      });
+  });
+}
 
 /* PWA Install */
 let deferredInstallPrompt = null;
 const installBtn = document.getElementById('installBtn');
+
 window.addEventListener('beforeinstallprompt', e => {
   e.preventDefault();
   deferredInstallPrompt = e;
   installBtn.classList.add('show');
+  console.log('%c📲 آماده نصب — دکمه نصب فعال شد', 'color:#8b5cf6;font-weight:bold');
 });
+
 installBtn.addEventListener('click', async () => {
-  if(!deferredInstallPrompt){ toast('مرورگر شما از نصب پشتیبانی نمی‌کند', 'info', 4000); return; }
+  if (!deferredInstallPrompt) {
+    toast('برای نصب از منوی مرورگر (سه‌نقطه بالا) → «نصب فرم‌بان» استفاده کن', 'info', 5000);
+    return;
+  }
   deferredInstallPrompt.prompt();
   const { outcome } = await deferredInstallPrompt.userChoice;
+  console.log('Install outcome:', outcome);
   deferredInstallPrompt = null;
   installBtn.classList.remove('show');
-  if(outcome === 'accepted') toast('فرم‌بان نصب شد 🎉');
+  if (outcome === 'accepted') toast('فرم‌بان نصب شد 🎉');
 });
+
 window.addEventListener('appinstalled', () => {
   installBtn.classList.remove('show');
   deferredInstallPrompt = null;
+  toast('فرم‌بان نصب شد 🎉');
 });
 
 /* ابزارها */
@@ -644,8 +659,7 @@ function fmtDateShort(ts){
 }
 function cleanName(filename){
   let n = filename.replace(/\.[^.]+$/, '');
-  n = n.replace(/[_\-]+/g, ' ');
-  n = n.replace(/\s+/g, ' ').trim();
+  n = n.replace(/[_\-]+/g, ' ').replace(/\s+/g, ' ').trim();
   return n;
 }
 function fileKind(name, type){
@@ -671,9 +685,6 @@ const GLYPHS = {
   file:'<path d="M14 2H6a2 2 0 00-2 2v16a2 2 0 002 2h12a2 2 0 002-2V8z"/><path d="M14 2v6h6"/>',
 };
 
-/* ══════════════════════════════════════════════════════════════════
-   STATE
-   ══════════════════════════════════════════════════════════════════ */
 const state = {
   forms: [],
   search: '',
@@ -684,7 +695,6 @@ const state = {
   isAdmin: sessionStorage.getItem('formban-admin') === '1',
 };
 
-/* Supabase */
 let supabaseClient = null;
 function initSupabase(){
   if(!SUPABASE_CONFIG.url || !SUPABASE_CONFIG.anonKey) return null;
@@ -694,15 +704,11 @@ function initSupabase(){
     state.connected = true;
     console.info('%c✅ Supabase client ساخته شد', 'color:#22c55e;font-weight:bold');
     return supabaseClient;
-  }catch(e){
-    console.error('❌ Supabase init error:', e);
-    return null;
-  }
+  }catch(e){ console.error('❌ Supabase:', e); return null; }
 }
 
 /* IndexedDB */
-const DB_NAME = 'formban-db';
-const STORE   = 'forms';
+const DB_NAME = 'formban-db', STORE = 'forms';
 let dbPromise = null;
 function openDB(){
   if(dbPromise) return dbPromise;
@@ -759,7 +765,7 @@ async function fetchAllForms(){
     const { data, error } = await supabaseClient
       .from(SUPABASE_CONFIG.table).select('*')
       .order('created_at', { ascending: false });
-    if(error){ console.error('❌ خطا در خواندن جدول:', error); throw error; }
+    if(error) throw error;
     return (data || []).map(r => ({
       id: r.id, name: r.name, size: r.file_size || 0,
       createdAt: new Date(r.created_at).getTime(),
@@ -853,7 +859,7 @@ function renderStatus(){
   else { pill.className = 'status-pill local'; txt.textContent = 'ذخیره محلی'; }
 }
 
-/* 🔐 Lock button + admin state */
+/* Lock */
 const LOCK_CLOSED = '<svg viewBox="0 0 24 24"><rect x="4" y="11" width="16" height="10" rx="2"/><path d="M8 11V7a4 4 0 018 0v4"/></svg>';
 const LOCK_OPEN   = '<svg viewBox="0 0 24 24"><rect x="4" y="11" width="16" height="10" rx="2"/><path d="M8 11V7a4 4 0 018 0"/></svg>';
 
@@ -868,12 +874,10 @@ function renderLockState(){
     btn.innerHTML = LOCK_CLOSED;
     btn.title = 'ورود مدیر';
   }
-  // Toggle admin-only UI
   $('#uploadBtn').style.display = state.isAdmin ? 'inline-flex' : 'none';
   $('#fab').style.display = state.isAdmin ? 'grid' : 'none';
 }
 
-/* 🔐 Login modal */
 const loginModal = $('#loginModal');
 const pwInput    = $('#pwInput');
 const pwError    = $('#pwError');
@@ -891,8 +895,7 @@ function closeLogin(){
   document.body.style.overflow = '';
 }
 function doLogin(){
-  const val = pwInput.value;
-  if(val === ADMIN_PASSWORD){
+  if(pwInput.value === ADMIN_PASSWORD){
     state.isAdmin = true;
     sessionStorage.setItem('formban-admin', '1');
     closeLogin();
@@ -916,20 +919,12 @@ function doLogout(){
   render();
   toast('از حالت مدیر خارج شدی', 'info');
 }
-
-$('#lockBtn').addEventListener('click', () => {
-  if(state.isAdmin) doLogout();
-  else openLogin();
-});
+$('#lockBtn').addEventListener('click', () => state.isAdmin ? doLogout() : openLogin());
 $('#closeLogin').addEventListener('click', closeLogin);
 $('#cancelLogin').addEventListener('click', closeLogin);
 $('#loginBtn').addEventListener('click', doLogin);
-pwInput.addEventListener('keydown', e => {
-  if(e.key === 'Enter'){ e.preventDefault(); doLogin(); }
-});
+pwInput.addEventListener('keydown', e => { if(e.key === 'Enter'){ e.preventDefault(); doLogin(); } });
 loginModal.addEventListener('click', e => { if(e.target === loginModal) closeLogin(); });
-
-/* نمایش/مخفی رمز */
 $('#pwToggle').addEventListener('click', () => {
   const t = pwInput.type === 'password' ? 'text' : 'password';
   pwInput.type = t;
@@ -945,7 +940,6 @@ function renderStats(list){
   const pdfCount  = state.forms.filter(f => f.type === 'application/pdf' || /\.pdf$/i.test(f.name)).length;
   const docCount  = state.forms.filter(f => /word|\.docx?$/i.test(f.type||'') || /\.docx?$/i.test(f.name)).length;
   const imgCount  = state.forms.filter(f => (f.type||'').startsWith('image/')).length;
-
   const chips = [
     { c:'#8b5cf6', v: state.forms.length, l:'کل فرم‌ها', ic:'<path d="M14 2H6a2 2 0 00-2 2v16a2 2 0 002 2h12a2 2 0 002-2V8z"/><path d="M14 2v6h6"/>' },
     { c:'#06b6d4', v: fmtSize(totalSize), l:'حجم کل', ic:'<path d="M21 15v4a2 2 0 01-2 2H5a2 2 0 01-2-2v-4"/><path d="M7 10l5 5 5-5"/><path d="M12 15V3"/>' },
@@ -954,7 +948,6 @@ function renderStats(list){
   ];
   if(imgCount) chips.push({ c:'#8b5cf6', v: imgCount, l:'تصاویر', ic:'<rect x="3" y="3" width="18" height="18" rx="2"/><circle cx="8.5" cy="8.5" r="1.5"/><path d="M21 15l-5-5L5 21"/>' });
   if(state.search) chips.push({ c:'#ec4899', v: list.length, l:'نتیجه جستجو', ic:'<circle cx="11" cy="11" r="7"/><path d="M20 20l-3.6-3.6"/>' });
-
   $('#stats').innerHTML = chips.map((c,i) => `
     <span class="chip" style="--c:${c.c}; animation-delay:${i*60}ms">
       <span class="ic"><svg viewBox="0 0 24 24">${c.ic}</svg></span>
@@ -966,17 +959,14 @@ function cardHTML(form, index){
   const kind = fileKind(form.name, form.type);
   const isEdit = state.editingId === form.id;
   const cols = state.isAdmin ? 4 : 3;
-
   const nameHtml = isEdit
     ? `<input class="card-name-input" data-act="rename-input" value="${esc(form.name)}">`
     : `<div class="card-name ${state.isAdmin ? 'editable' : ''}" ${state.isAdmin ? 'data-act="rename" title="برای تغییر نام کلیک کن"' : ''}>${esc(form.name)}</div>`;
-
   const deleteBtn = state.isAdmin ? `
     <button class="act rm" data-act="delete" title="حذف">
       <svg viewBox="0 0 24 24"><path d="M3 6h18"/><path d="M8 6V4h8v2"/><path d="M19 6l-1 14H6L5 6"/></svg>
       حذف
     </button>` : '';
-
   return `
   <article class="form-card" data-id="${form.id}"
     style="--fc:${kind.color}; animation-delay:${Math.min(index*45,420)}ms">
@@ -987,17 +977,14 @@ function cardHTML(form, index){
       <span class="kind">${kind.label}</span>
       <span class="date-badge">${fmtDateShort(form.createdAt)}</span>
     </div>
-
     <div class="card-body">
       ${nameHtml}
       <div class="card-meta">
         <svg viewBox="0 0 24 24"><path d="M21 15v4a2 2 0 01-2 2H5a2 2 0 01-2-2v-4"/><path d="M7 10l5 5 5-5"/><path d="M12 15V3"/></svg>
-        <span>${fmtSize(form.size)}</span>
-        <span class="sep">•</span>
+        <span>${fmtSize(form.size)}</span><span class="sep">•</span>
         <span>${form.remote ? '☁️ ابری' : '💾 محلی'}</span>
       </div>
     </div>
-
     <div class="card-actions" style="grid-template-columns:repeat(${cols},1fr)">
       <button class="act pv" data-act="preview" title="نمایش">
         <svg viewBox="0 0 24 24"><path d="M1.5 12S5 5 12 5s10.5 7 10.5 7-3.5 7-10.5 7S1.5 12 1.5 12z"/><circle cx="12" cy="12" r="3"/></svg>
@@ -1018,22 +1005,15 @@ function cardHTML(form, index){
 
 function render(){
   const q = state.search.trim().toLowerCase();
-  const list = q
-    ? state.forms.filter(f => f.name.toLowerCase().includes(q))
-    : state.forms.slice();
-
+  const list = q ? state.forms.filter(f => f.name.toLowerCase().includes(q)) : state.forms.slice();
   renderStats(list);
   renderStatus();
   renderLockState();
-
   const grid = $('#grid');
-
   if(!state.forms.length){
     grid.innerHTML = `
       <div class="empty">
-        <div class="circle">
-          <svg viewBox="0 0 24 24"><path d="M14 2H6a2 2 0 00-2 2v16a2 2 0 002 2h12a2 2 0 002-2V8z"/><path d="M14 2v6h6"/><path d="M12 12v6M9 15h6"/></svg>
-        </div>
+        <div class="circle"><svg viewBox="0 0 24 24"><path d="M14 2H6a2 2 0 00-2 2v16a2 2 0 002 2h12a2 2 0 002-2V8z"/><path d="M14 2v6h6"/><path d="M12 12v6M9 15h6"/></svg></div>
         <h3>${state.isAdmin ? 'هنوز فرمی آپلود نکردی' : 'هنوز فرمی وجود نداره'}</h3>
         <p>${state.isAdmin
           ? 'روی دکمه «افزودن فرم» بزن یا فایل‌ها رو داخل صفحه بکش و رها کن.<br>اسم فرم خودکار از روی فایل تشخیص داده می‌شه ✨'
@@ -1046,23 +1026,18 @@ function render(){
       </div>`;
     return;
   }
-
   if(!list.length){
     grid.innerHTML = `
       <div class="empty">
-        <div class="circle">
-          <svg viewBox="0 0 24 24"><circle cx="11" cy="11" r="7"/><path d="M20 20l-3.6-3.6"/><path d="M8 11h6"/></svg>
-        </div>
+        <div class="circle"><svg viewBox="0 0 24 24"><circle cx="11" cy="11" r="7"/><path d="M20 20l-3.6-3.6"/><path d="M8 11h6"/></svg></div>
         <h3>فرمی با این اسم پیدا نشد</h3>
         <p>املای اسم رو چک کن یا یه عبارت کوتاه‌تر بنویس.</p>
       </div>`;
     return;
   }
-
   grid.innerHTML = list.map((f,i) => cardHTML(f,i)).join('');
   const inp = grid.querySelector('.card-name-input');
   if(inp){ inp.focus(); inp.setSelectionRange(inp.value.length, inp.value.length); }
-
   list.forEach(async form => {
     if(form.previewUrl) return;
     const kind = fileKind(form.name, form.type);
@@ -1123,6 +1098,32 @@ async function printForm(form){
   }catch(e){ console.error(e); toast('خطا در چاپ: ' + (e.message||''), 'err'); }
 }
 
+/* ══════════════════════════════════════════════════════════════════
+   🚀 PREVIEW — سریع + کامل
+   ══════════════════════════════════════════════════════════════════ */
+const loadedLibs = {};
+
+function loadScript(url){
+  if(loadedLibs[url]) return loadedLibs[url];
+  loadedLibs[url] = new Promise((resolve, reject) => {
+    const s = document.createElement('script');
+    s.src = url;
+    s.onload = () => resolve();
+    s.onerror = () => reject(new Error('خطا در بارگذاری کتابخانه'));
+    document.head.appendChild(s);
+  });
+  return loadedLibs[url];
+}
+
+function showLoading(body, msg, sub = ''){
+  body.innerHTML = `
+    <div class="preview-loading">
+      <div class="spin"></div>
+      <div class="msg">${esc(msg)}</div>
+      ${sub ? `<div class="sub">${esc(sub)}</div>` : ''}
+    </div>`;
+}
+
 async function previewForm(form){
   const body  = $('#previewBody');
   const title = $('#previewTitle');
@@ -1131,60 +1132,120 @@ async function previewForm(form){
 
   title.textContent = form.name;
   sub.textContent = `${kind.label} • ${fmtSize(form.size)} • ${fmtDate(form.createdAt)}`;
-  body.innerHTML = `<div class="preview-loading"><div class="spin"></div><div>در حال آماده‌سازی پیش‌نمایش…</div></div>`;
+  showLoading(body, 'در حال بارگذاری…');
 
   $('#previewModal').classList.add('open');
   document.body.style.overflow = 'hidden';
   $('#previewDownload').onclick = () => downloadForm(form);
 
-  try{
-    const type = form.type || '';
-    const isPdf   = type === 'application/pdf' || /\.pdf$/i.test(form.name);
-    const isImage = type.startsWith('image/') || /\.(png|jpe?g|gif|webp|bmp|svg)$/i.test(form.name);
-    const isOffice = /\.(docx?|xlsx?|pptx?|odt|ods|odp)$/i.test(form.name) ||
-                     /officedocument|msword|ms-excel|ms-powerpoint|opendocument/.test(type);
-    const isText = /\.(txt|md|json|xml|log|ini|yml|yaml|csv)$/i.test(form.name) ||
-                   (type.startsWith('text/') && !isPdf);
+  const type = form.type || '';
+  const isPdf    = type === 'application/pdf' || /\.pdf$/i.test(form.name);
+  const isImage  = type.startsWith('image/') || /\.(png|jpe?g|gif|webp|bmp|svg)$/i.test(form.name);
+  const isDocx   = /\.docx?$/i.test(form.name) || /officedocument\.wordprocessingml|msword/i.test(type);
+  const isXlsx   = /\.(xlsx?|csv|ods)$/i.test(form.name) || /officedocument\.spreadsheetml|ms-excel/i.test(type);
+  const isText   = /\.(txt|md|json|xml|log|ini|yml|yaml)$/i.test(form.name) || (type.startsWith('text/') && !isPdf && !isXlsx);
 
+  try{
+    /* ─── PDF: نمایش مستقیم با iframe (فوری) ─── */
     if(isPdf){
       const url = await getFormUrl(form);
-      body.innerHTML = `<iframe class="preview-frame" src="${url}" title="PDF"></iframe>`;
+      body.innerHTML = `<iframe class="preview-frame" src="${url}#toolbar=1&view=FitH" title="PDF"></iframe>`;
       return;
     }
+
+    /* ─── IMAGE: نمایش مستقیم ─── */
     if(isImage){
       const url = await getFormUrl(form);
       body.innerHTML = `<img class="preview-img" src="${url}" alt="">`;
       return;
     }
-    if(isOffice){
-      let publicUrl = null;
-      if(form.remote && state.connected && supabaseClient && form.path){
-        const { data } = supabaseClient.storage.from(SUPABASE_CONFIG.bucket).getPublicUrl(form.path);
-        publicUrl = data?.publicUrl || null;
-      }
-      if(!publicUrl){
-        showUnsupported(body, kind, 'پیش‌نمایش فایل‌های آفیس فقط برای فایل‌های آپلود شده روی سرور امکان‌پذیره. لطفاً فایل رو دانلود کن.');
-        return;
-      }
-      const officeUrl = `https://view.officeapps.live.com/op/embed.aspx?src=${encodeURIComponent(publicUrl)}`;
-      body.innerHTML = `
-        <div class="preview-office">
-          <iframe id="officeFrame" src="${officeUrl}" title="Office Preview" allowfullscreen></iframe>
-        </div>
-        <div style="margin-top:14px;text-align:center;font-size:.76rem;color:var(--muted)">
-          💡 اگه پیش‌نمایش بالا نیومد، فایل رو دانلود کن.
-        </div>`;
-      return;
-    }
+
+    /* ─── TEXT: نمایش کامل ─── */
     if(isText){
       const blob = await getFormBlob(form);
       if(!blob) throw new Error('فایل پیدا نشد');
-      let text = await blob.text();
-      if(text.length > 200000) text = text.slice(0, 200000) + '\n\n... (فایل خیلی بزرگه)';
+      const text = await blob.text();
       body.innerHTML = `<pre class="preview-text">${esc(text)}</pre>`;
       return;
     }
+
+    /* ─── WORD (docx) — با mammoth.js محلی ─── */
+    if(isDocx){
+      // فایل‌های .doc قدیمی پشتیبانی نمی‌شن
+      if(/\.doc$/i.test(form.name) && !/\.docx$/i.test(form.name)){
+        showUnsupported(body, kind, 'فایل‌های Word قدیمی (.doc) قابل پیش‌نمایش نیستن. لطفاً دانلود کن یا فرمت رو به .docx تبدیل کن.');
+        return;
+      }
+      showLoading(body, 'در حال آماده‌سازی پیش‌نمایش Word…', 'بارگذاری موتور (فقط یک بار)');
+      try{
+        await loadScript('https://cdn.jsdelivr.net/npm/mammoth@1.6.0/mammoth.browser.min.js');
+      }catch(e){ throw new Error('اتصال به اینترنت برقرار نیست — کتابخانه پیش‌نمایش بارگذاری نشد'); }
+
+      showLoading(body, 'در حال تبدیل فایل Word…');
+      const blob = await getFormBlob(form);
+      if(!blob) throw new Error('فایل پیدا نشد');
+      const arrayBuffer = await blob.arrayBuffer();
+      const result = await mammoth.convertToHtml({ arrayBuffer });
+      const html = result.value || '<p style="color:#6b7280;text-align:center;padding:40px">فایل خالیه یا محتوایی نداره</p>';
+      body.innerHTML = `<div class="preview-doc">${html}</div>`;
+      return;
+    }
+
+    /* ─── EXCEL (xlsx/csv/ods) — با SheetJS محلی ─── */
+    if(isXlsx){
+      showLoading(body, 'در حال آماده‌سازی پیش‌نمایش Excel…', 'بارگذاری موتور (فقط یک بار)');
+      try{
+        await loadScript('https://cdn.jsdelivr.net/npm/xlsx@0.18.5/dist/xlsx.full.min.js');
+      }catch(e){ throw new Error('اتصال به اینترنت برقرار نیست — کتابخانه پیش‌نمایش بارگذاری نشد'); }
+
+      showLoading(body, 'در حال تبدیل فایل Excel…');
+      const blob = await getFormBlob(form);
+      if(!blob) throw new Error('فایل پیدا نشد');
+      const arrayBuffer = await blob.arrayBuffer();
+      const wb = XLSX.read(arrayBuffer, { type: 'array', cellStyles: false });
+      if(!wb.SheetNames.length) throw new Error('فایل شیت نداره');
+
+      const sheetsHtml = wb.SheetNames.map((name, i) => {
+        const sheet = wb.Sheets[name];
+        const html = XLSX.utils.sheet_to_html(sheet, { id: `sheet-${i}`, editable: false });
+        // تمیزکاری HTML
+        const clean = html.replace(/<html>|<\/html>|<head>[\s\S]*?<\/head>|<body>|<\/body>/g, '');
+        return `<div class="xlsx-sheet" data-sheet-idx="${i}" style="display:${i===0?'block':'none'}">${clean}</div>`;
+      }).join('');
+
+      const tabsHtml = wb.SheetNames.map((name, i) =>
+        `<button class="xlsx-tab ${i===0?'active':''}" data-tab="${i}">${esc(name)}</button>`
+      ).join('');
+
+      body.innerHTML = `
+        <div class="preview-xlsx">
+          ${wb.SheetNames.length > 1 ? `<div class="xlsx-tabs">${tabsHtml}</div>` : ''}
+          <div class="xlsx-content" id="xlsxContent">${sheetsHtml}</div>
+        </div>`;
+
+      // رویداد تغییر تب
+      body.querySelectorAll('.xlsx-tab').forEach(tab => {
+        tab.addEventListener('click', () => {
+          const idx = tab.dataset.tab;
+          body.querySelectorAll('.xlsx-tab').forEach(t => t.classList.remove('active'));
+          tab.classList.add('active');
+          body.querySelectorAll('.xlsx-sheet').forEach(s => {
+            s.style.display = s.dataset.sheetIdx === idx ? 'block' : 'none';
+          });
+        });
+      });
+      return;
+    }
+
+    /* ─── PPTX: پیش‌نمایش نداریم — فقط یادداشت + دانلود ─── */
+    if(/\.pptx?$/i.test(form.name) || /presentation/i.test(type)){
+      showUnsupported(body, kind, 'پیش‌نمایش فایل‌های PowerPoint در مرورگر پشتیبانی نمی‌شه. لطفاً فایل رو دانلود کن و با PowerPoint باز کن.');
+      return;
+    }
+
+    /* ─── بقیه ─── */
     showUnsupported(body, kind);
+
   }catch(e){
     console.error(e);
     body.innerHTML = `<div class="preview-unsupported" style="--fc:var(--danger)">
@@ -1248,7 +1309,7 @@ async function commitRename(input){
   render();
 }
 
-/* گرید رویدادها */
+/* رویدادها */
 const grid = $('#grid');
 grid.addEventListener('click', e => {
   const card = e.target.closest('.form-card');
@@ -1311,7 +1372,7 @@ document.addEventListener('keydown', e => {
   }
 });
 
-/* مودال آپلود */
+/* آپلود */
 const uploadModal = $('#uploadModal');
 const fileInput   = $('#fileInput');
 const dropZone    = $('#dropZone');
@@ -1336,7 +1397,6 @@ function closeUpload(){
   progressArea.innerHTML = '';
   renderPending();
 }
-
 function renderPending(){
   if(!pending.length){
     pendingList.innerHTML = '';
@@ -1348,7 +1408,6 @@ function renderPending(){
   dropZone.style.display = 'none';
   saveBtn.disabled = false;
   saveBtn.textContent = `ذخیره ${fa(pending.length)} فرم`;
-
   pendingList.innerHTML = pending.map((p, i) => {
     const kind = fileKind(p.name + '.' + (p.file.name.split('.').pop() || ''), p.file.type);
     const disabled = state.nameMode === 'auto' ? 'disabled' : '';
@@ -1366,7 +1425,6 @@ function renderPending(){
     </div>`;
   }).join('');
 }
-
 function addFiles(fileList){
   if(!state.isAdmin){ openLogin(); return; }
   const files = Array.from(fileList || []);
@@ -1377,7 +1435,6 @@ function addFiles(fileList){
   });
   renderPending();
 }
-
 dropZone.addEventListener('click', () => fileInput.click());
 fileInput.addEventListener('change', e => addFiles(e.target.files));
 ['dragenter','dragover'].forEach(ev =>
@@ -1399,7 +1456,6 @@ pendingList.addEventListener('click', e => {
   pending.splice(+btn.dataset.idx, 1);
   renderPending();
 });
-
 $$('.name-mode button').forEach(btn => {
   btn.addEventListener('click', () => {
     $$('.name-mode button').forEach(b => b.classList.remove('active'));
@@ -1414,36 +1470,30 @@ saveBtn.addEventListener('click', async () => {
   if(!state.isAdmin){ openLogin(); return; }
   if(!pending.length) return;
   if(!state.connected) toast('به Supabase وصل نیست — از ذخیره محلی استفاده می‌شه', 'info', 3500);
-
   saveBtn.disabled = true;
   saveBtn.textContent = 'در حال آپلود…';
-
   progressArea.innerHTML = `
     <div class="progress-wrap">
       <div class="progress-top"><span class="lbl">در حال آپلود…</span><span class="pct" id="progressPct">۰٪</span></div>
       <div class="progress-bar"><div class="progress-fill" id="progressFill"></div></div>
       <div class="progress-current" id="progressCurrent"></div>
     </div>`;
-
   const fill = $('#progressFill'), pct = $('#progressPct'), curr = $('#progressCurrent');
   const total = pending.length;
   let ok = 0, firstError = null;
-
   for(let i = 0; i < total; i++){
     const p = pending[i];
     curr.textContent = `(${fa(i+1)}/${fa(total)}) ${p.name}`;
-    const overallPct = (i / total) * 100;
-    fill.style.width = overallPct + '%';
-    pct.textContent = Math.round(overallPct).toLocaleString('fa-IR') + '٪';
+    fill.style.width = ((i / total) * 100) + '%';
+    pct.textContent = Math.round((i / total) * 100).toLocaleString('fa-IR') + '٪';
     const itemEl = pendingList.querySelector(`.pending-item[data-idx="${i}"]`);
-
     try{
       const rec = await uploadForm(p.file, p.name.trim() || p.file.name);
       state.forms.unshift(rec);
       ok++;
       if(itemEl) itemEl.classList.add('done');
     }catch(err){
-      console.error(`❌ خطا در «${p.name}»:`, err);
+      console.error(`❌ ${p.name}:`, err);
       const msg = err?.message || String(err);
       if(!firstError) firstError = msg;
       if(itemEl){
@@ -1454,16 +1504,14 @@ saveBtn.addEventListener('click', async () => {
       toast(`خطا در «${p.name}»`, 'err', 5000);
     }
   }
-
   fill.style.width = '100%';
   pct.textContent = '۱۰۰٪';
-
   if(ok === total){
     curr.textContent = 'تکمیل شد ✓';
     setTimeout(() => { closeUpload(); render(); toast(`${fa(ok)} فرم با موفقیت ذخیره شد`); }, 500);
   } else if(ok > 0){
     curr.textContent = `${fa(ok)} از ${fa(total)} موفق`;
-    setTimeout(() => { closeUpload(); render(); toast(`${fa(ok)} فرم ذخیره شد، ${fa(total-ok)} خطا خورد`, 'info', 4500); }, 1200);
+    setTimeout(() => { closeUpload(); render(); toast(`${fa(ok)} ذخیره شد، ${fa(total-ok)} خطا خورد`, 'info', 4500); }, 1200);
   } else {
     curr.textContent = '❌ هیچ فایلی ذخیره نشد';
     saveBtn.disabled = false;
@@ -1478,7 +1526,6 @@ $('#closeModal').addEventListener('click', closeUpload);
 $('#cancelModal').addEventListener('click', closeUpload);
 uploadModal.addEventListener('click', e => { if(e.target === uploadModal) closeUpload(); });
 
-/* Drag & Drop روی کل صفحه — فقط اگه ادمین باشه */
 let dragDepth = 0;
 window.addEventListener('dragenter', e => {
   if(!state.isAdmin) return;
@@ -1504,7 +1551,7 @@ window.addEventListener('drop', e => {
   }
 });
 
-/* مودال پیش‌نمایش */
+/* پیش‌نمایش modal */
 const previewModal = $('#previewModal');
 function closePreview(){
   previewModal.classList.remove('open');
@@ -1539,32 +1586,23 @@ $('#themeBtn').addEventListener('click', () => {
 /* شروع */
 (async function init(){
   applyTheme();
-  console.log('%c🚀 فرم‌بان داره بالا میاد…', 'color:#8b5cf6;font-weight:bold;font-size:14px');
-  console.log('%c🔐 حالت فعلی: ' + (state.isAdmin ? 'مدیر (آزاد)' : 'کاربر عادی (محدود)'),
-    state.isAdmin ? 'color:#22c55e;font-weight:bold' : 'color:#f59e0b;font-weight:bold');
+  console.log('%c🚀 فرم‌بان بالا اومد', 'color:#8b5cf6;font-weight:bold;font-size:14px');
+
+  await buildManifest();
 
   initSupabase();
 
   if(!state.connected){
-    console.warn('%c⚠️ Supabase وصل نشد — از ذخیره محلی استفاده می‌شه', 'color:#f59e0b;font-weight:bold');
+    console.warn('%c⚠️ Supabase وصل نشد', 'color:#f59e0b;font-weight:bold');
   } else {
-    console.info('%c✅ به Supabase متصل شد', 'color:#22c55e;font-weight:bold');
-    try{
-      const { error: e1 } = await supabaseClient.storage.from(SUPABASE_CONFIG.bucket).list('', { limit:1 });
-      if(e1) console.error('❌ مشکل Bucket:', e1.message);
-      else console.info('%c✅ Bucket "forms" در دسترسه', 'color:#22c55e');
-
-      const { error: e2 } = await supabaseClient.from(SUPABASE_CONFIG.table).select('id').limit(1);
-      if(e2) console.error('❌ مشکل جدول:', e2.message);
-      else console.info('%c✅ جدول "forms" در دسترسه', 'color:#22c55e');
-    }catch(e){ console.error('خطا در تست:', e); }
+    console.info('%c✅ Supabase متصل', 'color:#22c55e;font-weight:bold');
   }
 
   try{
     state.forms = await fetchAllForms();
     console.info(`%c📋 ${state.forms.length} فرم بارگذاری شد`, 'color:#06b6d4');
   }catch(e){
-    console.error('خطا در بارگذاری:', e);
+    console.error('خطا:', e);
     state.forms = [];
     if(state.connected) toast('خطا در اتصال به Supabase', 'err');
   }
