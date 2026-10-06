@@ -1,5 +1,4 @@
-/* سی تک پارسیان — Service Worker v8 */
-const CACHE_NAME = 'sitak-v8';
+const CACHE_NAME = 'sitak-v9';
 const APP_SHELL = ['./', './index.html'];
 const CDN_CACHE = [
   'https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2',
