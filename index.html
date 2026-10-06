@@ -74,6 +74,9 @@ button,input,textarea,select{font-family:inherit}
 .btn-primary:hover{transform:translateY(-2px);box-shadow:0 10px 26px -8px var(--accent-glow)}
 .btn-ghost{background:transparent;color:var(--text-2);padding:9px 14px;border-radius:var(--r-md);border:1px solid var(--border-2)}
 .btn-ghost:hover{background:var(--surface-2);color:var(--text);border-color:var(--border-strong)}
+.btn-gold{color:#fff;padding:10px 18px;border-radius:var(--r-md);background:linear-gradient(135deg,var(--gold),var(--gold-2));box-shadow:0 6px 18px -6px rgba(245,158,11,.4);font-size:.82rem;font-weight:bold;border:none;cursor:pointer;display:inline-flex;align-items:center;gap:6px;transition:all .2s var(--ease)}
+.btn-gold:hover{transform:translateY(-2px);box-shadow:0 10px 26px -8px rgba(245,158,11,.5)}
+.btn-gold svg{width:15px;height:15px;stroke:currentColor;fill:none;stroke-width:2.2;stroke-linecap:round;stroke-linejoin:round}
 .icon-btn{width:38px;height:38px;flex-shrink:0;display:grid;place-items:center;border-radius:var(--r-md);background:var(--surface);border:1px solid var(--border);color:var(--text-2);cursor:pointer;transition:all .2s var(--ease);position:relative}
 .icon-btn svg{width:17px;height:17px;stroke:currentColor;fill:none;stroke-width:2;stroke-linecap:round;stroke-linejoin:round;transition:transform .3s var(--ease-spring)}
 .icon-btn:hover{color:var(--accent-3);border-color:rgba(34,211,238,.4);background:var(--accent-soft);transform:translateY(-2px)}
@@ -130,6 +133,8 @@ main{position:relative;z-index:10;max-width:840px;margin:0 auto;padding:64px 24p
 .res-name mark{background:transparent;color:var(--accent-3);font-weight:bold}
 .res-meta{display:flex;align-items:center;gap:6px;margin-top:3px;font-size:.68rem;color:var(--text-3)}
 .res-meta .sep{opacity:.4}
+.res-meta .badge-cached{color:var(--success);font-weight:bold}
+.res-meta .badge-cloud{color:var(--accent-3);font-weight:bold}
 .res-acts{display:flex;gap:2px;flex-shrink:0;opacity:0;transition:opacity .2s}
 .res:hover .res-acts,.res.kbd-focus .res-acts{opacity:1}
 .res-act{width:30px;height:30px;display:grid;place-items:center;border-radius:var(--r-sm);border:none;background:transparent;color:var(--text-3);cursor:pointer;transition:all .2s}
@@ -152,14 +157,33 @@ main{position:relative;z-index:10;max-width:840px;margin:0 auto;padding:64px 24p
 .admin-panel{display:none;margin-top:36px;animation:adminIn .5s var(--ease-spring) both}
 .admin-panel.show{display:block}
 @keyframes adminIn{from{opacity:0;transform:translateY(20px)}to{opacity:1;transform:none}}
-.admin-head{display:flex;align-items:center;justify-content:space-between;gap:12px;margin-bottom:16px;padding:14px 18px;border-radius:var(--r-lg);background:linear-gradient(135deg,var(--gold-soft),transparent);border:1px solid rgba(245,158,11,.3)}
+.admin-head{display:flex;align-items:center;justify-content:space-between;gap:12px;margin-bottom:16px;padding:14px 18px;border-radius:var(--r-lg);background:linear-gradient(135deg,var(--gold-soft),transparent);border:1px solid rgba(245,158,11,.3);flex-wrap:wrap}
 .admin-head h3{font-size:.95rem;font-weight:bold;display:flex;align-items:center;gap:8px}
 .admin-head h3 svg{width:18px;height:18px;stroke:var(--gold-2);fill:none;stroke-width:2;stroke-linecap:round;stroke-linejoin:round}
 .admin-head .count{font-size:.72rem;padding:4px 10px;border-radius:var(--r-full);background:var(--gold-soft);color:var(--gold-2);border:1px solid rgba(245,158,11,.3);font-weight:bold}
+.admin-head-actions{display:flex;gap:8px;align-items:center;flex-wrap:wrap}
+.sync-status{
+  display:inline-flex;align-items:center;gap:6px;
+  font-size:.68rem;font-weight:bold;
+  padding:5px 10px;border-radius:var(--r-full);
+  background:var(--surface-2);border:1px solid var(--border);
+  color:var(--text-2);
+}
+.sync-status.done{color:var(--success);border-color:rgba(16,185,129,.35);background:rgba(16,185,129,.08)}
+.sync-status.syncing{color:var(--accent-3);border-color:rgba(34,211,238,.35);background:var(--accent-soft)}
 .admin-grid{display:grid;grid-template-columns:repeat(auto-fill,minmax(260px,1fr));gap:12px}
-.admin-card{display:flex;align-items:center;gap:12px;padding:12px;border-radius:var(--r-md);background:var(--surface);border:1px solid var(--border);transition:all .2s var(--ease);animation:cardIn .4s var(--ease-spring) both}
+.admin-card{display:flex;align-items:center;gap:12px;padding:12px;border-radius:var(--r-md);background:var(--surface);border:1px solid var(--border);transition:all .2s var(--ease);animation:cardIn .4s var(--ease-spring) both;position:relative}
 @keyframes cardIn{from{opacity:0;transform:translateY(10px) scale(.95)}to{opacity:1;transform:none}}
 .admin-card:hover{border-color:var(--accent-3);transform:translateY(-2px);box-shadow:0 10px 28px -10px var(--accent-glow)}
+.admin-card.cached{border-color:rgba(16,185,129,.3)}
+.admin-card .card-badge{
+  position:absolute;top:-6px;inset-inline-end:10px;
+  font-size:.6rem;font-weight:bold;
+  padding:2px 8px;border-radius:var(--r-full);
+  background:var(--surface-2);color:var(--text-3);
+  border:1px solid var(--border);
+}
+.admin-card.cached .card-badge{background:rgba(16,185,129,.15);color:var(--success);border-color:rgba(16,185,129,.4)}
 .admin-card .card-ico{width:44px;height:44px;flex-shrink:0;display:grid;place-items:center;border-radius:var(--r-md);background:color-mix(in srgb,var(--fc) 15%,transparent);border:1px solid color-mix(in srgb,var(--fc) 26%,transparent)}
 .admin-card .card-ico svg{width:20px;height:20px;stroke:var(--fc);fill:none;stroke-width:1.9;stroke-linecap:round;stroke-linejoin:round}
 .admin-card .card-body{flex:1;min-width:0}
@@ -388,7 +412,14 @@ main{position:relative;z-index:10;max-width:840px;margin:0 auto;padding:64px 24p
         <svg viewBox="0 0 24 24"><path d="M14 2H6a2 2 0 00-2 2v16a2 2 0 002 2h12a2 2 0 002-2V8z"/><path d="M14 2v6h6"/></svg>
         فرم‌های آپلود شده
       </h3>
-      <span class="count" id="adminCount">۰</span>
+      <div class="admin-head-actions">
+        <span class="sync-status" id="syncStatus"></span>
+        <button class="btn-gold" id="syncBtn" type="button">
+          <svg viewBox="0 0 24 24"><path d="M21 12a9 9 0 11-3-6.7"/><path d="M21 3v6h-6"/></svg>
+          همگام‌سازی آفلاین
+        </button>
+        <span class="count" id="adminCount">۰</span>
+      </div>
     </div>
     <div class="admin-grid" id="adminGrid"></div>
   </section>
@@ -533,7 +564,7 @@ function typeHero(){
 setTimeout(typeHero, 300);
 
 document.addEventListener('click', e => {
-  const btn = e.target.closest('.btn, .icon-btn, .install-btn');
+  const btn = e.target.closest('.btn, .icon-btn, .install-btn, .btn-gold');
   if(!btn) return;
   const rect = btn.getBoundingClientRect();
   const size = Math.max(rect.width, rect.height);
@@ -575,6 +606,7 @@ const esc = s => String(s).replace(/[&<>"']/g, c => ({'&':'&amp;','<':'&lt;','>'
 const fa = n => Number(n||0).toLocaleString('fa-IR');
 const rnd = () => (crypto.randomUUID ? crypto.randomUUID() : 'id-'+Date.now()+'-'+Math.random().toString(36).slice(2,9));
 const escapeRegex = s => s.replace(/[.*+?^${}()|[\]\\]/g, '\\$&');
+const sigOf = (name, size) => `${String(name).toLowerCase()}::${size}`;
 
 function fmtSize(b){
   if(!b) return '۰ بایت';
@@ -625,11 +657,13 @@ const state = {
   recent: JSON.parse(localStorage.getItem('formban-recent') || '[]'),
   kbdIndex: -1,
   hashes: JSON.parse(localStorage.getItem('formban-hashes') || '[]'),
+  cachedSigs: new Set(),  /* اسم+حجم فایل‌هایی که توی IndexedDB هستن */
+  syncing: false,
 };
 
 let sb = null;
 function initSupabase(){
-  if(!window.supabase){ console.warn('⚠️ Supabase library not loaded'); return null; }
+  if(!window.supabase){ console.warn('Supabase lib not loaded'); return null; }
   try{
     sb = window.supabase.createClient(SUPABASE_CONFIG.url, SUPABASE_CONFIG.anonKey);
     state.connected = true;
@@ -642,7 +676,7 @@ function initSupabase(){
 }
 
 /* IndexedDB */
-const DB_NAME = 'sitak-db', STORE = 'forms';
+const DB_NAME = 'sitak-db-v2', STORE = 'forms';
 let dbPromise = null;
 function openDB(){
   if(dbPromise) return dbPromise;
@@ -694,6 +728,101 @@ async function idbGet(id){
   });
 }
 
+/* ══════════════════════════════════════════════════════════════════
+   کش کردن فایل‌های ابری برای آفلاین
+   ══════════════════════════════════════════════════════════════════ */
+async function refreshCachedSigs(){
+  const local = await idbAll();
+  state.cachedSigs = new Set(local.map(r => sigOf(r.name, r.size)));
+}
+
+async function cacheOne(form){
+  /* اگه لوکال هست، رد کن */
+  if(state.cachedSigs.has(sigOf(form.name, form.size))) return true;
+
+  try{
+    let blob = null;
+    /* اگه ابری هست دانلود کن */
+    if(form.remote && form.path && state.connected && sb && navigator.onLine){
+      const { data, error } = await sb.storage.from(SUPABASE_CONFIG.bucket).download(form.path);
+      if(error) throw error;
+      blob = data;
+    } else if(form.blob){
+      blob = form.blob;
+    }
+    if(!blob) return false;
+
+    const rec = {
+      id: rnd(),
+      name: form.name,
+      blob: blob,
+      size: form.size || blob.size,
+      createdAt: form.createdAt || Date.now(),
+      type: form.type || blob.type,
+    };
+    await idbPut(rec);
+    state.cachedSigs.add(sigOf(rec.name, rec.size));
+    return true;
+  }catch(e){
+    console.warn('Cache error for', form.name, e);
+    return false;
+  }
+}
+
+async function syncCloudToLocal(silent = false){
+  if(state.syncing) return {total:0, cached:0};
+  if(!state.connected || !sb || !navigator.onLine){
+    if(!silent) toast('برای همگام‌سازی به اینترنت نیازه', 'warn', 4000);
+    return {total:0, cached:0};
+  }
+  state.syncing = true;
+  updateSyncStatus('syncing', 'در حال همگام‌سازی…');
+
+  await refreshCachedSigs();
+
+  /* فایل‌های ابری که هنوز لوکال نشدن */
+  const cloudForms = state.forms.filter(f =>
+    f.remote && !state.cachedSigs.has(sigOf(f.name, f.size))
+  );
+
+  if(!cloudForms.length){
+    state.syncing = false;
+    updateSyncStatus('done', 'همه آفلاین در دسترسن ✓');
+    if(!silent) toast('همه‌ی فایل‌ها برای آفلاین ذخیره شدن ✓', 'ok', 3500);
+    return {total:0, cached:0};
+  }
+
+  let cached = 0;
+  for(let i = 0; i < cloudForms.length; i++){
+    const form = cloudForms[i];
+    updateSyncStatus('syncing', `(${fa(i+1)}/${fa(cloudForms.length)}) ${form.name.substring(0,20)}…`);
+    const ok = await cacheOne(form);
+    if(ok) cached++;
+  }
+
+  state.syncing = false;
+  await refreshCachedSigs();
+  renderAdminPanel();
+  updateSyncStatus('done', `✓ ${fa(cached)} فایل ذخیره شد`);
+
+  if(!silent){
+    if(cached > 0) toast(`${fa(cached)} فایل برای آفلاین ذخیره شد ✓`, 'ok', 4000);
+    else toast('فایل جدیدی برای ذخیره نبود', 'info', 3000);
+  }
+  return {total: cloudForms.length, cached};
+}
+
+function updateSyncStatus(kind, text){
+  const el = $('#syncStatus');
+  if(!el) return;
+  el.className = 'sync-status ' + (kind === 'syncing' ? 'syncing' : 'done');
+  el.textContent = text;
+  el.style.display = text ? 'inline-flex' : 'none';
+}
+
+/* ══════════════════════════════════════════════════════════════════
+   Cloud / Local decision
+   ══════════════════════════════════════════════════════════════════ */
 function shouldUseCloud(){
   if(state.mode === 'offline') return false;
   if(!state.connected || !sb) return false;
@@ -702,24 +831,32 @@ function shouldUseCloud(){
 }
 
 async function fetchAllForms(){
+  /* اول لوکال */
   const localRaw = await idbAll();
+  await refreshCachedSigs();
+
   const localMapped = localRaw.map(r => ({
     id:r.id, name:r.name, size:r.size, createdAt:r.createdAt,
-    type:r.blob?.type || r.type, blob:r.blob, remote:false,
+    type:r.blob?.type || r.type, blob:r.blob, remote:false, cached:true,
   }));
 
+  /* بعد ابری (اگه ممکن باشه) */
   let cloudMapped = [];
   if(shouldUseCloud()){
     try{
       const { data, error } = await sb.from(SUPABASE_CONFIG.table).select('*').order('created_at', { ascending:false });
-      if(error){ console.error('❌ Supabase fetch error:', error); }
+      if(error) console.error('❌ Supabase fetch error:', error);
       else {
-        cloudMapped = (data || []).map(r => ({
-          id:r.id, name:r.name, size:r.file_size||0,
-          createdAt:new Date(r.created_at).getTime(),
-          type:r.file_type, path:r.file_path, remote:true,
-        }));
-        console.info(`%c☁️ ${cloudMapped.length} فایل از Supabase خونده شد`, 'color:#22d3ee');
+        cloudMapped = (data || []).map(r => {
+          const sig = sigOf(r.name, r.file_size||0);
+          return {
+            id:r.id, name:r.name, size:r.file_size||0,
+            createdAt:new Date(r.created_at).getTime(),
+            type:r.file_type, path:r.file_path, remote:true,
+            cached: state.cachedSigs.has(sig),
+          };
+        });
+        console.info(`%c☁️ ${cloudMapped.length} فایل از Supabase`, 'color:#22d3ee');
       }
     }catch(e){
       console.error('❌ Cloud fetch failed:', e);
@@ -728,15 +865,16 @@ async function fetchAllForms(){
 
   console.info(`%c💾 ${localMapped.length} فایل لوکال`, 'color:#f59e0b');
 
+  /* ادغام — لوکال اولویت داره چون همیشه در دسترسه */
   const seen = new Set();
   const merged = [];
-  for(const c of cloudMapped){
-    const key = `${c.name.toLowerCase()}::${c.size}`;
-    if(!seen.has(key)){ seen.add(key); merged.push(c); }
-  }
   for(const l of localMapped){
-    const key = `${l.name.toLowerCase()}::${l.size}`;
+    const key = sigOf(l.name, l.size);
     if(!seen.has(key)){ seen.add(key); merged.push(l); }
+  }
+  for(const c of cloudMapped){
+    const key = sigOf(c.name, c.size);
+    if(!seen.has(key)){ seen.add(key); merged.push(c); }
   }
   return merged.sort((a,b) => b.createdAt - a.createdAt);
 }
@@ -744,12 +882,13 @@ async function fetchAllForms(){
 async function uploadForm(file, name){
   const hash = await fileHash(file);
 
-  /* همیشه اول لوکال ذخیره کن */
+  /* همیشه لوکال ذخیره کن */
   const localRec = { id:rnd(), name, blob:file, size:file.size, createdAt:Date.now(), type:file.type };
   await idbPut(localRec);
+  state.cachedSigs.add(sigOf(name, file.size));
   if(hash) saveHash(hash);
 
-  /* بعد اگه ابری فعاله، به Supabase هم بفرست */
+  /* اگه ابری فعاله، به Supabase هم بفرست */
   if(shouldUseCloud()){
     try{
       const cloudId = rnd();
@@ -761,14 +900,14 @@ async function uploadForm(file, name){
       const { error: dbErr } = await sb.from(SUPABASE_CONFIG.table)
         .insert({ id:cloudId, name, file_path:path, file_type:file.type||'', file_size:file.size });
       if(dbErr) throw new Error(`Table: ${dbErr.message}`);
-      console.info(`%c☁️ به Supabase هم آپلود شد: ${name}`, 'color:#22d3ee');
-      return { ...localRec, remote:true, path };
+      console.info(`%c☁️ به Supabase هم رفت: ${name}`, 'color:#22d3ee');
+      return { ...localRec, remote:true, path, cached:true };
     }catch(err){
       console.warn('⚠️ Cloud upload failed, kept local:', err);
     }
   }
 
-  return { ...localRec, remote:false };
+  return { ...localRec, remote:false, cached:true };
 }
 function saveHash(hash){
   state.hashes.push(hash);
@@ -776,42 +915,49 @@ function saveHash(hash){
   localStorage.setItem('formban-hashes', JSON.stringify(state.hashes));
 }
 async function deleteFormRecord(form){
+  /* از ابر */
   if(form.remote && state.connected && sb && navigator.onLine){
     try{
       if(form.path) await sb.storage.from(SUPABASE_CONFIG.bucket).remove([form.path]);
       await sb.from(SUPABASE_CONFIG.table).delete().eq('id', form.id);
     }catch(e){ console.warn('Cloud delete failed:', e); }
   }
-  /* حذف از لوکال */
+  /* از لوکال */
   const localRaw = await idbAll();
-  const match = localRaw.find(r => r.name === form.name && r.size === form.size);
-  if(match) await idbDel(match.id);
-  else if(!form.remote) await idbDel(form.id);
+  const matches = localRaw.filter(r => r.name === form.name && r.size === form.size);
+  for(const m of matches) await idbDel(m.id);
+  state.cachedSigs.delete(sigOf(form.name, form.size));
 }
 async function getFormBlob(form){
-  /* اگه لوکال هست */
+  /* لوکال اول */
   if(form.blob) return form.blob;
-  /* بگرد توی IndexedDB با اسم و حجم */
   const localRaw = await idbAll();
   const match = localRaw.find(r => r.name === form.name && r.size === form.size);
   if(match?.blob) return match.blob;
-  /* از ابری */
-  if(form.remote && state.connected && sb && navigator.onLine && state.mode !== 'offline'){
+  /* ابری */
+  if(form.remote && form.path && state.connected && sb && navigator.onLine){
     try{
       const { data, error } = await sb.storage.from(SUPABASE_CONFIG.bucket).download(form.path);
       if(error) throw error;
+      /* همزمان کش کن */
+      try{
+        await idbPut({ id:rnd(), name:form.name, blob:data, size:form.size, createdAt:form.createdAt, type:form.type });
+        state.cachedSigs.add(sigOf(form.name, form.size));
+      }catch(e){}
       return data;
     }catch(e){ console.warn('Download failed:', e); }
   }
   return null;
 }
 async function getFormUrl(form){
-  if(form.remote && state.connected && sb && navigator.onLine && state.mode !== 'offline'){
+  const blob = await getFormBlob(form);
+  if(blob) return URL.createObjectURL(blob);
+  /* آخرین تلاش: publicUrl */
+  if(form.remote && form.path && sb){
     const { data } = sb.storage.from(SUPABASE_CONFIG.bucket).getPublicUrl(form.path);
-    if(data?.publicUrl) return data.publicUrl;
+    return data?.publicUrl || null;
   }
-  const b = await getFormBlob(form);
-  return b ? URL.createObjectURL(b) : null;
+  return null;
 }
 
 const TOAST_ICONS = {
@@ -855,14 +1001,27 @@ $('#modeBtn').addEventListener('click', async () => {
   try{ state.forms = await fetchAllForms(); }catch(e){}
   render();
   toast(state.mode === 'offline' ? 'حالت آفلاین فعال شد 📴' : 'حالت آنلاین فعال شد 🌐', 'info', 3000);
+  /* در حالت آفلاین، مخفی نکن ولی نمایش بده */
 });
+
+$('#syncBtn').addEventListener('click', () => syncCloudToLocal(false));
 
 window.addEventListener('online', async () => {
   renderStatus();
   toast('اینترنت وصل شد 🌐', 'ok', 2500);
+  try{
+    state.forms = await fetchAllForms();
+    render();
+    /* خودکار sync کن */
+    syncCloudToLocal(true);
+  }catch(e){}
+});
+window.addEventListener('offline', async () => {
+  renderStatus();
+  toast('اینترنت قطع شد — همه‌ی فایل‌ها آفلاین در دسترسن', 'warn', 3500);
+  /* دوباره لیست رو بخون از IndexedDB */
   try{ state.forms = await fetchAllForms(); render(); }catch(e){}
 });
-window.addEventListener('offline', () => { renderStatus(); toast('اینترنت قطع شد', 'warn', 3000); });
 
 const LOCK_CLOSED = '<svg viewBox="0 0 24 24"><rect x="4" y="11" width="16" height="10" rx="2"/><path d="M8 11V7a4 4 0 018 0v4"/></svg>';
 const LOCK_OPEN   = '<svg viewBox="0 0 24 24"><rect x="4" y="11" width="16" height="10" rx="2"/><path d="M8 11V7a4 4 0 018 0"/></svg>';
@@ -890,6 +1049,8 @@ function doLogin(){
     closeLogin(); renderLock(); render();
     confetti();
     toast('خوش آمدی مدیر 👋');
+    /* بعد از ورود، خودکار sync کن */
+    setTimeout(() => syncCloudToLocal(true), 800);
   } else {
     pwError.textContent = 'رمز عبور اشتباهه';
     pwError.classList.add('show');
@@ -1039,6 +1200,9 @@ function renderDropdown(){
       <button class="res-act rm" data-act="delete" title="حذف" type="button">
         <svg viewBox="0 0 24 24"><path d="M3 6h18"/><path d="M8 6V4h8v2"/><path d="M19 6l-1 14H6L5 6"/></svg>
       </button>` : '';
+    const cacheBadge = state.cachedSigs.has(sigOf(form.name, form.size))
+      ? `<span class="badge-cached">✓ آفلاین</span>`
+      : `<span class="badge-cloud">☁️ فقط آنلاین</span>`;
     return `
       <div class="res" data-id="${form.id}" data-idx="${i}">
         <div class="res-ico" style="--fc:${kind.color}"><svg viewBox="0 0 24 24">${GLYPHS[kind.glyph] || GLYPHS.file}</svg></div>
@@ -1047,7 +1211,7 @@ function renderDropdown(){
           <div class="res-meta">
             <span>${kind.label}</span><span class="sep">•</span>
             <span>${fmtSize(form.size)}</span><span class="sep">•</span>
-            <span>${form.remote ? '☁️' : '💾'} ${fmtDateShort(form.createdAt)}</span>
+            ${cacheBadge}
           </div>
         </div>
         <div class="res-acts">
@@ -1077,16 +1241,16 @@ function renderAdminPanel(){
 
   $('#adminGrid').innerHTML = state.forms.map((form, i) => {
     const kind = fileKind(form.name, form.type);
+    const isCached = state.cachedSigs.has(sigOf(form.name, form.size));
     return `
-      <div class="admin-card" style="--fc:${kind.color}; animation-delay:${Math.min(i*30,300)}ms" data-id="${form.id}">
+      <div class="admin-card ${isCached ? 'cached' : ''}" style="--fc:${kind.color}; animation-delay:${Math.min(i*30,300)}ms" data-id="${form.id}">
+        <span class="card-badge">${isCached ? '✓ آفلاین' : '☁️ فقط آنلاین'}</span>
         <div class="card-ico"><svg viewBox="0 0 24 24">${GLYPHS[kind.glyph] || GLYPHS.file}</svg></div>
         <div class="card-body">
           <div class="card-name" title="${esc(form.name)}">${esc(form.name)}</div>
           <div class="card-meta">
             <span>${kind.label}</span><span class="sep">•</span>
             <span>${fmtSize(form.size)}</span>
-            <span class="sep">•</span>
-            <span>${form.remote ? '☁️' : '💾'}</span>
           </div>
         </div>
         <div class="card-acts">
@@ -1302,11 +1466,13 @@ async function previewForm(form){
   try{
     if(isPdf){
       const url = await getFormUrl(form);
+      if(!url) throw new Error('فایل در دسترس نیست');
       body.innerHTML = `<iframe class="prev-frame" src="${url}#toolbar=1&navpanes=0&view=FitH"></iframe>`;
       return;
     }
     if(isImage){
       const url = await getFormUrl(form);
+      if(!url) throw new Error('فایل در دسترس نیست');
       body.innerHTML = `<img class="prev-img" src="${url}" alt="">`;
       return;
     }
@@ -1322,12 +1488,12 @@ async function previewForm(form){
         <div class="ic"><svg viewBox="0 0 24 24">${GLYPHS[kind.glyph] || GLYPHS.file}</svg></div>
         <h4>پیش‌نمایش این فایل در مرورگر ممکن نیست</h4>
         <p>مرورگر نمی‌تونه فایل‌های ${kind.label} رو مستقیم نمایش بده. برای مشاهده دانلود کن.</p>
-        <button class="btn btn-primary" id="prevDlBtn" style="margin:0 auto">
+        <button class="btn btn-primary" id="prevDlBtn2" style="margin:0 auto">
           <svg viewBox="0 0 24 24"><path d="M21 15v4a2 2 0 01-2 2H5a2 2 0 01-2-2v-4"/><path d="M7 10l5 5 5-5"/><path d="M12 15V3"/></svg>
           <span>دانلود فایل</span>
         </button>
       </div>`;
-    const btn = document.getElementById('prevDlBtn');
+    const btn = document.getElementById('prevDlBtn2');
     if(btn) btn.onclick = () => $('#previewDlBtn').click();
   }catch(e){
     body.innerHTML = `<div class="prev-unsup" style="--fc:var(--danger)">
@@ -1408,11 +1574,11 @@ async function addFiles(list){
   if(!state.isAdmin){ openLogin(); return; }
   const files = Array.from(list || []);
   if(!files.length) return;
-  const existingSigs = new Set(state.forms.map(f => `${f.name.toLowerCase()}::${f.size}`));
-  const pendingSigs = new Set(pending.map(p => `${p.name.toLowerCase()}::${p.file.size}`));
+  const existingSigs = new Set(state.forms.map(f => sigOf(f.name, f.size)));
+  const pendingSigs = new Set(pending.map(p => sigOf(p.name, p.file.size)));
   for(const f of files){
     const autoName = cleanName(f.name);
-    const sig = `${autoName.toLowerCase()}::${f.size}`;
+    const sig = sigOf(autoName, f.size);
     let isDup = existingSigs.has(sig) || pendingSigs.has(sig);
     if(!isDup && state.hashes.length){
       const h = await fileHash(f);
@@ -1500,189 +1666,4 @@ saveBtn.addEventListener('click', async () => {
       p.error = msg;
     }
   }
-  ring.style.strokeDashoffset = 0;
-  ringTxt.textContent = '۱۰۰٪';
-  if(ok === total){
-    confetti();
-    setTimeout(() => { closeUpload(); render(); toast(`${fa(ok)} فرم ذخیره شد 🎉`); }, 500);
-  } else if(ok > 0){
-    setTimeout(() => { closeUpload(); render(); toast(`${fa(ok)} ذخیره شد، ${fa(total-ok)} خطا`, 'warn', 4000); }, 1000);
-  } else {
-    saveBtn.disabled = false;
-    saveBtn.textContent = 'تلاش مجدد';
-    if(firstErr) toast('خطا: ' + firstErr, 'err', 8000);
-  }
-});
-
-$('#uploadBtn').addEventListener('click', openUpload);
-$('#closeUpload').addEventListener('click', closeUpload);
-$('#cancelUpload').addEventListener('click', closeUpload);
-uploadModal.addEventListener('click', e => { if(e.target === uploadModal) closeUpload(); });
-
-let dragDepth = 0;
-window.addEventListener('dragenter', e => {
-  if(!state.isAdmin) return;
-  if(e.dataTransfer && Array.from(e.dataTransfer.types).includes('Files')){
-    dragDepth++;
-    if(!uploadModal.classList.contains('open')) openUpload();
-    dropZone.classList.add('over');
-  }
-});
-window.addEventListener('dragover', e => { if(state.isAdmin && e.dataTransfer) e.preventDefault(); });
-window.addEventListener('dragleave', () => {
-  if(!state.isAdmin) return;
-  dragDepth = Math.max(0, dragDepth-1);
-  if(dragDepth === 0) dropZone.classList.remove('over');
-});
-window.addEventListener('drop', e => {
-  if(!state.isAdmin) return;
-  if(e.dataTransfer && e.dataTransfer.files.length){
-    e.preventDefault();
-    dragDepth = 0;
-    if(!uploadModal.classList.contains('open')) openUpload();
-    addFiles(e.dataTransfer.files);
-  }
-});
-
-const previewModal = $('#previewModal');
-function closePreview(){
-  previewModal.classList.remove('open');
-  document.body.style.overflow = '';
-  $('#previewBody').innerHTML = '';
-}
-$('#closePreview').addEventListener('click', closePreview);
-$('#previewCloseBtn').addEventListener('click', closePreview);
-previewModal.addEventListener('click', e => { if(e.target === previewModal) closePreview(); });
-
-document.addEventListener('keydown', e => {
-  if(e.key === 'Escape'){
-    if(confirmModal.classList.contains('open')) resolveConfirm(false);
-    else if(loginModal.classList.contains('open')) closeLogin();
-    else if(uploadModal.classList.contains('open')) closeUpload();
-    else if(previewModal.classList.contains('open')) closePreview();
-    else dropdown.classList.remove('show');
-  }
-});
-
-function applyTheme(){
-  document.documentElement.setAttribute('data-theme', state.theme);
-  $('#themeBtn').innerHTML = state.theme === 'dark'
-    ? '<svg viewBox="0 0 24 24"><circle cx="12" cy="12" r="4.2"/><path d="M12 2v2M12 20v2M4.9 4.9l1.4 1.4M17.7 17.7l1.4 1.4M2 12h2M20 12h2M4.9 19.1l1.4-1.4M17.7 6.3l1.4-1.4"/></svg>'
-    : '<svg viewBox="0 0 24 24"><path d="M21 12.8A9 9 0 1111.2 3a7 7 0 009.8 9.8z"/></svg>';
-  localStorage.setItem('formban-theme', state.theme);
-}
-$('#themeBtn').addEventListener('click', () => {
-  state.theme = state.theme === 'dark' ? 'light' : 'dark';
-  applyTheme();
-});
-
-function generatePngIcon(size){
-  return new Promise(resolve => {
-    const img = new Image();
-    img.crossOrigin = 'anonymous';
-    img.onload = () => {
-      const c = document.createElement('canvas');
-      c.width = size; c.height = size;
-      c.getContext('2d').drawImage(img, 0, 0, size, size);
-      try { resolve(c.toDataURL('image/png')); } catch(e){ resolve(LOGO_DATA_URI); }
-    };
-    img.onerror = () => resolve(LOGO_DATA_URI);
-    img.src = LOGO_DATA_URI;
-  });
-}
-async function buildManifest(){
-  const baseUrl = new URL('.', location.href).href;
-  const [p192, p512] = await Promise.all([generatePngIcon(192), generatePngIcon(512)]);
-  const manifest = {
-    name: 'جعبه ابزار کفپوش سی تک پارسیان',
-    short_name: 'سی تک پارسیان',
-    description: 'کتابخانه هوشمند فرم‌های کفپوش سی تک پارسیان',
-    start_url: baseUrl, scope: baseUrl,
-    display: 'standalone',
-    display_override: ['window-controls-overlay','standalone'],
-    orientation: 'any',
-    background_color: '#0a0d16',
-    theme_color: '#0e7490',
-    lang: 'fa', dir: 'rtl',
-    icons: [
-      { src: p192, sizes:'192x192', type:'image/png', purpose:'any' },
-      { src: p512, sizes:'512x512', type:'image/png', purpose:'any' },
-      { src: p512, sizes:'512x512', type:'image/png', purpose:'maskable' },
-    ],
-  };
-  const blob = new Blob([JSON.stringify(manifest)], { type:'application/manifest+json' });
-  document.getElementById('manifestLink').href = URL.createObjectURL(blob);
-}
-
-if('serviceWorker' in navigator){
-  window.addEventListener('load', () => {
-    navigator.serviceWorker.register('./sw.js', { scope:'./' })
-      .then(() => console.log('%c✅ Service Worker ثبت شد', 'color:#22c55e;font-weight:bold'))
-      .catch(err => console.warn('SW error:', err));
-  });
-}
-
-let deferredInstall = null;
-const installBtn = document.getElementById('installBtn');
-window.addEventListener('beforeinstallprompt', e => {
-  e.preventDefault();
-  deferredInstall = e;
-  installBtn.classList.add('show');
-});
-installBtn.addEventListener('click', async () => {
-  if(!deferredInstall){ toast('از منوی مرورگر → Install', 'info', 4000); return; }
-  deferredInstall.prompt();
-  const { outcome } = await deferredInstall.userChoice;
-  deferredInstall = null;
-  installBtn.classList.remove('show');
-  if(outcome === 'accepted') toast('سی تک پارسیان نصب شد 🎉');
-});
-window.addEventListener('appinstalled', () => {
-  installBtn.classList.remove('show');
-  deferredInstall = null;
-});
-
-/* 🔍 تابع تشخیص */
-window.diag = async () => {
-  console.log('%c═══ 🔍 DIAGNOSTIC ═══', 'color:#06b6d4;font-weight:bold;font-size:14px');
-  console.log('Mode:', state.mode);
-  console.log('Online:', navigator.onLine);
-  console.log('Supabase connected:', state.connected);
-  console.log('State.forms count:', state.forms.length);
-  try{
-    const idb = await idbAll();
-    console.log(`%c💾 IndexedDB: ${idb.length} فایل`, 'color:#f59e0b;font-weight:bold');
-    idb.slice(0, 30).forEach(r => console.log('  •', r.name, '-', r.size, 'bytes'));
-  }catch(e){ console.error('IDB error:', e); }
-  if(sb){
-    try{
-      const { data, error } = await sb.from('forms').select('*');
-      if(error) console.error('☁️ Supabase error:', error);
-      else {
-        console.log(`%c☁️ Supabase: ${data.length} فایل`, 'color:#22d3ee;font-weight:bold');
-        data.slice(0, 30).forEach(r => console.log('  •', r.name, '-', r.file_size));
-      }
-    }catch(e){ console.error('SB error:', e); }
-  }
-  console.log('همه‌ی فرم‌ها:', state.forms);
-};
-console.log('%c🔍 برای تشخیص، در کنسول بزن: diag()', 'color:#06b6d4;font-weight:bold;font-size:13px');
-
-(async function init(){
-  applyTheme();
-  applyMode();
-  console.log('%c🚀 سی تک پارسیان', 'color:#06b6d4;font-weight:bold;font-size:15px');
-  await buildManifest();
-  initSupabase();
-  try{
-    state.forms = await fetchAllForms();
-    console.info(`%c📋 ${state.forms.length} فرم آماده شد`, 'color:#f59e0b;font-weight:bold');
-  }catch(e){
-    console.error('Init error:', e);
-    state.forms = [];
-  }
-  render();
-})();
-</script>
-</body>
-</html>
+  ring.style.strokeDashoffset
