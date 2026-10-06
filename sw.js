@@ -1,8 +1,5 @@
-/* ══════════════════════════════════════════════════════════════════
-   سی تک پارسیان — Service Worker v5
-   ══════════════════════════════════════════════════════════════════ */
-
-const CACHE_NAME = 'sitak-v5';
+/* سی تک پارسیان — Service Worker v6 */
+const CACHE_NAME = 'sitak-v6';
 const APP_SHELL = ['./', './index.html'];
 const CDN_CACHE = [
   'https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2',
