@@ -148,8 +148,6 @@ main{position:relative;z-index:10;max-width:860px;margin:0 auto;padding:64px 24p
 .fchip{display:inline-flex;align-items:center;gap:5px;font-size:.72rem;font-weight:bold;padding:6px 11px;border-radius:var(--r-full);background:transparent;color:var(--text-3);border:1px solid var(--border-2);cursor:pointer;white-space:nowrap;transition:all .25s var(--ease);position:relative;overflow:hidden}
 .fchip:hover{color:var(--text);border-color:var(--border-strong);background:var(--surface-2);transform:translateY(-1px)}
 .fchip.active{background:linear-gradient(135deg,var(--accent),var(--accent-2));color:#fff;border-color:transparent;box-shadow:0 4px 14px -4px var(--accent-glow)}
-.fchip.active::after{content:'';position:absolute;inset:0;border-radius:inherit;background:radial-gradient(circle,rgba(255,255,255,.3),transparent 70%);animation:fchipPulse 1.5s ease-out}
-@keyframes fchipPulse{from{opacity:1;transform:scale(0)}to{opacity:0;transform:scale(1.5)}}
 .fchip .n{font-size:.62rem;padding:1px 6px;border-radius:var(--r-full);background:rgba(255,255,255,.14)}
 .fchip.active .n{background:rgba(255,255,255,.28)}
 .dd-body{overflow-y:auto;flex:1;padding:6px}
@@ -235,21 +233,20 @@ main{position:relative;z-index:10;max-width:860px;margin:0 auto;padding:64px 24p
 .overlay.high{z-index:200}
 @keyframes fade{from{opacity:0}to{opacity:1}}
 .modal{width:100%;max-width:580px;background:var(--surface-solid);border:1px solid var(--border-2);border-radius:var(--r-2xl);box-shadow:0 30px 80px -20px rgba(0,0,0,.9);overflow:hidden;margin:auto;animation:modalIn .5s var(--ease-spring) both;position:relative}
-.modal::before{content:'';position:absolute;inset:0;border-radius:inherit;padding:1px;background:linear-gradient(135deg,rgba(34,211,238,.4),rgba(245,158,11,.3),rgba(139,92,246,.4),rgba(34,211,238,.4));background-size:300% 300%;-webkit-mask:linear-gradient(#000 0 0) content-box,linear-gradient(#000 0 0);-webkit-mask-composite:xor;mask-composite:exclude;opacity:.5;animation:gradientShift 6s ease-in-out infinite;pointer-events:none;z-index:10}
 .modal.wide{max-width:1100px}
 .modal.small{max-width:440px}
 @keyframes modalIn{from{opacity:0;transform:scale(.88) translateY(30px);filter:blur(8px)}to{opacity:1;transform:none;filter:blur(0)}}
-.m-head{display:flex;align-items:flex-start;justify-content:space-between;gap:16px;padding:22px 24px;border-bottom:1px solid var(--border);position:relative;z-index:1;background:linear-gradient(180deg,rgba(255,255,255,.02),transparent)}
+.m-head{display:flex;align-items:flex-start;justify-content:space-between;gap:16px;padding:22px 24px;border-bottom:1px solid var(--border);background:linear-gradient(180deg,rgba(255,255,255,.02),transparent)}
 .m-head h3{font-size:1.05rem;font-weight:bold;letter-spacing:-.2px}
 .m-head p{font-size:.75rem;color:var(--text-3);margin-top:4px}
 .m-close{width:36px;height:36px;flex-shrink:0;display:grid;place-items:center;border-radius:var(--r-sm);border:1px solid var(--border);background:transparent;color:var(--text-3);cursor:pointer;font-size:1.15rem;line-height:1;transition:all .25s var(--ease-spring)}
 .m-close:hover{color:#fff;background:var(--danger);border-color:transparent;transform:rotate(90deg) scale(1.08)}
-.m-body{padding:22px 24px;max-height:70vh;overflow-y:auto;position:relative;z-index:1}
-.m-foot{display:flex;gap:10px;padding:16px 24px;border-top:1px solid var(--border);background:var(--surface-2);position:relative;z-index:1}
+.m-body{padding:22px 24px;max-height:70vh;overflow-y:auto}
+.m-foot{display:flex;gap:10px;padding:16px 24px;border-top:1px solid var(--border);background:var(--surface-2)}
 .m-foot .btn{flex:1;padding:12px;font-size:.86rem;border-radius:var(--r-md)}
 .m-foot .btn-primary{flex:2}
-.mode-toggle{display:flex;gap:4px;margin-bottom:16px;padding:4px;border-radius:var(--r-md);background:var(--surface-2);border:1px solid var(--border);position:relative}
-.mode-toggle button{flex:1;display:flex;align-items:center;justify-content:center;gap:6px;padding:10px;border-radius:var(--r-sm);border:none;background:transparent;color:var(--text-3);cursor:pointer;font-size:.78rem;font-weight:bold;transition:all .3s var(--ease);position:relative;z-index:1}
+.mode-toggle{display:flex;gap:4px;margin-bottom:16px;padding:4px;border-radius:var(--r-md);background:var(--surface-2);border:1px solid var(--border)}
+.mode-toggle button{flex:1;display:flex;align-items:center;justify-content:center;gap:6px;padding:10px;border-radius:var(--r-sm);border:none;background:transparent;color:var(--text-3);cursor:pointer;font-size:.78rem;font-weight:bold;transition:all .3s var(--ease)}
 .mode-toggle button svg{width:14px;height:14px;stroke:currentColor;fill:none;stroke-width:2.2;stroke-linecap:round;stroke-linejoin:round}
 .mode-toggle button.active{background:linear-gradient(135deg,var(--accent),var(--accent-2));color:#fff;box-shadow:0 4px 14px -4px var(--accent-glow)}
 .drop-zone{border:2px dashed var(--border-strong);border-radius:var(--r-lg);padding:44px 22px;text-align:center;cursor:pointer;background:var(--surface-2);transition:all .3s var(--ease);position:relative;overflow:hidden}
@@ -510,6 +507,10 @@ main{position:relative;z-index:10;max-width:860px;margin:0 auto;padding:64px 24p
     <div class="m-body" id="previewBody"></div>
     <div class="m-foot">
       <button class="btn btn-ghost" id="previewCloseBtn" type="button">بستن</button>
+      <button class="btn btn-gold" id="previewPrintBtn" type="button">
+        <svg viewBox="0 0 24 24"><path d="M6 9V2h12v7"/><path d="M6 18H4a2 2 0 01-2-2v-5a2 2 0 012-2h16a2 2 0 012 2v5a2 2 0 01-2 2h-2"/><path d="M6 14h12v8H6z"/></svg>
+        چاپ
+      </button>
       <button class="btn btn-primary" id="previewDlBtn" type="button">دانلود فایل</button>
     </div>
   </div>
@@ -573,19 +574,10 @@ const SUPABASE_CONFIG = {
 
 const LOGO_SVG = `<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 512 512">
   <defs>
-    <linearGradient id="bgGrad" x1="0" y1="0" x2="1" y2="1">
-      <stop offset="0%" stop-color="#0a2540"/><stop offset="45%" stop-color="#0e7490"/><stop offset="100%" stop-color="#06b6d4"/>
-    </linearGradient>
-    <linearGradient id="boxTop" x1="0" y1="0" x2="0" y2="1">
-      <stop offset="0%" stop-color="#fde68a"/><stop offset="50%" stop-color="#fcd34d"/><stop offset="100%" stop-color="#f59e0b"/>
-    </linearGradient>
-    <linearGradient id="boxBody" x1="0" y1="0" x2="1" y2="1">
-      <stop offset="0%" stop-color="#fbbf24"/><stop offset="100%" stop-color="#d97706"/>
-    </linearGradient>
-    <filter id="glow" x="-30%" y="-30%" width="160%" height="160%">
-      <feGaussianBlur stdDeviation="6" result="coloredBlur"/>
-      <feMerge><feMergeNode in="coloredBlur"/><feMergeNode in="SourceGraphic"/></feMerge>
-    </filter>
+    <linearGradient id="bgGrad" x1="0" y1="0" x2="1" y2="1"><stop offset="0%" stop-color="#0a2540"/><stop offset="45%" stop-color="#0e7490"/><stop offset="100%" stop-color="#06b6d4"/></linearGradient>
+    <linearGradient id="boxTop" x1="0" y1="0" x2="0" y2="1"><stop offset="0%" stop-color="#fde68a"/><stop offset="50%" stop-color="#fcd34d"/><stop offset="100%" stop-color="#f59e0b"/></linearGradient>
+    <linearGradient id="boxBody" x1="0" y1="0" x2="1" y2="1"><stop offset="0%" stop-color="#fbbf24"/><stop offset="100%" stop-color="#d97706"/></linearGradient>
+    <filter id="glow" x="-30%" y="-30%" width="160%" height="160%"><feGaussianBlur stdDeviation="6" result="coloredBlur"/><feMerge><feMergeNode in="coloredBlur"/><feMergeNode in="SourceGraphic"/></feMerge></filter>
   </defs>
   <rect width="512" height="512" rx="116" fill="url(#bgGrad)"/>
   <rect x="14" y="14" width="484" height="484" rx="102" fill="none" stroke="rgba(255,255,255,0.14)" stroke-width="2"/>
@@ -594,30 +586,18 @@ const LOGO_SVG = `<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 512 512">
     <rect x="40" y="0" width="432" height="14" rx="4" fill="#fcd34d"/>
     <rect x="40" y="22" width="432" height="14" rx="4" fill="#fcd34d"/>
     <rect x="40" y="44" width="432" height="14" rx="4" fill="#fcd34d"/>
-    <rect x="200" y="0" width="4" height="14" fill="rgba(10,37,64,0.4)"/>
-    <rect x="360" y="0" width="4" height="14" fill="rgba(10,37,64,0.4)"/>
-    <rect x="140" y="22" width="4" height="14" fill="rgba(10,37,64,0.4)"/>
-    <rect x="300" y="22" width="4" height="14" fill="rgba(10,37,64,0.4)"/>
-    <rect x="240" y="44" width="4" height="14" fill="rgba(10,37,64,0.4)"/>
-    <rect x="400" y="44" width="4" height="14" fill="rgba(10,37,64,0.4)"/>
   </g>
   <path d="M 200 172 v -26 a 24 24 0 0 1 24 -24 h 64 a 24 24 0 0 1 24 24 v 26" stroke="url(#boxTop)" stroke-width="18" fill="none" stroke-linecap="round" stroke-linejoin="round"/>
   <rect x="112" y="172" width="288" height="52" rx="14" fill="url(#boxTop)"/>
   <rect x="112" y="172" width="288" height="14" rx="7" fill="rgba(255,255,255,0.35)"/>
   <rect x="104" y="210" width="304" height="140" rx="16" fill="url(#boxBody)"/>
   <rect x="104" y="210" width="304" height="18" fill="rgba(255,255,255,0.2)"/>
-  <rect x="132" y="200" width="28" height="22" rx="5" fill="#7c2d12"/>
-  <rect x="132" y="200" width="28" height="8" rx="4" fill="#a16207"/>
-  <rect x="352" y="200" width="28" height="22" rx="5" fill="#7c2d12"/>
-  <rect x="352" y="200" width="28" height="8" rx="4" fill="#a16207"/>
   <rect x="236" y="244" width="40" height="50" rx="8" fill="#0a2540"/>
   <rect x="238" y="246" width="36" height="46" rx="6" fill="#0c4a6e"/>
   <circle cx="256" cy="266" r="7" fill="#fcd34d" filter="url(#glow)"/>
   <rect x="252" y="270" width="8" height="14" rx="3" fill="#fcd34d"/>
   <circle cx="120" cy="120" r="3" fill="#22d3ee" opacity="0.9" filter="url(#glow)"/>
   <circle cx="400" cy="150" r="4" fill="#fcd34d" opacity="0.8" filter="url(#glow)"/>
-  <circle cx="80" cy="360" r="3" fill="#22d3ee" opacity="0.7"/>
-  <circle cx="440" cy="350" r="3" fill="#fcd34d" opacity="0.7"/>
 </svg>`;
 const LOGO_DATA_URI = 'data:image/svg+xml;charset=utf-8,' + encodeURIComponent(LOGO_SVG);
 document.getElementById('brandLogo').innerHTML = LOGO_SVG;
@@ -753,6 +733,8 @@ const state = {
   hashes: JSON.parse(localStorage.getItem('formban-hashes') || '[]'),
   cachedSigs: new Set(),
   syncing: false,
+  previewingForm: null,
+  previewObjectUrl: null,
 };
 
 let sb = null;
@@ -766,7 +748,7 @@ function initSupabase(){
   }catch(e){ console.error('Supabase:', e); return null; }
 }
 
-const DB_NAME = 'sitak-db-v2', STORE = 'forms';
+const DB_NAME = 'sitak-db-v3', STORE = 'forms';
 let dbPromise = null;
 function openDB(){
   if(dbPromise) return dbPromise;
@@ -806,15 +788,6 @@ async function idbDel(id){
     tx.objectStore(STORE).delete(id);
     tx.oncomplete = () => res();
     tx.onerror = () => rej(tx.error);
-  });
-}
-async function idbGet(id){
-  const db = await openDB();
-  return new Promise((res, rej) => {
-    const tx = db.transaction(STORE, 'readonly');
-    const r = tx.objectStore(STORE).get(id);
-    r.onsuccess = () => res(r.result);
-    r.onerror = () => rej(r.error);
   });
 }
 
@@ -982,16 +955,16 @@ async function deleteFormRecord(form){
   state.cachedSigs.delete(sigOf(form.name, form.size));
 }
 
-/* ══════════════════════════════════════════════════════════════════
-   getFormBlob — سه لایه: blob → IndexedDB → Supabase
-   ══════════════════════════════════════════════════════════════════ */
+/* ═══ getFormBlob — ۳ لایه: memory → IndexedDB → Supabase ═══ */
 async function getFormBlob(form){
-  if(form.blob) return form.blob;
+  if(!form) return null;
+  if(form.blob && form.blob instanceof Blob) return form.blob;
+
   try{
     const localRaw = await idbAll();
     const match = localRaw.find(r => r.name === form.name && r.size === form.size);
-    if(match && match.blob) return match.blob;
-  }catch(e){ console.warn('IDB read:', e); }
+    if(match && match.blob instanceof Blob) return match.blob;
+  }catch(e){ console.warn('IDB read error:', e); }
 
   if(form.remote && form.path && state.connected && sb && navigator.onLine){
     try{
@@ -1007,15 +980,13 @@ async function getFormBlob(form){
         state.cachedSigs.add(sigOf(form.name, form.size || data.size));
       }catch(e){}
       return data;
-    }catch(e){ console.warn('Supabase download:', e); }
+    }catch(e){ console.warn('Supabase download error:', e); }
   }
   return null;
 }
 
-/* ══════════════════════════════════════════════════════════════════
-   getFormUrl — همیشه از blob یک ObjectURL می‌سازه
-   ══════════════════════════════════════════════════════════════════ */
-async function getFormUrl(form){
+/* ═══ ObjectURL از blob — به‌جای URL های CORS دار ═══ */
+async function makeObjectUrl(form){
   const blob = await getFormBlob(form);
   if(!blob) return null;
   return URL.createObjectURL(blob);
@@ -1410,7 +1381,7 @@ function updateKbdFocus(items){
 }
 
 /* ══════════════════════════════════════════════════════════════════
-   Download
+   DOWNLOAD
    ══════════════════════════════════════════════════════════════════ */
 async function downloadForm(form){
   try{
@@ -1432,91 +1403,137 @@ async function downloadForm(form){
 }
 
 /* ══════════════════════════════════════════════════════════════════
-   Print — چاپ مستقیم PDF/تصویر/متن (آنلاین + آفلاین)
+   PRINT — چاپ مستقیم PDF / تصویر / متن — آنلاین + آفلاین
    ══════════════════════════════════════════════════════════════════ */
 async function printForm(form){
+  if(!form){ toast('فرمی انتخاب نشده', 'err'); return; }
   try{
+    const kind = fileKind(form.name, form.type);
+    toast('در حال آماده‌سازی چاپ…', 'info', 2000);
+
     const blob = await getFormBlob(form);
     if(!blob){
       toast('فایل در دسترس نیست — اتصال اینترنت رو چک کن', 'err', 4000);
       return;
     }
 
-    const type = blob.type || form.type || '';
-    const isPdf   = type === 'application/pdf' || /\.pdf$/i.test(form.name);
-    const isImage = type.startsWith('image/') || /\.(png|jpe?g|gif|webp|bmp|svg)$/i.test(form.name);
-    const isText  = /\.(txt|md|json|xml|log|ini|yml|yaml)$/i.test(form.name) || (type.startsWith('text/') && !isPdf);
+    const type = (blob.type || form.type || '').toLowerCase();
+    const nameLower = (form.name || '').toLowerCase();
+    const isPdf   = type === 'application/pdf' || /\.pdf$/.test(nameLower);
+    const isImage = type.startsWith('image/') || /\.(png|jpe?g|gif|webp|bmp|svg)$/.test(nameLower);
+    const isText  = /\.(txt|md|json|xml|log|ini|yml|yaml|csv)$/.test(nameLower) || (type.startsWith('text/') && !isPdf);
 
     /* ─── PDF ─── */
     if(isPdf){
-      toast('در حال آماده‌سازی چاپ…', 'info', 2000);
       const url = URL.createObjectURL(blob);
-      try{
+
+      /* ساخت پنجره چاپ با auto-print */
+      const w = window.open('', '_blank');
+      if(!w){
+        /* اگه پنجره باز نشد، iframe مخفی */
         const iframe = document.createElement('iframe');
         iframe.style.cssText = 'position:fixed;right:0;bottom:0;width:0;height:0;border:0;visibility:hidden';
         iframe.src = url;
         document.body.appendChild(iframe);
-
         let printed = false;
         const doPrint = () => {
-          if(printed) return;
-          printed = true;
+          if(printed) return; printed = true;
           try{
             iframe.contentWindow.focus();
             iframe.contentWindow.print();
             toast('پنجره چاپ باز شد 🖨️', 'ok', 2500);
           }catch(err){
-            console.warn('iframe print failed, fallback:', err);
-            const w = window.open(url, '_blank');
-            if(w){
-              w.addEventListener('load', () => {
-                setTimeout(() => { try{ w.focus(); w.print(); }catch(e){} }, 400);
-              });
-              toast('پنجره چاپ باز شد 🖨️', 'ok', 2500);
-            } else {
-              toast('پنجره جدید مسدود شد — اجازه بده', 'err', 4000);
-            }
+            console.warn(err);
           }
           setTimeout(() => { iframe.remove(); URL.revokeObjectURL(url); }, 90000);
         };
-
-        iframe.onload = () => setTimeout(doPrint, 400);
-        setTimeout(() => { if(iframe.parentNode) doPrint(); }, 2000);
-      }catch(e){
-        console.error('PDF print setup failed:', e);
-        window.open(url, '_blank');
-        setTimeout(() => URL.revokeObjectURL(url), 90000);
+        iframe.onload = () => setTimeout(doPrint, 500);
+        setTimeout(() => { if(iframe.parentNode) doPrint(); }, 2500);
+        return;
       }
+
+      /* پنجره جدید باز شد — HTML با PDF embed و auto-print */
+      w.document.write(`<!DOCTYPE html>
+<html dir="rtl"><head>
+<meta charset="utf-8">
+<title>${esc(form.name)}</title>
+<style>
+@page{margin:0}
+html,body{margin:0;padding:0;background:#333;height:100%;overflow:hidden}
+iframe{width:100%;height:100%;border:0;display:block}
+.toolbar{position:fixed;top:12px;right:12px;display:flex;gap:8px;z-index:99;background:#fff;padding:8px;border-radius:10px;box-shadow:0 4px 20px rgba(0,0,0,.2)}
+.toolbar button{font-family:inherit;font-size:13px;font-weight:700;padding:9px 18px;border-radius:8px;border:none;cursor:pointer}
+.toolbar .bp{background:#0e7490;color:#fff}
+.toolbar .bc{background:#f3f4f6;color:#374151}
+@media print{.toolbar{display:none!important}}
+</style></head>
+<body>
+<div class="toolbar">
+  <button class="bp" onclick="window.print()">🖨️ چاپ</button>
+  <button class="bc" onclick="window.close()">✕ بستن</button>
+</div>
+<iframe id="pdfFrame" src="${url}"></iframe>
+<script>
+(function(){
+  var frame = document.getElementById('pdfFrame');
+  function doPrint(){
+    try{
+      frame.contentWindow.focus();
+      frame.contentWindow.print();
+    }catch(e){
+      try{ window.focus(); window.print(); }catch(e2){}
+    }
+  }
+  frame.onload = function(){ setTimeout(doPrint, 700); };
+  setTimeout(function(){ try{ doPrint(); }catch(e){} }, 2200);
+})();
+<\/script>
+</body></html>`);
+      w.document.close();
+      toast('پنجره چاپ باز شد 🖨️', 'ok', 2500);
+      setTimeout(() => URL.revokeObjectURL(url), 120000);
       return;
     }
 
     /* ─── تصویر ─── */
     if(isImage){
-      toast('در حال آماده‌سازی چاپ…', 'info', 2000);
       const url = URL.createObjectURL(blob);
       const w = window.open('', '_blank');
       if(!w){
         URL.revokeObjectURL(url);
-        toast('پنجره جدید مسدود شد — اجازه بده', 'err', 4000);
+        toast('پنجره جدید مسدود شد — پاپ‌آپ رو اجازه بده', 'err', 4000);
         return;
       }
-      w.document.write(`<!DOCTYPE html><html dir="rtl"><head><meta charset="utf-8"><title>${esc(form.name)}</title>
-        <style>
-        @page{margin:10mm}
-        html,body{margin:0;padding:0;background:#fff}
-        body{display:flex;align-items:center;justify-content:center;min-height:100vh}
-        img{max-width:100%;max-height:100vh;display:block;object-fit:contain}
-        .bar{position:fixed;top:12px;right:12px;display:flex;gap:8px;z-index:9}
-        .bar button{font-family:inherit;font-size:13px;font-weight:600;padding:9px 16px;border-radius:8px;cursor:pointer;border:none;background:#0e7490;color:#fff}
-        .bar .alt{background:#f3f4f6;color:#374151}
-        @media print{.bar{display:none!important}}
-        </style></head><body>
-        <div class="bar"><button onclick="window.print()">🖨️ چاپ</button><button class="alt" onclick="window.close()">✕</button></div>
-        <img src="${url}" onload="setTimeout(function(){window.focus();window.print()},400)">
-        </body></html>`);
+      w.document.write(`<!DOCTYPE html>
+<html dir="rtl"><head>
+<meta charset="utf-8">
+<title>${esc(form.name)}</title>
+<style>
+@page{margin:10mm;size:auto}
+html,body{margin:0;padding:0;background:#f5f5f5;min-height:100vh}
+body{display:flex;align-items:center;justify-content:center;padding:20px}
+img{max-width:100%;max-height:95vh;display:block;box-shadow:0 10px 40px rgba(0,0,0,.2);background:#fff}
+.toolbar{position:fixed;top:12px;right:12px;display:flex;gap:8px;z-index:99}
+.toolbar button{font-family:inherit;font-size:13px;font-weight:700;padding:10px 18px;border-radius:8px;border:none;cursor:pointer;box-shadow:0 4px 12px rgba(0,0,0,.15)}
+.toolbar .bp{background:#0e7490;color:#fff}
+.toolbar .bc{background:#fff;color:#374151}
+@media print{
+  html,body{background:#fff;padding:0}
+  body{display:block}
+  img{max-width:100%;max-height:none;box-shadow:none;margin:0 auto}
+  .toolbar{display:none!important}
+}
+</style></head>
+<body>
+<div class="toolbar">
+  <button class="bp" onclick="window.print()">🖨️ چاپ</button>
+  <button class="bc" onclick="window.close()">✕ بستن</button>
+</div>
+<img id="imgEl" src="${url}" onload="setTimeout(function(){window.focus();window.print();},500)">
+</body></html>`);
       w.document.close();
       toast('پنجره چاپ باز شد 🖨️', 'ok', 2500);
-      setTimeout(() => URL.revokeObjectURL(url), 90000);
+      setTimeout(() => URL.revokeObjectURL(url), 120000);
       return;
     }
 
@@ -1525,28 +1542,34 @@ async function printForm(form){
       const text = await blob.text();
       const w = window.open('', '_blank');
       if(!w){ toast('پنجره جدید مسدود شد', 'err', 4000); return; }
-      w.document.write(`<!DOCTYPE html><html dir="rtl"><head><meta charset="utf-8"><title>${esc(form.name)}</title>
-        <style>
-        @page{margin:15mm}
-        html,body{margin:0;padding:0;background:#fff}
-        body{font-family:'BYekan',Tahoma,Arial,sans-serif;padding:15mm}
-        pre{white-space:pre-wrap;word-break:break-word;direction:ltr;text-align:left;font-family:Consolas,monospace;font-size:12px;line-height:1.8;margin:0}
-        .bar{position:fixed;top:12px;right:12px;display:flex;gap:8px}
-        .bar button{font-size:13px;font-weight:600;padding:9px 16px;border-radius:8px;border:none;background:#0e7490;color:#fff;cursor:pointer}
-        .bar .alt{background:#f3f4f6;color:#374151}
-        @media print{.bar{display:none!important}body{padding:0}}
-        </style></head><body>
-        <div class="bar"><button onclick="window.print()">🖨️ چاپ</button><button class="alt" onclick="window.close()">✕</button></div>
-        <pre>${esc(text)}</pre>
-        <script>window.onload=function(){setTimeout(function(){window.focus();window.print()},400)};<\/script>
-        </body></html>`);
+      w.document.write(`<!DOCTYPE html>
+<html dir="rtl"><head>
+<meta charset="utf-8">
+<title>${esc(form.name)}</title>
+<style>
+@page{margin:15mm}
+html,body{margin:0;padding:0;background:#fff;color:#111}
+body{font-family:'BYekan',Tahoma,Arial,sans-serif;padding:15mm}
+pre{white-space:pre-wrap;word-break:break-word;direction:ltr;text-align:left;font-family:Consolas,'Courier New',monospace;font-size:12px;line-height:1.8;margin:0;color:#111}
+.toolbar{position:fixed;top:12px;right:12px;display:flex;gap:8px;z-index:99}
+.toolbar button{font-family:inherit;font-size:13px;font-weight:700;padding:10px 18px;border-radius:8px;border:none;cursor:pointer;background:#0e7490;color:#fff}
+.toolbar .bc{background:#f3f4f6;color:#374151}
+@media print{.toolbar{display:none!important}body{padding:0}}
+</style></head>
+<body>
+<div class="toolbar">
+  <button onclick="window.print()">🖨️ چاپ</button>
+  <button class="bc" onclick="window.close()">✕ بستن</button>
+</div>
+<pre>${esc(text)}</pre>
+<script>window.onload=function(){setTimeout(function(){window.focus();window.print();},500)};<\/script>
+</body></html>`);
       w.document.close();
       toast('پنجره چاپ باز شد 🖨️', 'ok', 2500);
       return;
     }
 
-    /* ─── Word/Excel/PPT: فقط دانلود ─── */
-    const kind = fileKind(form.name, form.type);
+    /* ─── Word / Excel / PPT: فقط دانلود ─── */
     const ok = await confirmDialog(
       'چاپ فایل ' + kind.label,
       `برای چاپ دقیق فایل‌های <b>${kind.label}</b>، باید فایل اصلی رو دانلود کنی و از خود برنامه‌ی ${kind.label} روی ویندوز پرینت بگیری.<br><br><span style="color:var(--accent-3)">فایل دانلود بشه؟</span>`,
@@ -1564,13 +1587,23 @@ async function printForm(form){
 }
 
 /* ══════════════════════════════════════════════════════════════════
-   Preview — آنلاین + آفلاین
+   PREVIEW — آنلاین + آفلاین، همه‌ی فرمت‌ها
    ══════════════════════════════════════════════════════════════════ */
 async function previewForm(form){
+  if(!form){ toast('فرمی انتخاب نشده', 'err'); return; }
+
   const body  = $('#previewBody');
   const title = $('#previewTitle');
   const sub   = $('#previewSub');
   const kind  = fileKind(form.name, form.type);
+
+  /* پاک کردن ObjectURL قبلی */
+  if(state.previewObjectUrl){
+    try{ URL.revokeObjectURL(state.previewObjectUrl); }catch(e){}
+    state.previewObjectUrl = null;
+  }
+
+  state.previewingForm = form;
 
   title.textContent = form.name;
   sub.textContent = `${kind.label} • ${fmtSize(form.size)} • ${fmtDate(form.createdAt)}`;
@@ -1578,30 +1611,39 @@ async function previewForm(form){
 
   $('#previewModal').classList.add('open');
   document.body.style.overflow = 'hidden';
-  $('#previewDlBtn').onclick = () => downloadForm(form);
 
-  const type = form.type || '';
-  const isPdf   = type === 'application/pdf' || /\.pdf$/i.test(form.name);
-  const isImage = type.startsWith('image/') || /\.(png|jpe?g|gif|webp|bmp|svg)$/i.test(form.name);
-  const isText  = /\.(txt|md|json|xml|log|ini|yml|yaml)$/i.test(form.name) || (type.startsWith('text/') && !isPdf);
+  /* دکمه‌های پایین */
+  $('#previewDlBtn').onclick = () => downloadForm(form);
+  $('#previewPrintBtn').onclick = () => printForm(form);
+
+  const type = (form.type || '').toLowerCase();
+  const nameLower = (form.name || '').toLowerCase();
+  const isPdf   = type === 'application/pdf' || /\.pdf$/.test(nameLower);
+  const isImage = type.startsWith('image/') || /\.(png|jpe?g|gif|webp|bmp|svg)$/.test(nameLower);
+  const isText  = /\.(txt|md|json|xml|log|ini|yml|yaml|csv)$/.test(nameLower) || (type.startsWith('text/') && !isPdf);
 
   try{
+    /* ─── PDF ─── */
     if(isPdf){
       const blob = await getFormBlob(form);
       if(!blob) throw new Error('فایل در دسترس نیست — اتصال اینترنت رو چک کن');
       const url = URL.createObjectURL(blob);
-      body.innerHTML = `<iframe class="prev-frame" src="${url}#toolbar=1&navpanes=0&view=FitH"></iframe>`;
-      body._objectUrl = url;
+      state.previewObjectUrl = url;
+      body.innerHTML = `<iframe class="prev-frame" src="${url}#toolbar=1&navpanes=0&view=FitH" type="application/pdf"></iframe>`;
       return;
     }
+
+    /* ─── تصویر ─── */
     if(isImage){
       const blob = await getFormBlob(form);
       if(!blob) throw new Error('فایل در دسترس نیست');
       const url = URL.createObjectURL(blob);
+      state.previewObjectUrl = url;
       body.innerHTML = `<img class="prev-img" src="${url}" alt="">`;
-      body._objectUrl = url;
       return;
     }
+
+    /* ─── متن ─── */
     if(isText){
       const blob = await getFormBlob(form);
       if(!blob) throw new Error('فایل در دسترس نیست');
@@ -1609,25 +1651,56 @@ async function previewForm(form){
       body.innerHTML = `<pre class="prev-text">${esc(text)}</pre>`;
       return;
     }
+
+    /* ─── Word / Excel / PPT — تلاش برای Office Viewer (فقط آنلاین) ─── */
+    const isOffice = /\.(docx?|xlsx?|pptx?|odt|ods|odp)$/.test(nameLower) ||
+                     /officedocument|msword|ms-excel|ms-powerpoint|opendocument/.test(type);
+
+    if(isOffice && form.remote && form.path && state.connected && sb && navigator.onLine && state.mode !== 'offline'){
+      try{
+        const { data } = sb.storage.from(SUPABASE_CONFIG.bucket).getPublicUrl(form.path);
+        if(data && data.publicUrl){
+          const viewerUrl = `https://view.officeapps.live.com/op/embed.aspx?src=${encodeURIComponent(data.publicUrl)}`;
+          body.innerHTML = `
+            <div style="border-radius:14px;overflow:hidden;background:#fff;border:1px solid var(--border)">
+              <iframe src="${viewerUrl}" style="display:block;width:100%;height:75vh;border:none" allowfullscreen></iframe>
+            </div>
+            <div style="margin-top:14px;text-align:center;font-size:.76rem;color:var(--text-3)">
+              💡 اگه پیش‌نمایش بالا نیومد، فایل رو دانلود کن.
+            </div>`;
+          return;
+        }
+      }catch(e){ console.warn('Office viewer failed:', e); }
+    }
+
+    /* ─── بقیه فرمت‌ها ─── */
     body.innerHTML = `
       <div class="prev-unsup" style="--fc:${kind.color}">
         <div class="ic"><svg viewBox="0 0 24 24">${GLYPHS[kind.glyph] || GLYPHS.file}</svg></div>
         <h4>پیش‌نمایش این فایل در مرورگر ممکن نیست</h4>
-        <p>مرورگر نمی‌تونه فایل‌های ${kind.label} رو مستقیم نمایش بده. برای مشاهده دانلود کن.</p>
-        <button class="btn btn-primary" id="prevDlBtn2" style="margin:0 auto">
-          <svg viewBox="0 0 24 24"><path d="M21 15v4a2 2 0 01-2 2H5a2 2 0 01-2-2v-4"/><path d="M7 10l5 5 5-5"/><path d="M12 15V3"/></svg>
-          <span>دانلود فایل</span>
-        </button>
+        <p>مرورگر نمی‌تونه فایل‌های <b>${kind.label}</b> رو مستقیم نمایش بده. برای مشاهده دانلود کن.</p>
+        <div style="display:flex;gap:10px;justify-content:center;flex-wrap:wrap">
+          <button class="btn btn-primary" id="prevDlBtn2" type="button">
+            <svg viewBox="0 0 24 24"><path d="M21 15v4a2 2 0 01-2 2H5a2 2 0 01-2-2v-4"/><path d="M7 10l5 5 5-5"/><path d="M12 15V3"/></svg>
+            <span>دانلود فایل</span>
+          </button>
+        </div>
       </div>`;
     const btn = document.getElementById('prevDlBtn2');
-    if(btn) btn.onclick = () => $('#previewDlBtn').click();
+    if(btn) btn.onclick = () => downloadForm(form);
   }catch(e){
     console.error('Preview error:', e);
     body.innerHTML = `<div class="prev-unsup" style="--fc:var(--danger)">
       <div class="ic"><svg viewBox="0 0 24 24"><circle cx="12" cy="12" r="9"/><path d="M12 8v5M12 16h.01"/></svg></div>
       <h4>خطا در بارگذاری</h4>
       <p>${esc(e.message||'مشکلی پیش اومد')}</p>
+      <button class="btn btn-primary" id="prevDlBtn2" type="button" style="margin:0 auto">
+        <svg viewBox="0 0 24 24"><path d="M21 15v4a2 2 0 01-2 2H5a2 2 0 01-2-2v-4"/><path d="M7 10l5 5 5-5"/><path d="M12 15V3"/></svg>
+        <span>دانلود فایل</span>
+      </button>
     </div>`;
+    const btn = document.getElementById('prevDlBtn2');
+    if(btn) btn.onclick = () => downloadForm(form);
   }
 }
 
@@ -1837,17 +1910,17 @@ window.addEventListener('drop', e => {
   }
 });
 
-/* Close preview با پاک کردن ObjectURL */
+/* ═══ بستن Preview + آزادسازی حافظه ═══ */
 const previewModal = $('#previewModal');
 function closePreview(){
   previewModal.classList.remove('open');
   document.body.style.overflow = '';
-  const body = $('#previewBody');
-  if(body._objectUrl){
-    try{ URL.revokeObjectURL(body._objectUrl); }catch(e){}
-    body._objectUrl = null;
+  if(state.previewObjectUrl){
+    try{ URL.revokeObjectURL(state.previewObjectUrl); }catch(e){}
+    state.previewObjectUrl = null;
   }
-  body.innerHTML = '';
+  state.previewingForm = null;
+  $('#previewBody').innerHTML = '';
 }
 $('#closePreview').addEventListener('click', closePreview);
 $('#previewCloseBtn').addEventListener('click', closePreview);
@@ -1860,6 +1933,11 @@ document.addEventListener('keydown', e => {
     else if(uploadModal.classList.contains('open')) closeUpload();
     else if(previewModal.classList.contains('open')) closePreview();
     else dropdown.classList.remove('show');
+  }
+  /* Ctrl+P داخل مودال پیش‌نمایش = چاپ فرم فعلی */
+  if((e.ctrlKey || e.metaKey) && e.key.toLowerCase() === 'p' && previewModal.classList.contains('open') && state.previewingForm){
+    e.preventDefault();
+    printForm(state.previewingForm);
   }
 });
 
@@ -1894,9 +1972,7 @@ function generatePngIcon(size){
 async function buildManifest(){
   const baseUrl = new URL('.', location.href).href;
   const [p192, p512, p512m] = await Promise.all([
-    generatePngIcon(192),
-    generatePngIcon(512),
-    generatePngIcon(512)
+    generatePngIcon(192), generatePngIcon(512), generatePngIcon(512)
   ]);
   const manifest = {
     name: 'جعبه ابزار کفپوش سی تک پارسیان',
@@ -1954,7 +2030,7 @@ window.diag = async () => {
   console.log('Mode:', state.mode, '| Online:', navigator.onLine, '| Connected:', state.connected);
   const idb = await idbAll();
   console.log(`%c💾 IndexedDB: ${idb.length} فایل`, 'color:#f59e0b;font-weight:bold');
-  idb.slice(0, 30).forEach(r => console.log('  •', r.name, '-', fmtSize(r.size)));
+  idb.slice(0, 30).forEach(r => console.log('  •', r.name, '-', fmtSize(r.size), '-', r.type));
   if(sb){
     try{
       const { data, error } = await sb.from('forms').select('*');
@@ -1965,6 +2041,7 @@ window.diag = async () => {
       }
     }catch(e){ console.error(e); }
   }
+  console.log('cachedSigs:', state.cachedSigs.size);
 };
 
 (async function init(){
